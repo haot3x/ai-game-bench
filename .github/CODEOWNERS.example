@@ -1,4 +1,5 @@
-# Rename to CODEOWNERS only after replacing the placeholder with an existing
-# Mopan maintainer team with write access, and enabling required owner reviews.
+# Future team migration example; the active CODEOWNERS currently names haot3x.
+# Update that file only after choosing a real Mopan team with repository write
+# access and deciding whether to require independent code-owner approval.
 # Example (not active):
 # * @mopan-ai/REPLACE_WITH_ACTUAL_MAINTAINER_TEAM

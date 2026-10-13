@@ -14,8 +14,13 @@ affiliation does not determine acceptance; apply the same criteria to Mopan.
 | Verifier fix | Minimal wrong verdict, expected behavior, regression test | No score inflation; new version when meaning changes |
 | Documentation | Reproducible clarification/example | Link and technical review |
 
-For a new task, platform or scoring change, open a proposal issue before a large
-PR. Small fixes may go directly to PR. See [task requirements](docs/adding-tasks.md)
+For a new task, platform or scoring change, start in
+[Ideas](https://github.com/mopan-ai/ai-game-bench/discussions/categories/ideas)
+before a large PR. Use the form to choose task/evaluation or platform integration.
+Share result proposals in
+[Show and tell](https://github.com/mopan-ai/ai-game-bench/discussions/categories/show-and-tell).
+A proposal issue is also welcome; link the discussion rather than re-entering
+everything. Small fixes may go directly to PR. See [task requirements](docs/adding-tasks.md)
 and [platform contract](docs/platforms.md).
 Use the existing [platform directories](platforms/README.md) as reference layouts
 for a new platform; provide a method and evidence, not only a name or model price.
@@ -30,6 +35,10 @@ for a new platform; provide a method and evidence, not only a name or model pric
 4. Include a scrubbed summary, never raw `jobs/`, login state or private assets.
 5. Wait for Mopan maintainer review. Passing CI alone does not authorize merge,
    official scores, model spending or website publication.
+
+Initially one designated maintainer handles review and manual merges. Maintainer-
+authored PRs still require CI but not another person's approval. No independent
+review is implied by a self-merged PR; see [governance](GOVERNANCE.md).
 
 Contributors use their own authorized accounts for real runs. Do not request
 shared credentials. A maintainer-funded rerun needs a separately approved task,

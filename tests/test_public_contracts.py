@@ -159,3 +159,55 @@ def test_shared_observation_template_is_not_a_run_or_score():
     assert record["cost"]["actual_run_charge"]["amount"] is None
     assert record["public_release_approved"] is False
     assert record["training_eligible"] is False
+
+
+def test_single_maintainer_policy_keeps_pr_and_ci_gates():
+    policy = json.loads((ROOT / ".github/main-protection.json").read_text())
+    checks = policy["required_status_checks"]
+    workflow = yaml.load(
+        (ROOT / ".github/workflows/checks.yml").read_text(), Loader=yaml.BaseLoader
+    )
+    assert checks["strict"] is True
+    assert {check["context"] for check in checks["checks"]} == set(workflow["jobs"])
+    assert all(check["app_id"] == 15368 for check in checks["checks"])
+    assert policy["enforce_admins"] is True
+    reviews = policy["required_pull_request_reviews"]
+    assert reviews["required_approving_review_count"] == 0
+    assert reviews["require_code_owner_reviews"] is False
+    assert reviews["require_last_push_approval"] is False
+    assert reviews["bypass_pull_request_allowances"] == {"users": [], "teams": [], "apps": []}
+    assert policy["restrictions"] == {"users": ["haot3x"], "teams": [], "apps": []}
+    assert policy["allow_force_pushes"] is False
+    assert policy["allow_deletions"] is False
+    assert policy["required_conversation_resolution"] is True
+    assert "* @haot3x" in (ROOT / ".github/CODEOWNERS").read_text().splitlines()
+
+
+def test_discussion_forms_match_default_category_slugs_and_preserve_privacy():
+    paths = list((ROOT / ".github/DISCUSSION_TEMPLATE").glob("*.yml"))
+    assert {path.stem for path in paths} == {"ideas", "show-and-tell"}
+    for path in paths:
+        form = yaml.safe_load(path.read_text())
+        assert form["title"]
+        ids = [field["id"] for field in form["body"] if "id" in field]
+        assert len(ids) == len(set(ids))
+        notice = form["body"][0]["attributes"]["value"]
+        assert "public" in notice and "private" in notice
+        evidence = next(field for field in form["body"] if field.get("id") == "evidence")
+        assert "Need to arrange private review before sharing" in evidence["attributes"]["options"]
+        assert evidence["validations"]["required"] is True
+    result_form = yaml.safe_load(
+        (ROOT / ".github/DISCUSSION_TEMPLATE/show-and-tell.yml").read_text()
+    )
+    links = next(field for field in result_form["body"] if field.get("id") == "links")
+    assert not links.get("validations", {}).get("required", False)
+
+
+def test_issue_chooser_links_to_public_contribution_entrypoints():
+    config = yaml.safe_load((ROOT / ".github/ISSUE_TEMPLATE/config.yml").read_text())
+    assert config["blank_issues_enabled"] is True
+    assert len(config["contact_links"]) == 3
+    for link in config["contact_links"]:
+        url = urlsplit(link["url"])
+        assert url.scheme == "https" and url.hostname == "github.com"
+        assert url.path.startswith("/mopan-ai/ai-game-bench/discussions/")

@@ -32,10 +32,12 @@ The landing site and historical records remain in a separate private repository.
 Local validation on 2026-10-13: the real Chromium fixture suite passed all 13
 tests. Native Harbor Oracle returned `overall=1` and Nop `overall=0`, each with
 one completed trial and zero exceptions. These are cost-free calibration runs,
-not creator-model evaluations. Fast checks passed 72 tests (the 13 browser tests
+not creator-model evaluations. Fast checks passed 75 tests (the 13 browser tests
 skip there and were run separately). Python wheel/source builds passed; the
 localhost Harbor Viewer returned HTTP 200. No visual Viewer audit was performed.
-GitHub Actions has not run this branch yet.
+GitHub automation rollout is tracked by the first foundation PR and the
+[setup runbook](github-setup.md). Check live Actions runs there; local passing
+tests alone do not establish a successful GitHub run.
 
 After the free path is verified and reviewed: implement one public-safe browser
 creation adapter using a fake local website first, then one authorized real run.

@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Propose a task or platform
+    url: https://github.com/mopan-ai/ai-game-bench/discussions/new?category=ideas
+    about: Discuss scope and verification before starting a large PR.
+  - name: Share an evaluation result
+    url: https://github.com/mopan-ai/ai-game-bench/discussions/new?category=show-and-tell
+    about: Share public-safe methodology and evidence; never upload raw private sessions.
+  - name: Installation or usage question
+    url: https://github.com/mopan-ai/ai-game-bench/discussions/categories/q-a
+    about: Ask for help running the free local calibration.

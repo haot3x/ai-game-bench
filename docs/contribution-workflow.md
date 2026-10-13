@@ -1,8 +1,9 @@
 # Contribution, automation and publication
 
-This document distinguishes the **local workflow definitions in this preview**
-from proposed future automation. Nothing here implies GitHub settings or remote
-services have been enabled.
+This document distinguishes the included free CI from proposed future automation.
+Discussions is enabled. Workflow definitions only become proven automation after
+GitHub runs them; see the [setup and audit runbook](github-setup.md) to inspect live
+settings and runs rather than inferring enforcement from these files.
 
 ## Three contribution paths
 
@@ -15,6 +16,25 @@ services have been enabled.
 Anyone can propose these through an issue or fork/PR. Initial merge authority is
 Mopan maintainers only. A private evidence workspace is optional, not a barrier
 for ordinary code fixes or public-safe task contributions.
+
+## Discussion intake
+
+- [Ideas](https://github.com/mopan-ai/ai-game-bench/discussions/categories/ideas):
+  choose a new task/evaluation method or a platform/harness integration.
+- [Show and tell](https://github.com/mopan-ai/ai-game-bench/discussions/categories/show-and-tell):
+  submit a result with method, evidence availability and limitations.
+- [Q&A](https://github.com/mopan-ai/ai-game-bench/discussions/categories/q-a):
+  installation and usage questions.
+
+These use GitHub's default categories with versioned forms for the first two.
+Maintainer triage is manual: discuss scope, link the accepted proposal from a PR,
+run CI, then manually merge. Opening/editing a discussion does **not** run a model,
+create a private repository or promise acceptance. Do not post confidential
+evidence; ask to arrange a private review first.
+
+During the initial single-maintainer phase, the author and merger can be the same
+maintainer. Required approvals are zero; PR and CI gates still apply. Self-merge
+is not independent review. See [governance](../GOVERNANCE.md).
 
 ## Actions included in this preview
 

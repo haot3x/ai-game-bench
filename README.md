@@ -48,7 +48,10 @@ See [running locally](docs/running.md) for checks and troubleshooting.
 - **Evaluation fixes:** minimal examples of false passes, missed defects or
   instability. Changes to released criteria need a new version.
 
-Start with [CONTRIBUTING.md](CONTRIBUTING.md). Read the
+Start a [task/platform proposal](https://github.com/mopan-ai/ai-game-bench/discussions/categories/ideas)
+or [share a result](https://github.com/mopan-ai/ai-game-bench/discussions/categories/show-and-tell).
+Questions belong in [Q&A](https://github.com/mopan-ai/ai-game-bench/discussions/categories/q-a).
+See [CONTRIBUTING.md](CONTRIBUTING.md). Read the
 [contribution → CI → review flow](docs/contribution-workflow.md) and
 [current platform boundaries](docs/platforms.md).
 The six [platform directories](platforms/README.md) explain the historical
