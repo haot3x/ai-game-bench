@@ -1,0 +1,36 @@
+title: "[Result] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share a result, not just a score. Keep credentials, raw jobs and private
+        sessions out of this public form. Unknown model/effort/cost stays unknown.
+        Maintainer acceptance, independent reproduction and publication are separate.
+  - type: textarea
+    id: result
+    attributes:
+      label: What did you test?
+      description: Task and version, platform/harness/model if known, date, attempts and outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Method and limitations
+      description: Prompt/rubric versions, follow-ups, evaluation method, time/cost basis and what was not checked.
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence
+    attributes:
+      label: Evidence availability
+      options:
+        - Public-safe evidence available
+        - Need to arrange private review before sharing
+    validations:
+      required: true
+  - type: textarea
+    id: links
+    attributes:
+      label: Public evidence links (optional)
+      description: Only links you are authorized to share. For private evidence, leave blank and request arrangements above.

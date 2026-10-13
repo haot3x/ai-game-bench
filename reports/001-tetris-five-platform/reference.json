@@ -1,0 +1,16 @@
+{
+  "schema_version": "0.1",
+  "kind": "historical_reference",
+  "id": "001-tetris-five-platform",
+  "title": "One Tetris task, five ways to create it.",
+  "date": "2026-09-22",
+  "platforms": [
+    "Codex",
+    "Claude Code",
+    "Mopan",
+    "Astrocade",
+    "TapTap Maker"
+  ],
+  "report_url": "https://aigamebench.com/reports/001-tetris-five-platform/report.html",
+  "reproduced_by_public_checkout": false
+}

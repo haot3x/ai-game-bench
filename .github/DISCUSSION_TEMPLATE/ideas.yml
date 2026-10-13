@@ -1,0 +1,41 @@
+title: "[Proposal] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose a task or platform before a large PR. This is public: do not include
+        credentials, browser profiles, private prompts or raw jobs. A proposal does
+        not trigger paid runs or automatically create a private evidence workspace.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Contribution type
+      options:
+        - Task / evaluation method
+        - Platform / harness integration
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you add, and why?
+      description: Describe the game capability or platform and what is missing today.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: How could we check it?
+      description: Reference/negative examples, free tests, setup needs and any expected cost. Unknowns are fine.
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence
+    attributes:
+      label: Evidence availability
+      options:
+        - Proposal only
+        - Public-safe evidence available
+        - Need to arrange private review before sharing
+    validations:
+      required: true

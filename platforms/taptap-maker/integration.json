@@ -1,0 +1,15 @@
+{
+  "schema_version": "platform-reference/0.1",
+  "id": "taptap-maker",
+  "display_name": "TapTap Maker",
+  "historical_route": "existing_profile_browser_ui",
+  "status": "reference_only",
+  "public_execution_supported": false,
+  "setup": ["authorized logged-in owner-selected Chrome profile", "browser-control consent", "fresh project and run budget"],
+  "creation_entry_url": "https://maker.taptap.cn/",
+  "harbor_agent": null,
+  "harbor_implementation": null,
+  "artifact_handoff": ["authorized_game_preview_surface", "game_url_if_available"],
+  "usage_sources": ["task_credit_record", "account_balance_delta_if_authorized", "captured_credit_package_price"],
+  "report_ids": ["001-tetris-five-platform", "003-manus-six-platform-tetris"]
+}

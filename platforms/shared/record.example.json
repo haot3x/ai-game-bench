@@ -1,0 +1,39 @@
+{
+  "schema_version": "platform-observation-example/0.1",
+  "record_status": "blank_template_not_a_result",
+  "platform_id": null,
+  "task": {"id": null, "version": null, "prompt_sha256": null, "policy_version": null},
+  "conditions": {
+    "agent_version": null, "provider": null,
+    "requested_model": null, "observed_model": null, "model_source": null,
+    "requested_effort": null, "observed_effort": null,
+    "ui_mode_label": null, "account_tier": null,
+    "browser_version": null, "viewport": null, "zoom": null, "device_scale": null,
+    "attempt_limit": null, "timeout_seconds": null, "spend_limit": null
+  },
+  "creation": {
+    "status": "not_started", "accepted_at": null,
+    "last_generating_at": null, "first_delivered_at": null,
+    "platform_duration_seconds": null, "observed_elapsed_seconds": null,
+    "followups": [], "capture_gaps": [], "evidence_refs": []
+  },
+  "artifact": {
+    "kind": null, "game_url": null, "bundle_sha256": null,
+    "game_version": null, "build_version": null, "observed_at": null,
+    "access_conditions": null, "frozen": false
+  },
+  "evaluation": {"task_version": null, "rubric_version": null, "native_trial_ref": null},
+  "cost": {
+    "native_cli_estimate": {"amount": null, "currency": null, "pricing_mapping_verified": null},
+    "model_estimate": {"amount": null, "currency": null, "pricing_date": null},
+    "credits": {"task_usage": null, "balance_delta": null, "unresolved_difference": null},
+    "credit_price": {"amount": null, "currency": null, "quantity": null, "conditions": null},
+    "credit_value": {"amount": null, "currency": null},
+    "actual_run_charge": {"amount": null, "currency": null, "allocation_basis": null},
+    "usd_conversion": {"basis": null, "amount": null, "rate": null, "rate_date": null},
+    "source_refs": [], "exclusions": []
+  },
+  "limitations": [],
+  "public_release_approved": false,
+  "training_eligible": false
+}

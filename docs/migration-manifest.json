@@ -1,0 +1,132 @@
+{
+  "schema_version": "0.1",
+  "description": "Explicitly selected Apache-2.0 calibration files; no private Git history or raw runs copied.",
+  "source_revision": "e931677458224917ef188ed43ee3fe2f6ee75106",
+  "files": [
+    {
+      "source": "LICENSE",
+      "path": "LICENSE",
+      "sha256": "f67692d373a4b220e4d0e6084edc178553d0a53d9212a6d249c5e2df2f7b216c"
+    },
+    {
+      "source": "bench/datasets/smoke-create-v0.2/create-click-counter-zh-001/task.toml",
+      "path": "datasets/smoke-create-v0.2/create-click-counter-zh-001/task.toml",
+      "sha256": "b119157bad1ddaca39cedb709187bf5b64f1b66b202d51b3067ea353f92721de"
+    },
+    {
+      "source": "bench/datasets/smoke-create-v0.2/create-click-counter-zh-001/instruction.md",
+      "path": "datasets/smoke-create-v0.2/create-click-counter-zh-001/instruction.md",
+      "sha256": "78cd56579bae813a0b59b7e18ba26be85a7e33be0b9fa92bc6e177f349035bca"
+    },
+    {
+      "source": "bench/datasets/smoke-create-v0.2/create-click-counter-zh-001/environment/Dockerfile",
+      "path": "datasets/smoke-create-v0.2/create-click-counter-zh-001/environment/Dockerfile",
+      "sha256": "d70d6d4814924e69130fcc774a4f373c7a4fb0f3babdab6f7da2cfd67561b23e"
+    },
+    {
+      "source": "bench/datasets/smoke-create-v0.2/create-click-counter-zh-001/solution/solve.sh",
+      "path": "datasets/smoke-create-v0.2/create-click-counter-zh-001/solution/solve.sh",
+      "sha256": "b34e4ae0dadcb3f10e80929e38b57d36aca630761487e93a9cd516bdd10463ab"
+    },
+    {
+      "source": "bench/datasets/smoke-create-v0.2/create-click-counter-zh-001/solution/files/index.html",
+      "path": "datasets/smoke-create-v0.2/create-click-counter-zh-001/solution/files/index.html",
+      "sha256": "dc987328099a8e53cd987935a32775f2a4c1d18b4628a0c29884a117a0b3a28c"
+    },
+    {
+      "source": "bench/datasets/smoke-create-v0.2/create-click-counter-zh-001/tests/test.sh",
+      "path": "datasets/smoke-create-v0.2/create-click-counter-zh-001/tests/test.sh",
+      "sha256": "f8ad5ae5cc7cebfd09d02d7dc5dbe80dcf3dbde1ae64a56c5d7751c6f1bbb7a1"
+    },
+    {
+      "source": "bench/datasets/smoke-create-v0.2/create-click-counter-zh-001/tests/rubric.json",
+      "path": "datasets/smoke-create-v0.2/create-click-counter-zh-001/tests/rubric.json",
+      "sha256": "c9d481e222edc99f142c26b04d39209a1425c9a30b313e63225ca607625c8b23"
+    },
+    {
+      "source": "bench/datasets/smoke-create-v0.2/create-click-counter-zh-001/tests/verify_submission.py",
+      "path": "datasets/smoke-create-v0.2/create-click-counter-zh-001/tests/verify_submission.py",
+      "sha256": "a1e42745b9d51fcd0231e549dd2f4fad996b0d6922780868aa4c97cd3acf958d"
+    },
+    {
+      "source": "bench/datasets/smoke-create-v0.2/create-click-counter-zh-001/tests/Dockerfile",
+      "path": "datasets/smoke-create-v0.2/create-click-counter-zh-001/tests/Dockerfile",
+      "sha256": "9060a8601c6f630f5984560d722799c0117d6bb7d261f09898dec5bfc3eda963"
+    },
+    {
+      "source": "bench/tests/conftest.py",
+      "path": "tests/conftest.py",
+      "sha256": "18c809589669310e087643e35db28d7a8d694e60dfb1c165bb315ed8c6652c5b"
+    },
+    {
+      "source": "bench/tests/test_dom_verifier.py",
+      "path": "tests/test_dom_verifier.py",
+      "sha256": "f8491bd26be9edc385b58dc258534b28eae0edd07caf3a021560fd7d53b57e4f"
+    },
+    {
+      "source": "bench/tests/test_dom_browser.py",
+      "path": "tests/test_dom_browser.py",
+      "sha256": "ad09e633ef36bb8c7957d94d379b8d95b7b238a1094676be4c37c7eacbf105b1"
+    },
+    {
+      "source": "bench/scripts/test-browser.sh",
+      "path": "scripts/test-browser.sh",
+      "sha256": "ad1080a2efcaeb637c9c3610e36afeba8c976f35b3a98403c37d1e9d1513824a"
+    },
+    {
+      "source": "bench/fixtures/browser/click-counter/README.md",
+      "path": "fixtures/browser/click-counter/README.md",
+      "sha256": "f17c48992ddd24626424d8a602417edae813837c0bf659d1bf685bd75820fe73"
+    },
+    {
+      "source": "bench/fixtures/browser/click-counter/auto-increment.html",
+      "path": "fixtures/browser/click-counter/auto-increment.html",
+      "sha256": "cbe0efeb91aa9581ca0cff60df83dd7640faab3efddcb359c8e2c9b94cc8f352"
+    },
+    {
+      "source": "bench/fixtures/browser/click-counter/blocked-button.html",
+      "path": "fixtures/browser/click-counter/blocked-button.html",
+      "sha256": "f2e78946bfc50b5a12bbecd68f071f9a2edb16ef2f95bbd3bff580a1ed20fb37"
+    },
+    {
+      "source": "bench/fixtures/browser/click-counter/double-increment.html",
+      "path": "fixtures/browser/click-counter/double-increment.html",
+      "sha256": "3605d63b59bad9a92b831e627f899ca830e1fa802c08ca042c79750f555b2c1a"
+    },
+    {
+      "source": "bench/fixtures/browser/click-counter/external-navigation.html",
+      "path": "fixtures/browser/click-counter/external-navigation.html",
+      "sha256": "edd0f0d32126aae7559d55010d021c5c0bf6a302e5124b6d27efde53edad12a4"
+    },
+    {
+      "source": "bench/fixtures/browser/click-counter/external-resource.html",
+      "path": "fixtures/browser/click-counter/external-resource.html",
+      "sha256": "73513f0101cee2be94130216ad29bea782ae56eb37048b6701e3b50274699fe1"
+    },
+    {
+      "source": "bench/fixtures/browser/click-counter/hidden-score.html",
+      "path": "fixtures/browser/click-counter/hidden-score.html",
+      "sha256": "daf7aba94427443d4d28f09822248e731d412fa7220e35c3078c05b2a958ad2a"
+    },
+    {
+      "source": "bench/fixtures/browser/click-counter/one-click-only.html",
+      "path": "fixtures/browser/click-counter/one-click-only.html",
+      "sha256": "4e0de8c5821ad8027419b591d8946ffccec30d68cbf584c94be90ad5123ecbfa"
+    },
+    {
+      "source": "bench/fixtures/browser/click-counter/runtime-error.html",
+      "path": "fixtures/browser/click-counter/runtime-error.html",
+      "sha256": "5d6738051fed97f4619fdc38b8b66ce6ea82f0dc9e341c995171fc0500722d23"
+    },
+    {
+      "source": "bench/fixtures/browser/click-counter/static.html",
+      "path": "fixtures/browser/click-counter/static.html",
+      "sha256": "3fc1c07a46bfb7e13323ada8b725ad86a4df4b141dec4bd1e809b6b5d11cd3b2"
+    },
+    {
+      "source": "bench/fixtures/browser/click-counter/working.html",
+      "path": "fixtures/browser/click-counter/working.html",
+      "sha256": "d391943fa7b21b084f5cd8522e334c42f33f542a45843a9412c821057bba6e16"
+    }
+  ]
+}

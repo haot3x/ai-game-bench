@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1",
+  "kind": "historical_reference",
+  "id": "003-manus-six-platform-tetris",
+  "title": "One Tetris task, six creation platforms.",
+  "date": "2026-09-29",
+  "platforms": [
+    "Codex",
+    "Claude Code",
+    "Mopan",
+    "Astrocade",
+    "TapTap Maker",
+    "Manus"
+  ],
+  "report_url": "https://aigamebench.com/reports/003-manus-six-platform-tetris/report.html",
+  "reproduced_by_public_checkout": false
+}

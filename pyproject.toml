@@ -1,0 +1,30 @@
+[project]
+name = "ai-game-bench"
+version = "0.1.0"
+description = "Harbor-native, evidence-first benchmark for AI game creation"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = ["harbor==0.22.0"]
+
+[project.scripts]
+agb = "ai_game_bench.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.8.4,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = ["pytest>=8.4.2,<9", "ruff>=0.15.17,<0.16"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["browser: real Chromium calibration; run scripts/test-browser.sh"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

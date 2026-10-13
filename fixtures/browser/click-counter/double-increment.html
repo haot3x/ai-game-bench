@@ -1,0 +1,6 @@
+<!doctype html><html><meta charset="utf-8"><title>Broken: counts twice</title>
+<output data-testid="score">0</output><button data-testid="click-target">Count</button>
+<script>
+let n = 0;
+document.querySelector('button').onclick = () => document.querySelector('output').textContent = (n += 2);
+</script></html>

@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1",
+  "kind": "historical_reference",
+  "id": "002-codex-gpt-6-sol-astra-tetris",
+  "title": "One Tetris task, two Codex models.",
+  "date": "2026-09-23",
+  "platforms": [
+    "Codex"
+  ],
+  "report_url": "https://aigamebench.com/reports/002-codex-gpt-6-sol-astra-tetris/report.html",
+  "reproduced_by_public_checkout": false
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>点击计数</title>
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #f6f3e6; color: #1a30c0; font-family: system-ui; }
+    main { text-align: center; }
+    [data-testid="score"] { display: block; margin: 24px; font-size: 80px; }
+    button { padding: 24px 48px; border: 2px solid currentColor; border-radius: 8px; background: transparent; color: inherit; font-size: 24px; cursor: pointer; }
+    button:active { transform: translateY(2px); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>点击计数</h1>
+    <output data-testid="score" aria-label="当前分数" aria-live="polite">0</output>
+    <button data-testid="click-target" type="button">点我加一</button>
+  </main>
+  <script>
+    let score = 0;
+    const output = document.querySelector('[data-testid="score"]');
+    document.querySelector('[data-testid="click-target"]').addEventListener('click', () => {
+      output.textContent = String(++score);
+    });
+  </script>
+</body>
+</html>

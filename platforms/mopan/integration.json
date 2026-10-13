@@ -1,0 +1,15 @@
+{
+  "schema_version": "platform-reference/0.1",
+  "id": "mopan",
+  "display_name": "Mopan",
+  "historical_route": "existing_profile_browser_ui",
+  "status": "reference_only",
+  "public_execution_supported": false,
+  "setup": ["authorized logged-in owner-selected Chrome profile", "browser-control consent", "fresh project and run budget"],
+  "creation_entry_url": "https://mopan.ai/",
+  "harbor_agent": null,
+  "harbor_implementation": null,
+  "artifact_handoff": ["play_url_with_build_identity_when_exposed", "game_only_preview_surface"],
+  "usage_sources": ["visible_ui_usage_if_available", "separately_authorized_provider_summary", "model_price_estimate"],
+  "report_ids": ["001-tetris-five-platform", "003-manus-six-platform-tetris", "004-mopan-astra-gemini-tetris"]
+}
