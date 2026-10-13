@@ -113,9 +113,20 @@ def test_ci_is_read_only_and_has_no_paid_or_deploy_lane():
     assert "secrets." not in path.read_text()
     for job in workflow["jobs"].values():
         assert job["runs-on"] == "ubuntu-24.04"
+        assert "permissions" not in job
         for step in job["steps"]:
             if "uses" in step:
                 assert re.fullmatch(r"[^@]+@[a-f0-9]{40}", step["uses"])
+                if step["uses"].startswith("actions/checkout@"):
+                    assert step["with"]["persist-credentials"] == "false"
+    package_commands = {
+        step["run"] for step in workflow["jobs"]["checks-and-package"]["steps"] if "run" in step
+    }
+    browser_commands = {
+        step["run"] for step in workflow["jobs"]["browser-calibration"]["steps"] if "run" in step
+    }
+    assert {"./verify.sh", "uv build"} <= package_commands
+    assert {"./scripts/test-browser.sh", "./scripts/run-smoke.sh"} <= browser_commands
 
 
 def test_six_platform_references_are_explicitly_not_executable():
@@ -207,6 +218,12 @@ def test_issue_chooser_links_to_public_contribution_entrypoints():
     config = yaml.safe_load((ROOT / ".github/ISSUE_TEMPLATE/config.yml").read_text())
     assert config["blank_issues_enabled"] is True
     assert len(config["contact_links"]) == 3
+    base = "https://github.com/mopan-ai/ai-game-bench/discussions/"
+    assert {link["url"] for link in config["contact_links"]} == {
+        base + "new?category=ideas",
+        base + "new?category=show-and-tell",
+        base + "categories/q-a",
+    }
     for link in config["contact_links"]:
         url = urlsplit(link["url"])
         assert url.scheme == "https" and url.hostname == "github.com"
