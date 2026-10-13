@@ -1,0 +1,42 @@
+name: Task, platform or result proposal
+description: Propose a test task, platform integration or evidence-backed result.
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Contribution type
+      options:
+        - Task / evaluation method
+        - Platform / harness integration
+        - Result / report
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What are you contributing?
+      description: Capability covered, platform, or report scope. No private data.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: How can it be checked?
+      description: Reproduction steps, reference/negative examples, versions and limitations.
+    validations:
+      required: true
+  - type: dropdown
+    id: privacy
+    attributes:
+      label: Evidence sharing
+      options:
+        - Public-safe evidence available
+        - Need to arrange private review before sharing
+        - Proposal only; evidence not collected yet
+    validations:
+      required: true
+  - type: textarea
+    id: resources
+    attributes:
+      label: Accounts, compute and cost
+      description: State requirements, not credentials. Submission does not authorize spending.

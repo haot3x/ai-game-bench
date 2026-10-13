@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+jobs/
+artifacts/
+.env*
+!.env.example
+.DS_Store
+.vercel/
+node_modules/
+*storage-state*.json
+*storage_state*.json

@@ -1,0 +1,4 @@
+# Rename to CODEOWNERS only after replacing the placeholder with an existing
+# Mopan maintainer team with write access, and enabling required owner reviews.
+# Example (not active):
+# * @mopan-ai/REPLACE_WITH_ACTUAL_MAINTAINER_TEAM

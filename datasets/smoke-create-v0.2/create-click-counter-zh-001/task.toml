@@ -1,0 +1,36 @@
+schema_version = "1.4"
+artifacts = [
+  "/workspace/gamebench/submission.json",
+  "/workspace/game/dist",
+]
+
+[task]
+name = "mopan-ai/create-click-counter-zh-001"
+version = "0.2.0"
+description = "Create an offline DOM click counter with browser-verified interactions"
+authors = [{ name = "Mopan AI" }]
+keywords = ["game", "web", "create", "clicker", "calibration", "zh"]
+
+[metadata]
+dataset = "smoke-create"
+dataset_version = "v0.2"
+source = "synthetic-public-smoke"
+archetype = "clicker"
+evaluation_stage = "interaction"
+
+[verifier]
+timeout_sec = 90.0
+environment_mode = "separate"
+network_mode = "no-network"
+
+[agent]
+timeout_sec = 1800.0
+
+[environment]
+network_mode = "no-network"
+build_timeout_sec = 1200.0
+os = "linux"
+cpus = 2
+memory_mb = 2048
+storage_mb = 4096
+gpus = 0

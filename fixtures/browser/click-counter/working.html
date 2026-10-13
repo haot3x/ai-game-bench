@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Alternate counter</title>
+<h1>Independent DOM fixture</h1><output data-testid="score">0</output>
+<button data-testid="click-target">Count</button>
+<script>
+document.addEventListener('click', event => {
+  if (event.target.matches('button')) {
+    const node = document.querySelector('output');
+    node.textContent = Number(node.textContent) + 1;
+  }
+});
+</script></html>

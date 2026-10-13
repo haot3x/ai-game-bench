@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "mode": "dom-click-counter",
+  "verifier_version": "0.2.0",
+  "viewport": {"width": 1280, "height": 720},
+  "score_selector": "[data-testid=\"score\"]",
+  "target_selector": "[data-testid=\"click-target\"]",
+  "initial_score": 0,
+  "idle_ms": 800,
+  "click_delays_ms": [100, 350, 150],
+  "action_timeout_ms": 3000,
+  "navigation_timeout_ms": 10000,
+  "note": "DOM integration calibration only. Not a gameplay-quality or model-leaderboard score."
+}

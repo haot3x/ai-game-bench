@@ -1,0 +1,15 @@
+{
+  "schema_version": "platform-reference/0.1",
+  "id": "codex",
+  "display_name": "Codex",
+  "historical_route": "local_cli",
+  "status": "reference_only",
+  "public_execution_supported": false,
+  "setup": ["authorized local CLI account", "fresh isolated workspace", "recorded CLI/model/effort configuration"],
+  "creation_entry_url": null,
+  "harbor_agent": "codex",
+  "harbor_implementation": "harbor.agents.installed.codex:Codex",
+  "artifact_handoff": ["frozen_local_bundle", "game_only_loopback_url"],
+  "usage_sources": ["native_cli_usage", "versioned_model_price_estimate", "subscription_allocation_if_known"],
+  "report_ids": ["001-tetris-five-platform", "002-codex-gpt-6-sol-astra-tetris", "003-manus-six-platform-tetris"]
+}

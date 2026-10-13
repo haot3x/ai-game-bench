@@ -1,0 +1,15 @@
+{
+  "schema_version": "platform-reference/0.1",
+  "id": "claude-code",
+  "display_name": "Claude Code",
+  "historical_route": "local_cli",
+  "status": "reference_only",
+  "public_execution_supported": false,
+  "setup": ["authorized local CLI/provider account", "fresh isolated workspace", "record provider routing without credentials"],
+  "creation_entry_url": null,
+  "harbor_agent": "claude-code",
+  "harbor_implementation": "harbor.agents.installed.claude_code:ClaudeCode",
+  "artifact_handoff": ["frozen_local_bundle", "game_only_loopback_url"],
+  "usage_sources": ["native_cli_usage", "native_cli_estimate_with_mapping_confidence", "provider_usage_if_available"],
+  "report_ids": ["001-tetris-five-platform", "003-manus-six-platform-tetris"]
+}

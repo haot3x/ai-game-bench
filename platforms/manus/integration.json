@@ -1,0 +1,15 @@
+{
+  "schema_version": "platform-reference/0.1",
+  "id": "manus",
+  "display_name": "Manus",
+  "historical_route": "existing_profile_browser_ui",
+  "status": "reference_only",
+  "public_execution_supported": false,
+  "setup": ["authorized logged-in owner-selected Chrome profile", "browser-control consent", "fresh task and run budget"],
+  "creation_entry_url": "https://manus.im/",
+  "harbor_agent": null,
+  "harbor_implementation": null,
+  "artifact_handoff": ["authorized_managed_preview_url"],
+  "usage_sources": ["task_credit_record", "captured_plan_credit_price", "actual_charge_if_known"],
+  "report_ids": ["003-manus-six-platform-tetris"]
+}

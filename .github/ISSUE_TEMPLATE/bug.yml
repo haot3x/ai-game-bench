@@ -1,0 +1,16 @@
+name: Bug or incorrect evaluation
+description: Report a reproducible bug, false pass, missed defect or unstable result.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Expected and observed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction and versions
+      description: Commands, task version and scrubbed output. Do not attach raw jobs or credentials.
+    validations:
+      required: true

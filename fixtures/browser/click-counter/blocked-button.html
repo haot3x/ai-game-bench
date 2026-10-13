@@ -1,0 +1,7 @@
+<!doctype html><html><meta charset="utf-8"><title>Broken: covered button</title>
+<output data-testid="score">0</output><button data-testid="click-target">Count</button>
+<div style="position:fixed;inset:0;background:white">Overlay blocks input</div>
+<script>
+let n = 0;
+document.querySelector('button').onclick = () => document.querySelector('output').textContent = ++n;
+</script></html>

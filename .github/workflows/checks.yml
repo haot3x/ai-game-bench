@@ -1,0 +1,55 @@
+name: Public checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-checks-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  HARBOR_TELEMETRY: "0"
+
+jobs:
+  checks-and-package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        with:
+          version: "0.8.22"
+          enable-cache: false
+      - run: uv sync --locked --python 3.12
+      - run: ./verify.sh
+      - name: Build Python wheel and source package (no publishing)
+        run: uv build
+      - name: Check CLI entry point
+        run: uv run --locked agb run --agent oracle --dry-run
+
+  browser-calibration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        with:
+          version: "0.8.22"
+          enable-cache: false
+      - run: uv sync --locked --python 3.12
+      - run: uv run --locked agb doctor
+      - name: Build browser image and test known-good and broken games
+        run: ./scripts/test-browser.sh
+      - name: Run native Harbor Oracle and Nop; assert rewards and no errors
+        run: ./scripts/run-smoke.sh
+      # Deliberately no model keys, account profiles, deployment or raw-job upload.

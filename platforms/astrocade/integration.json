@@ -1,0 +1,15 @@
+{
+  "schema_version": "platform-reference/0.1",
+  "id": "astrocade",
+  "display_name": "Astrocade",
+  "historical_route": "existing_profile_browser_ui",
+  "status": "reference_only",
+  "public_execution_supported": false,
+  "setup": ["authorized logged-in owner-selected Chrome profile", "browser-control consent", "fresh project and run budget"],
+  "creation_entry_url": "https://www.astrocade.com/create",
+  "harbor_agent": null,
+  "harbor_implementation": null,
+  "artifact_handoff": ["authorized_editor_game_preview_surface", "play_url_if_available_and_authorized"],
+  "usage_sources": ["visible_task_or_credit_usage_if_available"],
+  "report_ids": ["001-tetris-five-platform", "003-manus-six-platform-tetris"]
+}
