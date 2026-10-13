@@ -179,6 +179,8 @@ def test_single_maintainer_policy_keeps_pr_and_ci_gates():
         (ROOT / ".github/workflows/checks.yml").read_text(), Loader=yaml.BaseLoader
     )
     assert checks["strict"] is True
+    # GitHub accepts either legacy contexts or app-pinned checks, not both.
+    assert "contexts" not in checks
     assert {check["context"] for check in checks["checks"]} == set(workflow["jobs"])
     assert all(check["app_id"] == 15368 for check in checks["checks"])
     assert policy["enforce_admins"] is True
