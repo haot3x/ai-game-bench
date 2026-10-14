@@ -1,0 +1,25 @@
+{
+  "selector_observed_at": "2026-10-14T04:00:16.392Z",
+  "selector_excerpt": [
+    "  uid=2_0 StaticText \"Main model\"",
+    "  uid=2_1 combobox \"Main model\" description=\"Main model\" expandable focusable focused haspopup=\"menu\" value=\"Astra · Bedrock\"",
+    "    uid=2_4 option \"Gemini 4 Argon · Google\" selectable value=\"Gemini 4 Argon · Google\"",
+    "  uid=2_5 StaticText \"Child model\"",
+    "  uid=2_6 combobox \"Child model\" description=\"Child model\" expandable haspopup=\"menu\" value=\"Same as Main\"",
+    "    uid=2_7 option \"Same as Main\" selectable selected value=\"Same as Main\"",
+    "    uid=2_11 option \"Gemini 4 Argon · Google\" selectable value=\"Gemini 4 Argon · Google\""
+  ],
+  "environment_observed_at": "2026-10-14T04:01:16.856Z",
+  "environment": {
+    "url": "https://mopan.ai/#agb-gemini4-20261014-preflight",
+    "viewport": {
+      "width": 1648,
+      "height": 1233,
+      "dpr": 2
+    },
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "create": "Assets\nSkills\nGemini 4 Argon",
+    "controls": []
+  },
+  "scope": "Allowlisted visible model-selector lines before selection and visible DOM/browser environment after selection. Not backend telemetry or account/profile data."
+}

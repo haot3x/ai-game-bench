@@ -1,0 +1,102 @@
+{
+  "schema_version": "maintainer-replay-note/0.1",
+  "submission": "mopan-gemini4-tetris-20261014",
+  "revision": 3,
+  "manifest_sha256": "46f8f1fa92d8ab582591ce3db75254c4af523c76de5ec8f9dcd584b5fdd05e6d",
+  "evidence_head_before_review_artifacts": "53448364d4c8a7c48d973087555b01eebe4b7311",
+  "trusted_revision": "bc13bdc88e2abe1114324b8e7520dbc24e5a44d9",
+  "reviewer": "haot3x / Mopan AI, same affiliated Codex session as submitter",
+  "independent_review": false,
+  "generation_rerun": false,
+  "replay_start": "2026-10-14T06:40:04.176Z",
+  "replay_end": "2026-10-14T06:49:05.491Z",
+  "game_url": "https://mopan.ai/play/9e77c349-d405-4916-9773-00f00535479d?build=5816ae22-b9f0-49cb-b736-dd111797133d",
+  "build_version": "5816ae22-b9f0-49cb-b736-dd111797133d",
+  "bundle_sha256": null,
+  "browser": "HeadlessChrome/151.0.7922.34 via gstack browse",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "imported_account_state": false,
+  "input_mode": "DOM-assisted pointer events at visible canvas buttons, browser keyboard after native canvas focus",
+  "replayed": [
+    "delayed clean start",
+    "idle gravity / score stability",
+    "hard-drop stacking / score",
+    "top-out",
+    "post-loss left/down blocked",
+    "visible restart score/board reset",
+    "post-restart left input",
+    "pause"
+  ],
+  "original_evidence_reviewed": [
+    "creation/model/send/followups",
+    "all nine core verdict references",
+    "single and double clear before/after/score isolation",
+    "six experience ratings",
+    "sampling gaps/anomalies",
+    "owner cost scope/arithmetic",
+    "original revision/hash continuity"
+  ],
+  "limitations": [
+    "Original owner-tab anomalies not reproduced; cause remains unresolved.",
+    "Line clears were reviewed from original evidence, not rerun during maintainer replay.",
+    "Hosted build label is not byte identity.",
+    "Same-person nonblind review.",
+    "Early unfocused keyboard attempts and Space quick-restarts retained; not all presses imply delivered gameplay input.",
+    "Mobile/audio/frame-rate/level progression/exhaustive collision checks not replayed."
+  ],
+  "recommendation": "accept manual pilot with stated limitations, subject to final-head required checks",
+  "images": [
+    {
+      "file": "replay-entry.png",
+      "sha256": "b0a143625913d93f3c0c148c6b849af867762a55879fd15c66826ed597c304d9",
+      "bytes": 78841,
+      "at": "2026-10-14T06:40:53.092Z"
+    },
+    {
+      "file": "replay-start.png",
+      "sha256": "5203ec1b380bac4eaaf6a06f65f8207d1f6f8e57aaa839ac8fd8c75e92f1f410",
+      "bytes": 52364,
+      "at": "2026-10-14T06:42:35.105Z"
+    },
+    {
+      "file": "replay-idle.png",
+      "sha256": "e8b00714f693fb9b3569c12f67368c0819756364a30292b8b0479a94dfc47be1",
+      "bytes": 60825,
+      "at": "2026-10-14T06:43:25.180Z"
+    },
+    {
+      "file": "replay-pointer-loss.png",
+      "sha256": "0359e9b4bf55148580c0c00109a8ef3d2b386a024478e40f1665deb8f2d916fe",
+      "bytes": 67566,
+      "at": "2026-10-14T06:48:09.877Z"
+    },
+    {
+      "file": "replay-pointer-loss-blocked.png",
+      "sha256": "0359e9b4bf55148580c0c00109a8ef3d2b386a024478e40f1665deb8f2d916fe",
+      "bytes": 67566,
+      "at": "2026-10-14T06:48:39.659Z"
+    },
+    {
+      "file": "replay-pointer-restart.png",
+      "sha256": "3ffb64dddfeef7a17b676e3ccd9af5a244538f56b2474863b192f4a79e9741fc",
+      "bytes": 52646,
+      "at": "2026-10-14T06:48:39.724Z"
+    },
+    {
+      "file": "replay-pointer-restart-left.png",
+      "sha256": "b59833149b4fbb72197375cfaec9ed1ae4acf66305e5d40901a576f020447298",
+      "bytes": 52685,
+      "at": "2026-10-14T06:48:39.790Z"
+    },
+    {
+      "file": "replay-final-paused.png",
+      "sha256": "c93bb20d872cbd3a779fd63ac0bec9cb5045adae03f59177647b32bfb92013fe",
+      "bytes": 64641,
+      "at": "2026-10-14T06:49:05.491Z"
+    }
+  ],
+  "operation_count": 108
+}

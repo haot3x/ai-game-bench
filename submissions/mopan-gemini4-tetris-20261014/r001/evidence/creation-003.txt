@@ -1,0 +1,61 @@
+uid=1_0 RootWebArea "经典俄罗斯方块 | Mopan" url="https://mopan.ai/workspace/9e77c349-d405-4916-9773-00f00535479d"
+  uid=3_0 banner
+    uid=3_1 button "Mopan home"
+    uid=3_2 button "Rename game title" description="Click to rename"
+    uid=3_3 button "More" description="More" expandable haspopup="menu"
+  uid=3_4 generic "Conversation"
+    uid=7_0 StaticText "一个经典俄罗斯方块"
+    uid=3_8 button "Copy prompt"
+    uid=3_9 StaticText "2m ago"
+    uid=3_10 region "Mopan Agent: Working on your request"
+      uid=3_12 StaticText "Mopan Agent"
+      uid=3_13 StaticText ":"
+      uid=6_1 StaticText "Working on your request"
+      uid=3_15 StaticText "57s"
+    uid=4_2 StaticText "你希望这款俄罗斯方块采用哪种核心规则与操作体验？"
+    uid=4_3 button "现代顺手版（推荐：经典消行升级加速，含落点虚影与Hold暂存功能）" disableable disabled
+    uid=4_4 button "纯粹怀旧街机版（仅保留下一个方块预览，无虚影与暂存，原汁原味硬核挑战）" disableable disabled pressed
+    uid=4_5 button "经典无尽 + 40行极速冲刺双模式（既可刷高分也能比拼消行速度）" disableable disabled
+    uid=4_7 StaticText "画面视觉与背景音乐更偏向哪种风格？"
+    uid=4_8 button "现代绚丽霓虹风（推荐：深色棋盘、发光立体方块与消行粒子特效，配动感电子乐）" disableable disabled
+    uid=4_9 button "复古像素街机风（8-bit像素质感与经典电子芯片音乐，还原童年掌机/红白机氛围）" disableable disabled
+    uid=4_10 button "清爽极简积木风（干净柔和配色、圆润木质或糖果色方块，配轻松舒缓音乐）" disableable disabled pressed
+    uid=4_12 StaticText "主要在什么设备与屏幕方向下游玩？"
+    uid=4_13 button "竖屏通用布局（推荐：棋盘居中视野大，底部带触屏操控键，手机触屏与电脑键盘都能顺畅玩）" disableable disabled pressed
+    uid=4_14 button "横屏街机布局（宽屏机台视角，主推电脑键盘操作，两侧展示丰富数据面板）" disableable disabled
+    uid=4_17 StaticText "1m ago"
+    uid=7_1 StaticText "你希望这款俄罗斯方块采用哪种核心规则与操作体验？: 纯粹怀旧街机版（仅保留下一个方块预览，无虚影与暂存，原汁原味硬核挑战）"
+    uid=7_2 LineBreak "
+"
+    uid=7_3 StaticText "画面视觉与背景音乐更偏向哪种风格？: 清爽极简积木风（干净柔和配色、圆润木质或糖果色方块，配轻松舒缓音乐）"
+    uid=7_4 LineBreak "
+"
+    uid=7_5 StaticText "主要在什么设备与屏幕方向下游玩？: 竖屏通用布局（推荐：棋盘居中视野大，底部带触屏操控键，手机触屏与电脑键盘都能顺畅玩）"
+    uid=6_7 button "Cannot retry — build missing" disableable disabled
+    uid=6_8 button "Cannot edit — build missing" disableable disabled
+    uid=6_9 button "Copy prompt"
+    uid=6_10 StaticText "1m ago"
+    uid=6_11 region "Mopan Agent: Working on your request"
+      uid=6_12 status "Loading" atomic live="polite" relevant="additions text"
+      uid=6_13 StaticText "Mopan Agent"
+      uid=6_14 StaticText ":"
+      uid=7_6 StaticText "Looking around"
+      uid=6_16 StaticText "1:01"
+  uid=3_16 textbox multiline
+  uid=3_17 button "Add to prompt" description="Add to prompt" expandable haspopup="menu"
+  uid=3_18 button "Models" disableable disabled expandable haspopup="dialog"
+  uid=3_19 button "Stop task" description="Stop task"
+  uid=3_20 generic description="Drag to resize"
+  uid=3_21 banner
+    uid=3_22 button "No builds —" description="No builds yet" disableable disabled
+    uid=3_23 generic "Open build in Play" description="Open build in Play" disableable disabled
+    uid=3_24 button "Restart game" description="Restart game" disableable disabled
+    uid=3_25 button "Unmute music" description="Unmute music" disableable disabled pressed
+    uid=3_26 button "Fullscreen" description="Fullscreen" disableable disabled
+  uid=3_27 status "Loading" atomic live="polite" relevant="additions text"
+  uid=3_28 StaticText "Building your game…"
+  uid=3_29 generic description="Drag to resize"
+  uid=3_30 tab "Game Design" selectable selected
+  uid=3_31 tab "Game Assets" selectable
+  uid=3_32 status atomic live="polite" relevant="additions text"
+    uid=3_33 StaticText "Your game's design will appear here as you work with Mopan."

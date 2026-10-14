@@ -1,0 +1,11 @@
+uid=11_0 RootWebArea "经典俄罗斯方块 | Mopan" url="https://mopan.ai/play/9e77c349-d405-4916-9773-00f00535479d?build=5816ae22-b9f0-49cb-b736-dd111797133d"
+  uid=11_1 main
+    uid=11_2 link "Mopan home, opens in a new tab" url="https://mopan.ai/"
+    uid=11_3 heading "经典俄罗斯方块" level="1"
+    uid=11_4 button "Remix"
+    uid=11_5 button "Share"
+      uid=11_6 status atomic live="polite" relevant="additions text"
+    uid=11_7 button "Mute sound" description="Mute sound"
+    uid=11_8 button "Fullscreen" description="Fullscreen"
+    uid=11_9 Iframe "经典俄罗斯方块"
+      uid=11_10 RootWebArea "经典俄罗斯方块" url="https://mopan.ai/play/9e77c349-d405-4916-9773-00f00535479d?build=5816ae22-b9f0-49cb-b736-dd111797133d"

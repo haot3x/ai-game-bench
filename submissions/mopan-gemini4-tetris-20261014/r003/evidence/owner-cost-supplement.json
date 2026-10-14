@@ -1,0 +1,70 @@
+{
+  "schema_version": "owner-reported-cost-supplement/0.1",
+  "submission_id": "mopan-gemini4-tetris-20261014",
+  "attempt_id": "attempt-1",
+  "artifact_id": "mopan-gemini4-tetris-build-5816ae22",
+  "build_version": "5816ae22-b9f0-49cb-b736-dd111797133d",
+  "source": {
+    "kind": "owner_provided_backend_summary",
+    "received_date": "2026-10-14",
+    "evidence": "evidence/owner-cost-summary.txt",
+    "run_attribution": "Owner supplied these figures in direct response to the request for this Gemini 4 Argon workspace's costs. Attribution is owner-reported, not independently matched against a backend export.",
+    "independently_verified": false,
+    "raw_backend_receipt_available": false,
+    "supplier_invoice_reconciled": false,
+    "unit_prices_supplied": false
+  },
+  "model": {
+    "name": "Gemini 4 Argon",
+    "scope": "Main and child agents combined",
+    "request_count": 59,
+    "tokens": {
+      "uncached_input": 386689,
+      "cached_input": 3267135,
+      "output_including_thinking": 70781,
+      "input_total_derived": 3653824,
+      "total_derived": 3724605,
+      "input_cache_hit_percent_reported": "89.4",
+      "cache_ratio_definition": "cached_input / (uncached_input + cached_input)"
+    }
+  },
+  "costs": {
+    "currency": "USD",
+    "basis": "Owner-reported model/provider generation cost estimate, not verified user payment or a reconciled supplier bill.",
+    "model_tokens_only_usd": "1.807902",
+    "new_media": [
+      {"kind": "cover_image", "count": 1, "amount_usd": "0.068237"},
+      {"kind": "background_music", "count": 1, "amount_usd": "0.040000"},
+      {"kind": "sound_effect", "count": 6, "amount_usd": "0.240000"}
+    ],
+    "media_subtotal_from_displayed_rows_usd": "0.348237",
+    "total_reported_precise_usd": "2.1561385",
+    "total_reported_display_usd": "2.156139",
+    "sum_of_displayed_rows_usd": "2.156139",
+    "displayed_sum_minus_reported_precise_usd": "0.0000005",
+    "precision_note": "The displayed components add to 2.156139, 0.0000005 above the owner's more precise total. This is compatible with displayed rounding but underlying per-component precision was not supplied; both values are preserved, not silently reconciled.",
+    "comparison": {
+      "scope": "model_tokens_only",
+      "amount_usd": "1.807902",
+      "note": "Use only this amount for comparison with the old model-token estimates. Do not compare the media-inclusive total against old model-only values."
+    },
+    "actual_user_charge_usd": null,
+    "credit_value_usd": null,
+    "infrastructure_storage_bandwidth_taxes": "not specified; not assumed zero or included"
+  },
+  "timing": {
+    "backend_reported_seconds_approx": 1175,
+    "backend_scope": "Owner reports about 19m35s; start/end boundaries were not supplied.",
+    "observer_accepted_to_final_render_seconds": "1241.231",
+    "creator_ui_build_card_seconds": 1132,
+    "note": "Separate measurements. Neither the backend estimate nor the visible build-card timer replaces the browser-observed duration used for scoring. The delta is not attributed to a cause."
+  },
+  "revision": {
+    "previous_revision": 1,
+    "previous_manifest_sha256": "3e5de4f6ebb946e849e812168adf3ce05110289baa138a3dbe15322ba0bf05fc",
+    "purpose": "Append owner-supplied cost, usage and backend duration after recording; not a new creation/evaluation run.",
+    "original_trajectories_and_screenshots_unchanged": true,
+    "original_pilot_total": "91.443355",
+    "score_effect": "None. The pilot excludes costs. An old-report 40/20/20/20 reassessment is still outstanding; this estimate does not fill its user-payment component."
+  }
+}
