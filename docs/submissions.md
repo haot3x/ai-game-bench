@@ -20,6 +20,10 @@ manual pilot, not an automatic Harbor run. If a task/policy is absent, [propose 
 before a formal run. Development pilots must be labeled as such; do not retrofit
 a rubric after seeing results. Platform references are not executable adapters.
 
+For historical Tetris comparisons, read the [fixed 40/20/20/20 scoring rules](../scoring/README.md).
+Freeze these alongside the creation method before new runs. Existing pilot data
+can receive an explicitly retrospective score addendum, never a rewritten score.
+
 `init` creates an unapproved draft with empty trajectories. It does not fabricate
 evidence, approve publication or connect a browser. Read the policy's limits.
 For agents, schemas are available without network calls:

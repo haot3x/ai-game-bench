@@ -4,6 +4,7 @@ import copy
 import json
 import os
 import shutil
+import socket
 import subprocess
 from pathlib import Path
 
@@ -14,6 +15,16 @@ from ai_game_bench import submissions as s
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLE = ROOT / "examples/submissions/synthetic-counter"
+
+
+@pytest.fixture(autouse=True)
+def offline_only(monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Public validation must not make network connections")
+
+    monkeypatch.setattr(socket, "create_connection", forbidden)
+    monkeypatch.setattr(socket, "getaddrinfo", forbidden)
+    monkeypatch.setattr(socket.socket, "connect", forbidden)
 
 
 @pytest.fixture
@@ -67,6 +78,24 @@ def test_example_is_valid_not_verified():
     assert result["review_status"] == "unverified"
     assert result["kind"] == "synthetic_example"
     assert result["attempts"][0]["recomputed_total"] == 1
+
+
+def test_collection_accepts_two_maximum_file_count_packages(tmp_path, trusted_root):
+    tree = tmp_path / "incoming"
+    for name in ("large-a", "large-b"):
+        package = tree / name / "r001"
+        shutil.copytree(EXAMPLE, package)
+        record = manifest(package)
+        record.update(id=name, kind="result")
+        for index in range(300 - len(record["files"])):
+            filename = f"extra-{index}.txt"
+            data = b"Synthetic inventory boundary fixture."
+            (package / filename).write_bytes(data)
+            record["files"].append({"path": filename, "bytes": len(data), "sha256": s.digest(data)})
+        save(package, record)
+    result = s.validate_tree(tree, trusted_root)
+    assert result["structure_valid"], result
+    assert result["count"] == 2
 
 
 def test_draft_never_authorizes_publication(tmp_path):

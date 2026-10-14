@@ -194,3 +194,4 @@ class Submission(Record):
     external_evidence: Annotated[list[ExternalEvidence], Field(max_length=100)]
     costs: Annotated[list[Cost], Field(min_length=1, max_length=50)]
     publication: Publication
+    score_addenda: Annotated[list[Text], Field(max_length=10)] = []

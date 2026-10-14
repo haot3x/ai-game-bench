@@ -105,3 +105,20 @@ def test_favorable_time_score_cannot_be_claimed(ready, claimed):
     attempt, policy, prompt, blobs = fictional_attempt(1950, ready=ready, claimed_time=claimed)
     with pytest.raises(s.InvalidSubmission, match="Delivery-time credit"):
         s.check_attempt(attempt, policy, prompt, blobs, set(blobs), set())
+
+
+def test_browser_draft_does_not_claim_native_or_deterministic_verification(tmp_path):
+    target = tmp_path / "draft"
+    s.initialize(ROOT, target, POLICY, "manual-test")
+    record = json.loads((target / "manifest.json").read_text())
+    assert record["source_kind"] == "browser_observation"
+    assert record["attempts"][0]["result"]["mode"] == "human"
+
+
+@pytest.mark.parametrize("key", ["line-score", "readability", "guidance", "feedback", "layout"])
+def test_discrete_anchors_reject_arbitrary_partial_credit(key):
+    attempt, policy, prompt, blobs = fictional_attempt(1950)
+    verdict = next(v for v in attempt.result.criteria if v.criterion_id == key)
+    verdict.status, verdict.score = "partial", 9.0
+    with pytest.raises(s.InvalidSubmission, match="anchors"):
+        s.check_attempt(attempt, policy, prompt, blobs, set(blobs), set())
