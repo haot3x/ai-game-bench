@@ -23,6 +23,17 @@ def package(tmp_path):
     return target
 
 
+@pytest.fixture
+def trusted_root(tmp_path):
+    """A unit test's accepted-data baseline must not depend on real submissions."""
+    target = tmp_path / "trusted"
+    for directory in ("datasets", "policies", "protocols"):
+        shutil.copytree(ROOT / directory, target / directory)
+    shutil.copyfile(ROOT / "pyproject.toml", target / "pyproject.toml")
+    (target / "submissions").mkdir()
+    return target
+
+
 def manifest(package):
     return json.loads((package / "manifest.json").read_text())
 
@@ -382,16 +393,16 @@ def test_prepare_does_not_reseal_tampering(package, tmp_path):
     assert not (tmp_path / "ready").exists()
 
 
-def test_tree_layout_and_synthetic_block(package, tmp_path):
+def test_tree_layout_and_synthetic_block(package, tmp_path, trusted_root):
     tree = tmp_path / "submissions"
     shutil.copytree(package, tree / "synthetic-counter/r001")
-    assert not s.validate_tree(tree, ROOT)["structure_valid"]
+    assert not s.validate_tree(tree, trusted_root)["structure_valid"]
     record = manifest(tree / "synthetic-counter/r001")
     record["kind"] = (
         "result"  # Mechanical gate only; the reviewer must still reject invented evidence.
     )
     save(tree / "synthetic-counter/r001", record)
-    result = s.validate_tree(tree, ROOT)
+    result = s.validate_tree(tree, trusted_root)
     assert result["structure_valid"], result
     assert result["review_status"] == "unverified"
 
@@ -404,15 +415,23 @@ def test_missing_or_malformed_manifest(tmp_path):
     rejected(tmp_path, "nonfinite")
 
 
-def test_cli_is_offline_and_schema_machine_readable(monkeypatch, capsys):
+@pytest.mark.parametrize("existing_result", [False, True])
+def test_cli_is_offline_and_schema_machine_readable(
+    monkeypatch, capsys, trusted_root, package, existing_result
+):
+    if existing_result:
+        record = manifest(package)
+        record["kind"] = "result"  # Test data only; never submitted as genuine evidence.
+        save(package, record)
+        shutil.copytree(package, trusted_root / "submissions/synthetic-counter/r001")
     monkeypatch.setattr(subprocess, "run", lambda *a, **k: pytest.fail("No commands may execute"))
-    base = ["--repo", str(ROOT), "submission"]
+    base = ["--repo", str(trusted_root), "submission"]
     assert cli.main([*base, "validate", str(EXAMPLE)]) == 0
     assert json.loads(capsys.readouterr().out)["review_status"] == "unverified"
     assert cli.main([*base, "schema", "manifest"]) == 0
     assert json.loads(capsys.readouterr().out)["additionalProperties"] is False
-    assert cli.main([*base, "validate-all", str(ROOT / "submissions")]) == 0
-    assert json.loads(capsys.readouterr().out)["count"] == 0
+    assert cli.main([*base, "validate-all", str(trusted_root / "submissions")]) == 0
+    assert json.loads(capsys.readouterr().out)["count"] == int(existing_result)
 
 
 def test_new_policy_must_match_frozen_task_and_have_negative_checks(tmp_path):
@@ -454,7 +473,7 @@ def test_trusted_review_blocks_rewriting_or_deleting_accepted_data(package, tmp_
     assert s.validate_tree(incoming, trusted)["errors"][0]["code"] == "immutable_revision"
 
 
-def test_correction_adds_revision_without_replacing_original(package, tmp_path):
+def test_correction_adds_revision_without_replacing_original(package, tmp_path, trusted_root):
     tree = tmp_path / "incoming"
     first = tree / "synthetic-counter/r001"
     second = tree / "synthetic-counter/r002"
@@ -462,23 +481,24 @@ def test_correction_adds_revision_without_replacing_original(package, tmp_path):
     record = manifest(first)
     record["kind"] = "result"
     save(first, record)
+    shutil.copytree(first, trusted_root / "submissions/synthetic-counter/r001")
     shutil.copytree(first, second)
     record["revision"] = 2
     record["publication"]["limitations"].append("Corrected disclosure; original retained.")
     save(second, record)
-    result = s.validate_tree(tree, ROOT)
+    result = s.validate_tree(tree, trusted_root)
     assert result["structure_valid"], result
     assert result["count"] == 2
 
 
-def test_revision_gap_rejected(package, tmp_path):
+def test_revision_gap_rejected(package, tmp_path, trusted_root):
     tree = tmp_path / "incoming"
     destination = tree / "synthetic-counter/r002"
     shutil.copytree(package, destination)
     record = manifest(destination)
     record.update(kind="result", revision=2)
     save(destination, record)
-    assert s.validate_tree(tree, ROOT)["errors"][0]["code"] == "revision"
+    assert s.validate_tree(tree, trusted_root)["errors"][0]["code"] == "revision"
 
 
 def test_manifest_cannot_smuggle_escaped_secret(package):
