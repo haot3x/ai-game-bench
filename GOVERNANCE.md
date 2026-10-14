@@ -60,7 +60,8 @@ requires a separate curated update/PR in that repository. A result author cannot
 grant themselves an independently-reproduced badge. Maintainers document review
 evidence and conflicts of interest; they do not edit native historical runs.
 
-Private evidence workspaces, if adopted, give the contributor access only to
-their workspace—not main-repo write access or other contributors' data. Creation
-authority belongs to a narrowly scoped provisioning service, never untrusted PR
-code. See the [proposed workflow](docs/contribution-workflow.md).
+Evidence submissions use public packages and ordinary PRs, with explicit
+pre-upload privacy/rights confirmation. There is no private evidence workspace
+or automatic provisioning service. The trusted review workflow reads incoming
+data using approved code/policies; maintainers still review claims and omissions.
+See [the submission flow](docs/contribution-workflow.md).

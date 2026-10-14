@@ -207,13 +207,39 @@ def test_discussion_forms_match_default_category_slugs_and_preserve_privacy():
         notice = form["body"][0]["attributes"]["value"]
         assert "public" in notice and "private" in notice
         evidence = next(field for field in form["body"] if field.get("id") == "evidence")
-        assert "Need to arrange private review before sharing" in evidence["attributes"]["options"]
+        assert any("Public-safe" in option for option in evidence["attributes"]["options"])
+        assert all("private review" not in option for option in evidence["attributes"]["options"])
         assert evidence["validations"]["required"] is True
     result_form = yaml.safe_load(
         (ROOT / ".github/DISCUSSION_TEMPLATE/show-and-tell.yml").read_text()
     )
     links = next(field for field in result_form["body"] if field.get("id") == "links")
     assert not links.get("validations", {}).get("required", False)
+
+
+def test_trusted_evidence_review_does_not_execute_incoming_code():
+    path = ROOT / ".github/workflows/review-submission.yml"
+    workflow = yaml.load(path.read_text(), Loader=yaml.BaseLoader)
+    assert set(workflow["on"]) == {"workflow_dispatch"}
+    assert workflow["permissions"] == {"contents": "read", "pull-requests": "read"}
+    job = workflow["jobs"]["evidence-review"]
+    assert job["runs-on"] == "ubuntu-24.04"
+    assert job["if"] == "github.ref == 'refs/heads/main'"
+    steps = job["steps"]
+    checkouts = [s for s in steps if s.get("uses", "").startswith("actions/checkout@")]
+    assert [s["with"]["path"] for s in checkouts] == ["trusted", "incoming"]
+    assert checkouts[0]["with"]["ref"] == "${{ github.sha }}"
+    assert checkouts[1]["with"]["ref"] == "${{ steps.pr.outputs.sha }}"
+    for step in steps:
+        if "uses" in step:
+            assert re.fullmatch(r"[^@]+@[a-f0-9]{40}", step["uses"])
+        assert step.get("working-directory") != "incoming"
+    validation = steps[-1]
+    assert validation["working-directory"] == "trusted"
+    assert "submission validate-all" in validation["run"]
+    assert '"$GITHUB_WORKSPACE/incoming/submissions"' in validation["run"]
+    assert "secrets." not in path.read_text()
+    assert "pull_request_target" not in path.read_text()
 
 
 def test_issue_chooser_links_to_public_contribution_entrypoints():

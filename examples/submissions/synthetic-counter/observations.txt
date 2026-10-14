@@ -1,0 +1,4 @@
+SYNTHETIC FORMAT FIXTURE. Authored for tests, not captured from a platform.
+The accepted prompt, game identity, observations, timings and claimed result are invented.
+Expected reference behavior: initial score 0; three clicks produce 1, 2, 3; no runtime errors.
+A structurally valid package does not prove any of these observations occurred.

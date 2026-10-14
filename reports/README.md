@@ -18,7 +18,7 @@ results were not regenerated using the public counter task.
 
 ## New result contribution
 
-Open a result proposal with:
+Use [the public submission guide](../docs/submissions.md) and submit one result PR with:
 
 - Task/prompt version and hash; evaluation policy/rubric version.
 - Creator platform, harness/version, model and effort (unknown when not exposed).
@@ -30,9 +30,12 @@ Open a result proposal with:
   payment as separate fields with source/currency/date. Unknown is not zero.
 - Rights/privacy review, limitations and self-reported/reviewed/reproduced status.
 
-Initially a maintainer reviews the proposal and arranges private evidence sharing
-if necessary. Full submission packaging and HTML preview automation are planned,
-not existing CLI commands. Do not submit a raw Harbor job to this public repo.
+`agb submission init/prepare/validate` supports public evidence packaging and
+offline structural checks. The report links above are historical references,
+not examples of this new contract. Use the authored synthetic format example.
+Do not submit a raw Harbor job to this public repo. HTML generation is not part
+of the submission CLI.
 
-Publication creates a sanitized, explicit export and a separate landing-site PR.
-It never makes a private evidence repository public or copies its Git history.
+Maintainers [review the public package](../docs/reviewing-submissions.md); a
+separate landing-site PR renders selected results from the same reviewed evidence.
+No private evidence transfer or automatic website deployment is required.

@@ -52,9 +52,10 @@ publication check reads proposed data using base-revision policy, separately fro
 testing the proposed checker. The private provisioning implementation is not
 established by the public workflow alone.
 
-Apply here: optional private evidence workspace after Mopan maintainer approval;
-separate artifact review from public release. Do not automatically upload personal
-agent histories, adopt an RSI training goal, or enable paid task generation.
+Apply here: validate data with trusted-base policy and separate review from
+publication. The initially considered private-workspace pattern is **not adopted**
+in v1; use public evidence-package PRs. Do not automatically upload personal agent
+histories, adopt an RSI training goal, or enable paid task generation.
 An authorized private workspace was inspected for structure only; no private
 contents or identifiers are included in this public research note.
 
@@ -72,7 +73,6 @@ Checks from a PR's own revision are development tests, not tamper-proof gates.
 Sources: [GitHub token scope](https://docs.github.com/en/actions/concepts/security/github_token),
 [secure Actions use](https://docs.github.com/en/actions/reference/security/secure-use).
 
-Our initial workflow deliberately implements only free checks/builds. Trusted-base
-publication validation, evidence packaging, auto-provisioning, official reruns and
-cross-repo publication remain separate milestones. See the
-[implementation/proposal matrix](../contribution-workflow.md).
+Current implementation includes free checks/builds, evidence packaging and a
+trusted-revision manual validation workflow. No auto-provisioning, paid reruns or
+cross-repo publication. See the [current trigger matrix](../contribution-workflow.md).

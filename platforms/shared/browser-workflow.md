@@ -12,9 +12,14 @@ yet ship an unattended browser creator or a Chrome connection tool.
    prompt remain human steps. Generation permission is not permission to buy
    credits, publish a game or inspect private APIs.
 2. Attach to the owner's explicitly selected Chrome profile. Check Chrome's own
-   `chrome://version/` Profile Path and bind its browser context/target; store proof
-   privately. A window label, logged-in page or last-used profile is insufficient.
+   `chrome://version/` Profile Path and bind its browser context/target; keep the
+   original locally and publish only task-scoped, redacted confirmation. A window
+   label, logged-in page or last-used profile is insufficient.
    Never fall back to another profile, copy cookies or inspect unrelated tabs.
+   If the browser tool blocks internal Chrome pages, ask the owner to confirm the
+   Profile Path, open a dedicated tab using that exact profile-directory option,
+   and bind operations to that tab ID. Disclose that the path confirmation was
+   owner-supplied, not machine-verified; do not weaken Chrome security settings.
 3. Open the platform's new-project entrypoint in that context. Record visible
    default mode/model labels and account tier when available. A label such as
    "Max" is not backend-model attestation. Do not change defaults unless the
@@ -55,8 +60,11 @@ state, source, `srcdoc` content or inject a score to prove gameplay. Record any
 remaining branding/blinding limits. Historical profile-specific evaluators are
 not migrated here: the public counter verifier cannot score these remote games.
 
-Use [record.example.json](record.example.json) privately. Displayed task credits,
+Use [record.example.json](record.example.json) as local observation notes; it is
+not the public submission contract. Export relevant observations through the
+[public submission guide](../../docs/submissions.md). Displayed task credits,
 balance changes, package-price valuations, provider estimates and actual payments
 are separate observations. Convert with a recorded currency/rate/date and keep
 the cost basis; USD alone does not make mixed accounting bases comparable.
-Never publish raw chats, profile paths, billing screens or signed URLs.
+Publish only reviewed task-scoped dialogue, never entire personal chats, profile
+paths, full billing screens or signed URLs. Declare omissions in the public package.

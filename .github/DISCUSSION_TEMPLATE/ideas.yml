@@ -5,7 +5,7 @@ body:
       value: |
         Propose a task or platform before a large PR. This is public: do not include
         credentials, browser profiles, private prompts or raw jobs. A proposal does
-        not trigger paid runs or automatically create a private evidence workspace.
+        not trigger paid runs. Results use public packages in ordinary PRs.
   - type: dropdown
     id: kind
     attributes:
@@ -36,6 +36,6 @@ body:
       options:
         - Proposal only
         - Public-safe evidence available
-        - Need to arrange private review before sharing
+        - Essential evidence cannot be published yet; proposal only
     validations:
       required: true

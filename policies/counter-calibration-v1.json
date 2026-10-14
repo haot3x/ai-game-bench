@@ -1,0 +1,30 @@
+{
+  "schema_version": "public-policy/0.1",
+  "id": "counter-calibration-v1",
+  "task": {
+    "path": "smoke-create-v0.2/create-click-counter-zh-001",
+    "version": "0.2.0",
+    "instruction_sha256": "78cd56579bae813a0b59b7e18ba26be85a7e33be0b9fa92bc6e177f349035bca",
+    "rubric_sha256": "c9d481e222edc99f142c26b04d39209a1425c9a30b313e63225ca607625c8b23",
+    "verifier_sha256": "a1e42745b9d51fcd0231e549dd2f4fad996b0d6922780868aa4c97cd3acf958d"
+  },
+  "prompt_mode": "full_instruction",
+  "attempt_limit": 1,
+  "timeout_seconds": 1800,
+  "allow_followups": false,
+  "allow_repairs": false,
+  "artifact_kinds": ["harbor_bundle"],
+  "criteria": [
+    {
+      "id": "counter-contract",
+      "description": "All frozen DOM counter checks pass in the isolated verifier; otherwise zero. Not a game-quality score.",
+      "max_score": 1,
+      "weight": 1
+    }
+  ],
+  "total_max": 1,
+  "limitations": [
+    "Free local calibration, not a Tetris or remote-platform evaluation.",
+    "A structurally valid evidence export does not prove its claimed observations are true."
+  ]
+}

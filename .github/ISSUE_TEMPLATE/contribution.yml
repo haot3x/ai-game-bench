@@ -1,12 +1,17 @@
-name: Task, platform or result proposal
-description: Propose a test task, platform integration or evidence-backed result.
+name: Task, policy, platform or result proposal
+description: Propose a method or ask about a result. Formal results use public evidence-package PRs.
 body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public immediately. Read README public-data terms before posting.
+        No credentials, personal sessions or raw jobs. No private evidence workspace is needed.
   - type: dropdown
     id: kind
     attributes:
       label: Contribution type
       options:
-        - Task / evaluation method
+        - Task / policy / evaluation method
         - Platform / harness integration
         - Result / report
     validations:
@@ -31,7 +36,7 @@ body:
       label: Evidence sharing
       options:
         - Public-safe evidence available
-        - Need to arrange private review before sharing
+        - Essential evidence cannot be published yet; proposal only
         - Proposal only; evidence not collected yet
     validations:
       required: true

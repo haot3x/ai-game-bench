@@ -12,7 +12,7 @@ Use a fresh isolated workspace and an explicitly approved account/model budget.
    repository instructions, private skills or prior scores. Record any scaffold
    that must exist. Keep the approved prompt bytes unchanged; the historical
    Tetris prompt was `一个经典俄罗斯方块`.
-3. Capture native CLI events and timestamps privately. Confirm prompt acceptance,
+3. Capture native CLI events and timestamps locally. Confirm prompt acceptance,
    answer clarification under the comparison's common policy, and retain every
    added instruction. No silent repair/regeneration or extra attempts.
 4. Retain final response, exit status and generated files. An exit code or the
@@ -30,8 +30,10 @@ need a reviewed creator configuration; the verifier must retain its own isolatio
 
 ## Record and compare
 
-Use [record.example.json](record.example.json) as an optional private worksheet;
+Use [record.example.json](record.example.json) as an optional local worksheet;
 it is not a replacement for Harbor JSON and is not consumed by the counter verifier.
+Publish task-scoped exports using [the submission guide](../../docs/submissions.md),
+not a whole native session or raw job directory.
 Retain requested **and observed** model/effort, CLI/provider identity, native usage
 semantics, and source of each measurement. Cached input may already be included
 in total input. Do not sum overlapping token categories.

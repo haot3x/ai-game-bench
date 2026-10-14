@@ -18,7 +18,8 @@ generation state and an accessible final game.
 
 ## Game handoff
 
-Retain the final play URL, exposed build identity and observation time privately.
+Retain the final play URL, exposed build identity and observation time locally;
+publish authorized, task-scoped references in the public submission package.
 Use a game-only page/surface for evaluation, excluding chat and billing. A play
 URL/build query is not proof that the bytes are frozen. No database access,
 private prompt export or reverse-engineered API is required for this UI route.

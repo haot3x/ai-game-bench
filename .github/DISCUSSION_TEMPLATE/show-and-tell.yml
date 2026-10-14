@@ -3,8 +3,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Share a result, not just a score. Keep credentials, raw jobs and private
-        sessions out of this public form. Unknown model/effort/cost stays unknown.
+        Optional result discussion; formal submissions use the public evidence-package
+        PR described in docs/submissions.md. Everything here is public immediately.
+        Keep credentials, raw jobs and private sessions out. Unknown cost stays unknown.
         Maintainer acceptance, independent reproduction and publication are separate.
   - type: textarea
     id: result
@@ -26,11 +27,11 @@ body:
       label: Evidence availability
       options:
         - Public-safe evidence available
-        - Need to arrange private review before sharing
+        - Essential evidence cannot be published yet; discussion only
     validations:
       required: true
   - type: textarea
     id: links
     attributes:
       label: Public evidence links (optional)
-      description: Only links you are authorized to share. For private evidence, leave blank and request arrangements above.
+      description: Link your public submission PR or authorized public evidence. Do not share private data.

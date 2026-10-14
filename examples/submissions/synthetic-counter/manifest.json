@@ -1,0 +1,94 @@
+{
+  "schema_version": "public-submission/0.1",
+  "id": "synthetic-counter",
+  "revision": 1,
+  "kind": "synthetic_example",
+  "policy_id": "counter-calibration-v1",
+  "policy_sha256": "3e3fb615f6b25562009a8557f8d2cf1e8dc08d301c9b1e948e73e40435a3d975",
+  "author": "AI Game Bench fixture authors",
+  "affiliation": "Mopan AI; synthetic fixture only",
+  "creator": {
+    "platform": "oracle",
+    "harness_version": null,
+    "model": null,
+    "model_source": "not_applicable",
+    "effort": null
+  },
+  "environment": "Synthetic fixture; no browser, model or actual creation run.",
+  "source_kind": "harbor",
+  "source_ref": "synthetic-run/synthetic-trial",
+  "attempts": [
+    {
+      "id": "attempt-1",
+      "outcome": "delivered",
+      "creation": "creation.jsonl",
+      "evaluation": "evaluation.jsonl",
+      "artifact": {
+        "id": "synthetic-game",
+        "kind": "harbor_bundle",
+        "url": null,
+        "build_version": null,
+        "bundle_sha256": "34f38bef3ad2c97f83fa16b2d1bf06f9e49fb02cb6081d046439c671ab01be9c",
+        "access": "No actual artifact. Format example only."
+      },
+      "result": {
+        "evaluator": "Synthetic fixture author",
+        "model": null,
+        "mode": "deterministic",
+        "creation_context_hidden": true,
+        "criteria": [
+          {
+            "criterion_id": "counter-contract",
+            "status": "passed",
+            "score": 1,
+            "reason": "Invented passing observation for exercising the export format.",
+            "evidence_events": [
+              "e-observe"
+            ]
+          }
+        ],
+        "total": 1
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "creation.jsonl",
+      "sha256": "0ae4f5133986d190ffba3b32538ede4f8006f2bdf7bf1fee1e63f415381f091b",
+      "bytes": 2182
+    },
+    {
+      "path": "evaluation.jsonl",
+      "sha256": "051463ca10702d70a4219f1abaec5eb546af8cdfb4fb356573a63234e4dd8ebb",
+      "bytes": 750
+    },
+    {
+      "path": "observations.txt",
+      "sha256": "86c6755a6358bc058405cda760e428279f4d8da13e0bc9750078ac60d0aba4c6",
+      "bytes": 342
+    }
+  ],
+  "external_evidence": [],
+  "costs": [
+    {
+      "kind": "no_model_call",
+      "component": "creator",
+      "amount": 0,
+      "currency": "USD",
+      "basis": "Authored synthetic fixture. No model was called.",
+      "evidence": []
+    }
+  ],
+  "publication": {
+    "public_release_confirmed": true,
+    "rights_confirmed": true,
+    "sensitive_data_checked": true,
+    "all_attempts_disclosed": true,
+    "license": "Apache-2.0",
+    "redactions": [],
+    "capture_gaps": [],
+    "limitations": [
+      "Synthetic format fixture, not a real run or verified score."
+    ]
+  }
+}

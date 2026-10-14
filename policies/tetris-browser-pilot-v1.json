@@ -1,0 +1,136 @@
+{
+  "schema_version": "public-policy/0.1",
+  "id": "tetris-browser-pilot-v1",
+  "task": {
+    "kind": "browser_protocol",
+    "path": "tetris-browser-pilot-v1",
+    "version": "0.1.0",
+    "instruction_sha256": "08dade8133dc18c287dbe860a11978405e06239bd409fe313ac151acfdbb3c3c",
+    "rubric_sha256": "949c207c8c5456abc4efd5c343d29ecdc431b347b456c067c0396cc75eaef5ee",
+    "verifier_sha256": "b46274cb7e2e06b7fa9e13c575206287db59de5ef2ce86c68d0120dc39af43d1"
+  },
+  "prompt_mode": "mopan_block",
+  "attempt_limit": 1,
+  "timeout_seconds": 3600,
+  "allow_followups": true,
+  "allow_repairs": false,
+  "artifact_kinds": [
+    "public_url"
+  ],
+  "criteria": [
+    {
+      "id": "ready",
+      "description": "Visible playable board, piece and legible state",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "movement",
+      "description": "Left/right input and both side boundaries",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "rotation",
+      "description": "Asymmetric rotation in open space and at a wall",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "gravity",
+      "description": "Automatic descent and accelerated soft drop",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "lock-spawn",
+      "description": "Three locks, including one on a stack, and new pieces",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "line-clear",
+      "description": "Observed complete row removal and collapse",
+      "max_score": 10,
+      "weight": 10,
+      "allow_partial": false
+    },
+    {
+      "id": "line-score",
+      "description": "Verified single-line and same-placement multi-line score changes",
+      "max_score": 10,
+      "weight": 8,
+      "allow_partial": true
+    },
+    {
+      "id": "game-over",
+      "description": "Top-out stops normal placement with explicit loss",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "restart",
+      "description": "Post-loss reset of board/score and working input",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "readability",
+      "description": "Empty and populated board/state are legible",
+      "max_score": 10,
+      "weight": 2.5,
+      "allow_partial": true
+    },
+    {
+      "id": "guidance",
+      "description": "Visible control instructions match observed input",
+      "max_score": 10,
+      "weight": 2.5,
+      "allow_partial": true
+    },
+    {
+      "id": "feedback",
+      "description": "Distinct visible feedback for line clear and game-over",
+      "max_score": 10,
+      "weight": 2.5,
+      "allow_partial": true
+    },
+    {
+      "id": "layout",
+      "description": "Board/state/controls fit desktop and mobile viewports",
+      "max_score": 10,
+      "weight": 2.5,
+      "allow_partial": true
+    },
+    {
+      "id": "delivery-time",
+      "description": "Observed final delivery duration gated by ready and lock-spawn",
+      "max_score": 10,
+      "weight": 30,
+      "allow_partial": true
+    }
+  ],
+  "total_max": 100,
+  "time_score": {
+    "criterion_id": "delivery-time",
+    "full_credit_seconds": 300,
+    "required_passes": [
+      "ready",
+      "lock-spawn"
+    ]
+  },
+  "limitations": [
+    "Pilot manual browser protocol, not a calibrated automatic game verifier or accepted ranking.",
+    "Not comparable to historical Tetris report totals.",
+    "A remote game URL/build label is not a byte-frozen artifact.",
+    "Separate creation/evaluation files do not establish blinded independent judgement.",
+    "Score weights and evidence requirements were frozen before the first pilot generation."
+  ]
+}

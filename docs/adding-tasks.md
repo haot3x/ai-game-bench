@@ -1,7 +1,7 @@
 # Contribute a task
 
-A task needs a testable contract, not only an attractive prompt. First open a task
-proposal describing the game type, capability covered and how it will be checked.
+A task needs a testable contract, not only an attractive prompt. Open a scoped PR
+or an Ideas proposal describing the game type, capability and how it is checked.
 For v0, favor small deterministic mechanics and authored, redistributable assets.
 
 Use the counter as a packaging example, not a universal gameplay rubric:
@@ -43,3 +43,26 @@ manual gate. Never claim file validation alone verified a game.
 Released task files are immutable. For prompt, rubric or verifier changes, add a
 new task/dataset version and describe the compatibility break. Regression tests
 and new defect fixtures are welcome; do not relabel historical results.
+
+## If the task or policy you need does not exist
+
+1. Define the prompt/input, artifact contract and capability being measured.
+2. Define **policy**: attempts, time cap, allowed clarifications/repairs, environment
+   and capture requirements. Define **eval**: criteria, evidence, score mapping,
+   not-tested and infrastructure-error treatment. Keep criteria platform-neutral.
+3. Add the Harbor package above, a versioned file in [policies/](../policies/README.md),
+   reference and broken examples, and the corresponding free tests.
+4. Submit a method PR with calibration results and limitations. A pilot may inform
+   the design, but is not a formal result under rules invented afterward.
+5. After method approval/merge, freeze the version and [submit results](submissions.md).
+
+A browser/URL-only task can propose documented human verification, but must define
+concrete actions and evidence for every criterion and disclose its manual status.
+It must not pretend the offline counter verifier supports remote games. A new
+game type need not add an unattended creator adapter in the same PR.
+
+For this manual track use a data-only package under `protocols/<version>/` with
+`task.toml`, `instruction.md`, `rubric.json` and `evaluation.md`, and set the
+policy's `task.kind` to `browser_protocol`. These packages are deliberately not
+listed by `agb tasks` or executable by `agb run`. Test identity/arithmetic and
+document the manual gameplay-review gate; do not fake an Oracle gameplay pass.
