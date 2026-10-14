@@ -56,7 +56,23 @@ duration, credit valuation, model-cost estimate and actual payment separately.
 ## Data and publication
 
 `jobs/` is the canonical local Harbor record, excluded from Git. Public report
-entries are curated references, not replacements for trial JSON. Logs, cookies,
-tokens and private user content never enter the public repository. Artifact
-publication and any future training use require separate rights/privacy review.
-No training permission follows from a benchmark submission.
+references and evidence exports do not replace trial JSON. The public export uses
+`manifest.json` with schema `public-submission/0.1`; it is distinct from the
+game-to-verifier `submission.json` contract above. Existing frozen task bytes are
+unchanged. `policies/` pins their identity and the export's score mapping.
+
+`agb submission` creates/checks publication exports, not runs or a second result
+database. Browser observations may use the same export once their task/policy is
+approved; they are never misrepresented as native Harbor trials. The validator
+does not execute submitted code or fetch URLs. Maintainers use a trusted revision
+and independently inspect evidence, not contributor-authored checks.
+
+Data-only browser protocols live in `protocols/`, outside executable Harbor
+datasets. Their policy pins a manual `evaluation.md` procedure. They support
+transparent pilot observations while an unattended adapter/verifier is absent;
+they do not create a parallel runtime, job store or automatic judge.
+
+Public submission data is public by default, with pre-upload rights/privacy
+confirmation. Credentials, private content and whole raw jobs never enter Git.
+No additional training agreement is inferred; reuse follows the declared license.
+See [public-data terms](../README.md#public-data-and-privacy-terms).

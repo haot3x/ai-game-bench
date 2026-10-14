@@ -19,6 +19,11 @@ other repositories, organization membership or a cross-repository GitHub App.
   Q&A. Forms live in `.github/DISCUSSION_TEMPLATE/` and take effect on `main`.
 - Discussions and issues do not trigger an automated reviewer, paid run, private
   repository creation, merge or website publication.
+- Result PRs go directly to public `submissions/`; Discussion is optional. The
+  `Trusted evidence review` manual workflow checks pinned PR data with trusted
+  code/policies; it is not another required PR approval or automatic score judge.
+- Secret scanning and push protection should be enabled. Private vulnerability
+  reporting is for security incidents, not a private result-submission workflow.
 
 ## Administrator application
 
@@ -45,6 +50,8 @@ gh api repos/mopan-ai/ai-game-bench/branches/main/protection
 gh api repos/mopan-ai/ai-game-bench/rulesets
 gh api repos/mopan-ai/ai-game-bench/actions/permissions/workflow
 gh api repos/mopan-ai/ai-game-bench/actions/permissions/fork-pr-contributor-approval
+gh api repos/mopan-ai/ai-game-bench --jq '.security_and_analysis'
+gh api repos/mopan-ai/ai-game-bench/private-vulnerability-reporting
 gh run list --repo mopan-ai/ai-game-bench --limit 5
 gh pr checks --repo mopan-ai/ai-game-bench PR_NUMBER
 ```
@@ -58,6 +65,13 @@ For a normal contribution: open a proposal when needed, create/update a PR,
 wait for both checks, inspect the change and evidence, then merge manually. A
 failed check blocks merge; fix it and rerun rather than disabling protection.
 The public framework remains a source checkout, not a PyPI release.
+
+Audit on 2026-10-14: public visibility, Issues/Discussions, main PR + both checks,
+read-only Actions token, all-external-contributor approval and disabled auto-merge
+were read back. Secret scanning, push protection and private vulnerability
+reporting were enabled and read back. No collaborators or merge permissions were
+broadened. The new submission workflow still needs merge before it can be
+dispatched on GitHub; local checks do not establish that remote run.
 
 Live evidence: [PRs](https://github.com/mopan-ai/ai-game-bench/pulls),
 [Actions](https://github.com/mopan-ai/ai-game-bench/actions),

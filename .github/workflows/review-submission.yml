@@ -1,0 +1,56 @@
+name: Trusted evidence review
+
+# Maintainer chooses a trusted default-branch revision. No PR-triggered privileged execution.
+on:
+  workflow_dispatch:
+    inputs:
+      pull_request:
+        description: Result PR number to inspect as DATA (not code)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  evidence-review:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+          path: trusted
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        with:
+          version: "0.8.22"
+          enable-cache: false
+      - name: Resolve exact public-repository PR head
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVIEW_PR: ${{ inputs.pull_request }}
+          REVIEW_REPO: ${{ github.repository }}
+        run: |
+          [[ "$REVIEW_PR" =~ ^[0-9]+$ ]] || exit 1
+          REVIEW_SHA=$(gh api "repos/$REVIEW_REPO/pulls/$REVIEW_PR" --jq '.head.sha')
+          [[ "$REVIEW_SHA" =~ ^[0-9a-f]{40}$ ]] || exit 1
+          printf 'sha=%s\n' "$REVIEW_SHA" >> "$GITHUB_OUTPUT"
+          printf 'Reviewing PR %s at %s\n' "$REVIEW_PR" "$REVIEW_SHA"
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ steps.pr.outputs.sha }}
+          path: incoming
+          persist-credentials: false
+          submodules: false
+          lfs: false
+      - name: Validate data using trusted code, dependencies and policies only
+        working-directory: trusted
+        run: |
+          uv sync --locked --python 3.12
+          uv run --locked agb --repo "$GITHUB_WORKSPACE/trusted" submission validate-all "$GITHUB_WORKSPACE/incoming/submissions"
+      # No incoming scripts, URL downloads, model calls, artifact upload, PR writes or auto-merge.
+      # Green = structural check only. Record the head SHA and human review in the PR.

@@ -15,3 +15,4 @@ artifacts/
 node_modules/
 *storage-state*.json
 *storage_state*.json
+.submission-drafts/

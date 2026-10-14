@@ -1,0 +1,105 @@
+{
+  "schema_version": "browser-rubric/0.1",
+  "verification": "manual_observation",
+  "total_max": 100,
+  "criteria": [
+    {
+      "id": "ready",
+      "description": "Visible playable board, piece and legible state",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "movement",
+      "description": "Left/right input and both side boundaries",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "rotation",
+      "description": "Asymmetric rotation in open space and at a wall",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "gravity",
+      "description": "Automatic descent and accelerated soft drop",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "lock-spawn",
+      "description": "Three locks, including one on a stack, and new pieces",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "line-clear",
+      "description": "Observed complete row removal and collapse",
+      "max_score": 10,
+      "weight": 10,
+      "allow_partial": false
+    },
+    {
+      "id": "line-score",
+      "description": "Verified single-line and same-placement multi-line score changes",
+      "max_score": 10,
+      "weight": 8,
+      "allow_partial": true
+    },
+    {
+      "id": "game-over",
+      "description": "Top-out stops normal placement with explicit loss",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "restart",
+      "description": "Post-loss reset of board/score and working input",
+      "max_score": 10,
+      "weight": 6,
+      "allow_partial": false
+    },
+    {
+      "id": "readability",
+      "description": "Empty and populated board/state are legible",
+      "max_score": 10,
+      "weight": 2.5,
+      "allow_partial": true
+    },
+    {
+      "id": "guidance",
+      "description": "Visible control instructions match observed input",
+      "max_score": 10,
+      "weight": 2.5,
+      "allow_partial": true
+    },
+    {
+      "id": "feedback",
+      "description": "Distinct visible feedback for line clear and game-over",
+      "max_score": 10,
+      "weight": 2.5,
+      "allow_partial": true
+    },
+    {
+      "id": "layout",
+      "description": "Board/state/controls fit desktop and mobile viewports",
+      "max_score": 10,
+      "weight": 2.5,
+      "allow_partial": true
+    },
+    {
+      "id": "delivery-time",
+      "description": "Observed final delivery duration gated by ready and lock-spawn",
+      "max_score": 10,
+      "weight": 30,
+      "allow_partial": true
+    }
+  ]
+}

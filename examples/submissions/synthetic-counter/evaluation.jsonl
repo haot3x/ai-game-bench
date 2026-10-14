@@ -1,0 +1,4 @@
+{"seq":1,"id":"e-start","at":"2026-01-01T00:00:04Z","kind":"evaluation_started","detail":"Synthetic evaluator start.","evidence":["observations.txt"],"artifact_id":"synthetic-game"}
+{"seq":2,"id":"e-action","at":"2026-01-01T00:00:05Z","kind":"action","detail":"Synthetic three spaced clicks.","evidence":["observations.txt"],"artifact_id":"synthetic-game"}
+{"seq":3,"id":"e-observe","at":"2026-01-01T00:00:06Z","kind":"observation","detail":"Synthetic score sequence 0,1,2,3; no runtime errors.","evidence":["observations.txt"],"artifact_id":"synthetic-game"}
+{"seq":4,"id":"e-end","at":"2026-01-01T00:00:07Z","kind":"evaluation_finished","detail":"Synthetic evidence export finished.","evidence":["observations.txt"],"artifact_id":"synthetic-game"}

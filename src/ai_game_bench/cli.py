@@ -174,6 +174,29 @@ def main(argv: list[str] | None = None) -> int:
     inspect.add_argument("--expect", type=float, choices=[0.0, 1.0], help="Calibration assertion")
     view = commands.add_parser("view", help="Open the native Harbor Viewer, bound to localhost")
     view.add_argument("--port", type=int, default=8080)
+    submission = commands.add_parser(
+        "submission", help="Prepare/check public evidence; never uploads"
+    )
+    subcommands = submission.add_subparsers(dest="submission_command", required=True)
+    subcommands.add_parser("policies", help="List versioned public result policies")
+    schema = subcommands.add_parser("schema", help="Print a JSON Schema for agents")
+    schema.add_argument("kind", choices=["manifest", "event", "policy"])
+    initialize = subcommands.add_parser("init", help="Create an explicitly unapproved local draft")
+    initialize.add_argument("directory", type=Path)
+    initialize.add_argument("--id", required=True)
+    initialize.add_argument("--policy", required=True)
+    validate = subcommands.add_parser("validate", help="Check an evidence package, offline")
+    validate.add_argument("directory", type=Path)
+    validate_all = subcommands.add_parser(
+        "validate-all", help="Check submissions/<id>/rNNN packages"
+    )
+    validate_all.add_argument("directory", type=Path, nargs="?", default=Path("submissions"))
+    prepare = subcommands.add_parser(
+        "prepare", help="Copy an allowlisted public package; no Git/network"
+    )
+    prepare.add_argument("directory", type=Path)
+    prepare.add_argument("--output", type=Path, required=True)
+    prepare.add_argument("--confirm-public", action="store_true")
     args = parser.parse_args(argv)
     try:
         if args.command == "doctor":
@@ -195,6 +218,39 @@ def main(argv: list[str] | None = None) -> int:
             print("\nRead a reference: agb platforms <name> (never starts a paid run).")
             return 0
         root = repository_root(args.repo)
+        if args.command == "submission":
+            from ai_game_bench import submissions
+            from ai_game_bench.submission_models import Event, Policy, Submission
+
+            action = args.submission_command
+            if action == "schema":
+                record = {"manifest": Submission, "event": Event, "policy": Policy}[
+                    args.kind
+                ].model_json_schema()
+            elif action == "policies":
+                record = []
+                for path in sorted((root / "policies").glob("*.json")):
+                    policy, checksum, _ = submissions.load_policy(root, path.stem)
+                    record.append(
+                        {
+                            "id": policy.id,
+                            "sha256": checksum,
+                            "task": policy.task.path,
+                            "limitations": policy.limitations,
+                        }
+                    )
+            elif action == "init":
+                record = submissions.initialize(root, args.directory, args.policy, args.id)
+            elif action == "prepare":
+                record = submissions.prepare(
+                    args.directory, root, args.output, confirmed=args.confirm_public
+                )
+            elif action == "validate-all":
+                record = submissions.validate_tree(args.directory, root)
+            else:
+                record = submissions.validate(args.directory, root)
+            print(json.dumps(record, ensure_ascii=False, indent=2))
+            return 2 if isinstance(record, dict) and record.get("structure_valid") is False else 0
         if args.command == "tasks":
             for path in sorted((root / "datasets").glob("*/*/task.toml")):
                 config = tomllib.loads(path.read_text())

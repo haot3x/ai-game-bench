@@ -23,8 +23,10 @@ This is an observed historical UI shape, not a stable selector promise. If the
 frame is missing, ambiguous or transformed differently, stop measurement and
 retain the transport issue. Do not invent an unprotected play URL, extract
 assets from browser caches, or publish the project without separate permission.
-Source-less account-only games can be reviewed privately with access limits
-disclosed; their exact replay may not be publicly reproducible.
+Source-less account-only games may provide authorized public screenshots/action
+evidence, with access limits disclosed. Never share login credentials or claim
+public replay when the game needs the creator's account. Essential unsupported
+claims remain unverified; there is no private evidence lane in v1.
 
 ## Usage and references
 

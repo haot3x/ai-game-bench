@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
-dependencies = ["harbor==0.22.0"]
+dependencies = ["harbor==0.22.0", "pydantic>=2.14.1,<3"]
 
 [project.scripts]
 agb = "ai_game_bench.cli:main"
