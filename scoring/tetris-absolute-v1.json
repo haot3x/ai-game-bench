@@ -1,0 +1,141 @@
+{
+  "policy_id": "tetris-absolute/1.0.0",
+  "numeric_policy_source": "five-platform-tetris-pilot/0.3.0",
+  "scope": "Fixed criterion-referenced scores for a single Tetris artifact; no cohort-relative normalization.",
+  "application_note": "Reuses the owner-approved numeric rules. Assessment provenance may be an independent evaluation or an explicitly labelled operator evidence review; these are not equivalent evaluation protocols.",
+  "weights": {
+    "mechanics": 40,
+    "experience": 20,
+    "time": 20,
+    "user_cost": 20
+  },
+  "mechanics": {
+    "opens": 4,
+    "gravity_next": 5,
+    "move_bounds": 5,
+    "rotate": 4,
+    "stack": 5,
+    "line_clear": 7,
+    "line_clear_score": 4,
+    "top_out": 3,
+    "restart_reset": 3
+  },
+  "experience": {
+    "discoverable_controls": 4,
+    "clear_information": 4,
+    "board_legibility": 4,
+    "visual_consistency": 4,
+    "feedback_pacing": 2,
+    "session_flow": 2
+  },
+  "subjective_scale": {
+    "0": "该维度观察到完全不可用或阻断",
+    "1": "严重障碍反复出现，只有极少部分可用",
+    "2": "仍有严重障碍，但少数路径可完成",
+    "3": "能够使用，但明显问题频繁出现",
+    "4": "可用但粗糙，明显问题影响多个状态",
+    "5": "基本满足需求，存在清楚可见的局限",
+    "6": "基本完整，主要局限可绕过但仍影响体验",
+    "7": "清楚顺畅，存在一项可见的非阻断摩擦",
+    "8": "多个已观察状态下清楚一致、完成度高",
+    "9": "多个相关状态表现精致，细节有明确额外证据",
+    "10": "在本维度已观察范围内全面精致，无明显问题且多状态证据充分；不代表全游戏完美"
+  },
+  "criterion_guidance": {
+    "discoverable_controls": "首次进入可见的操作说明、按钮及重开入口；不以熟悉俄罗斯方块的先验替代说明。",
+    "clear_information": "分数、行数、下一块、结束状态的可读性和层次；不重复判断计分算法。",
+    "board_legibility": "棋盘边界、活动块、已堆叠方块、网格和落点能否区分。",
+    "visual_consistency": "进行、结束、重开画面的视觉一致性及已观测视口适配；不是审美偏好投票。",
+    "feedback_pacing": "输入、锁定、消行与结果的可见反馈及连续性；离散截图不能证明 FPS 或音效。",
+    "session_flow": "进入、开始、结束、重开流程的清楚程度；未见非零分数重置不自动扣此项，核心 reset 验证仍独立。"
+  },
+  "time_limit_seconds": 3600,
+  "cost_currency": "CNY",
+  "cost_curve_linear_points": [
+    [
+      0,
+      100
+    ],
+    [
+      5,
+      90
+    ],
+    [
+      20,
+      70
+    ],
+    [
+      50,
+      40
+    ],
+    [
+      100,
+      0
+    ]
+  ],
+  "core_acceptance": "demonstrated-pass-only/0.1",
+  "missing": "In completed valid assessments, failed and unverified mechanics score zero with the full weight retained; distinguish the reasons. Unknown experience, time or user cost stays unallocated. P=sum(scored points), W=sum(scored weights), provisional=100*P/W; show W, evidence coverage and [P,P+100-W].",
+  "infrastructure": "Unavailable measurement, never numeric game failure.",
+  "criteria_labels": {
+    "opens": [
+      "打开并进入游戏",
+      "Open and enter gameplay"
+    ],
+    "gravity_next": [
+      "自动下落与下一块",
+      "Gravity and next piece"
+    ],
+    "move_bounds": [
+      "左右移动与边界",
+      "Movement and boundaries"
+    ],
+    "rotate": [
+      "非对称方块旋转",
+      "Asymmetric-piece rotation"
+    ],
+    "stack": [
+      "落定与堆叠",
+      "Locking and stacking"
+    ],
+    "line_clear": [
+      "满行消除",
+      "Completed row removal"
+    ],
+    "line_clear_score": [
+      "同次消行计分",
+      "Score from the same line clear"
+    ],
+    "top_out": [
+      "堆顶结束",
+      "Top-out game over"
+    ],
+    "restart_reset": [
+      "重开清空棋盘与分数",
+      "Restart resets board and score"
+    ],
+    "discoverable_controls": [
+      "操作可发现性",
+      "Discoverable controls"
+    ],
+    "clear_information": [
+      "信息清晰度",
+      "Information clarity"
+    ],
+    "board_legibility": [
+      "棋盘可读性",
+      "Board legibility"
+    ],
+    "visual_consistency": [
+      "视觉一致性",
+      "Visual consistency"
+    ],
+    "feedback_pacing": [
+      "反馈与节奏",
+      "Feedback and pacing"
+    ],
+    "session_flow": [
+      "完整游玩流程",
+      "Session flow"
+    ]
+  }
+}

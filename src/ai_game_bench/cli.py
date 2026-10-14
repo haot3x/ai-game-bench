@@ -180,7 +180,7 @@ def main(argv: list[str] | None = None) -> int:
     subcommands = submission.add_subparsers(dest="submission_command", required=True)
     subcommands.add_parser("policies", help="List versioned public result policies")
     schema = subcommands.add_parser("schema", help="Print a JSON Schema for agents")
-    schema.add_argument("kind", choices=["manifest", "event", "policy"])
+    schema.add_argument("kind", choices=["manifest", "event", "policy", "score-addendum"])
     initialize = subcommands.add_parser("init", help="Create an explicitly unapproved local draft")
     initialize.add_argument("directory", type=Path)
     initialize.add_argument("--id", required=True)
@@ -220,13 +220,17 @@ def main(argv: list[str] | None = None) -> int:
         root = repository_root(args.repo)
         if args.command == "submission":
             from ai_game_bench import submissions
+            from ai_game_bench.score_addenda import ScoreAddendum
             from ai_game_bench.submission_models import Event, Policy, Submission
 
             action = args.submission_command
             if action == "schema":
-                record = {"manifest": Submission, "event": Event, "policy": Policy}[
-                    args.kind
-                ].model_json_schema()
+                record = {
+                    "manifest": Submission,
+                    "event": Event,
+                    "policy": Policy,
+                    "score-addendum": ScoreAddendum,
+                }[args.kind].model_json_schema()
             elif action == "policies":
                 record = []
                 for path in sorted((root / "policies").glob("*.json")):

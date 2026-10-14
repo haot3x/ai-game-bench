@@ -220,7 +220,7 @@ def load_policy(root: Path, policy_id: str):
     return policy, digest(raw), prompt
 
 
-def inventory(directory: Path) -> set[str]:
+def inventory(directory: Path, *, max_entries: int = 600) -> set[str]:
     require(
         directory.is_dir() and not directory.is_symlink(),
         "package",
@@ -234,7 +234,9 @@ def inventory(directory: Path) -> set[str]:
             relative_path(relative)
             require(not path.is_symlink(), "symlink", "Symlinks are not accepted.")
             found.add(relative)
-            require(len(found) <= 600, "package_size", "Too many files/directories in package.")
+            require(
+                len(found) <= max_entries, "package_size", "Too many files/directories in package."
+            )
     return {name for name in found if not (directory / name).is_dir()}
 
 
@@ -411,6 +413,18 @@ def check_attempt(attempt, policy, prompt, blobs, references, global_ids):
                     "This policy does not allow that partial score.",
                 )
             weighted += verdict.score / criterion.max_score * criterion.weight
+            if policy.id == "tetris-browser-pilot-v1" and criterion.id in {
+                "line-score",
+                "readability",
+                "guidance",
+                "feedback",
+                "layout",
+            }:
+                require(
+                    verdict.score in {0, 5, 10},
+                    "score",
+                    "Frozen pilot line-score/UX anchors are 0, 5 or 10.",
+                )
         if attempt.outcome == "build_failure":
             require(
                 verdict.status in {"failed", "not_tested"},
@@ -478,6 +492,13 @@ def validate(directory: Path, trusted_root: Path, *, override: dict | None = Non
         submission = model(Submission, parsed)
         require("REPLACE" not in raw.decode(), "draft", "Replace draft placeholders first.")
         policy, policy_hash, prompt = load_policy(trusted_root, submission.policy_id)
+        if policy.task.kind == "browser_protocol":
+            require(
+                submission.source_kind == "browser_observation"
+                and all(a.result.mode != "deterministic" for a in submission.attempts),
+                "source",
+                "Manual browser evidence is not native Harbor/deterministic verification.",
+            )
         require(submission.policy_sha256 == policy_hash, "policy", "Trusted policy hash mismatch.")
         pub = submission.publication
         require(
@@ -567,7 +588,7 @@ def validate(directory: Path, trusted_root: Path, *, override: dict | None = Non
         references = set(names) | {f"external:{i}" for i in external_ids}
         # Trajectories cannot serve as circular evidence for their own assertions.
         trajectory_names = {p for a in submission.attempts for p in (a.creation, a.evaluation)}
-        references -= trajectory_names
+        references -= trajectory_names | set(submission.score_addenda)
         require(
             len(trajectory_names) == 2 * len(submission.attempts),
             "trajectory",
@@ -619,6 +640,9 @@ def validate(directory: Path, trusted_root: Path, *, override: dict | None = Non
                     "cost",
                     "Known cost needs amount, currency and public evidence.",
                 )
+        from .score_addenda import validate_addenda
+
+        addenda = validate_addenda(submission, policy, blobs, references, trusted_root)
         if pub.redactions or pub.capture_gaps:
             warnings.append(
                 "Redactions/capture gaps are declared; review whether conclusions remain supported."
@@ -637,6 +661,7 @@ def validate(directory: Path, trusted_root: Path, *, override: dict | None = Non
             "kind": submission.kind,
             "manifest_sha256": digest(raw),
             "attempts": attempts,
+            "score_addenda": addenda,
             "errors": [],
             "warnings": warnings,
         }
@@ -681,7 +706,9 @@ def initialize(root: Path, output: Path, policy_id: str, submission_id: str) -> 
             "effort": None,
         },
         "environment": "REPLACE with runtime/browser versions and conditions",
-        "source_kind": "harbor",
+        "source_kind": "browser_observation"
+        if policy.task.kind == "browser_protocol"
+        else "harbor",
         "source_ref": "REPLACE with task-scoped run/trial reference",
         "attempts": [
             {
@@ -693,7 +720,7 @@ def initialize(root: Path, output: Path, policy_id: str, submission_id: str) -> 
                 "result": {
                     "evaluator": "REPLACE",
                     "model": None,
-                    "mode": "deterministic",
+                    "mode": "human" if policy.task.kind == "browser_protocol" else "deterministic",
                     "creation_context_hidden": False,
                     "criteria": [
                         {
@@ -802,11 +829,11 @@ def prepare(directory: Path, root: Path, output: Path, *, confirmed: bool) -> di
 
 def validate_tree(directory: Path, root: Path) -> dict:
     try:
-        files = inventory(directory)
+        files = inventory(directory, max_entries=60201)
         # In trusted-review mode, incoming data cannot erase or rewrite accepted revisions.
         baseline = root / "submissions"
         if baseline.is_dir() and directory.resolve() != baseline.resolve():
-            for name in inventory(baseline) - {"README.md"}:
+            for name in inventory(baseline, max_entries=60201) - {"README.md"}:
                 require(
                     name in files and read_file(baseline, name) == read_file(directory, name),
                     "immutable_revision",
@@ -837,6 +864,15 @@ def validate_tree(directory: Path, root: Path) -> dict:
                     "Examples cannot be submitted as results.",
                 )
                 revisions.setdefault(result["id"], []).append(result["revision"])
+                for addendum in result["score_addenda"]:
+                    source_path = f"{parts[0]}/r{addendum['source_revision']:03}/manifest.json"
+                    require(
+                        source_path in files
+                        and digest(read_file(directory, source_path))
+                        == addendum["source_manifest_sha256"],
+                        "immutable_revision",
+                        "Addendum must pin the actual earlier manifest.",
+                    )
             results.append({"package": parent, **result})
         require(files <= covered, "layout", "Unpackaged files are not accepted under submissions/.")
         require(

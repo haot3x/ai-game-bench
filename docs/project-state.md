@@ -25,7 +25,8 @@ The landing site and historical records remain in a separate private repository.
 
 ## Not included / not claimed
 
-- No new paid creator runs; no six-platform unattended creation adapter.
+- No six-platform unattended creation adapter. The separately authorized Gemini 4
+  pilot has a public result PR; it is not an unattended or reproduced run.
 - No migration of private browser profiles, production Mopan API integration,
   private prompts, raw jobs, screenshots containing accounts or Git history.
 - No independently calibrated subjective judge, representative game leaderboard,
@@ -45,7 +46,16 @@ benchmark result. The new trusted-review dispatch becomes live
 only after its workflow is merged. See [submitting](submissions.md) and
 [reviewing](reviewing-submissions.md).
 
-Local validation on 2026-10-14: 164 fast tests passed; all 13 real Chromium
+Current review slice (2026-10-14): the fixed historical Tetris scoring standard
+is available under `scoring/`, with explicitly retrospective, automatically
+recomputed addenda. Original pilot policy and evidence are preserved. Method
+[PR #3](https://github.com/mopan-ai/ai-game-bench/pull/3) and evidence
+[PR #4](https://github.com/mopan-ai/ai-game-bench/pull/4) track acceptance separately;
+consult their exact heads, checks and review comments for live status. The
+Gemini 4 cost supplement is owner-reported, not independently billed or audited.
+No new game generation is needed for this review or reassessment.
+
+Initial pre-run local validation on 2026-10-14: 164 fast tests passed; all 13 real Chromium
 calibration tests passed separately. Native Harbor Oracle returned `overall=1`
 and Nop `overall=0`, both with one completed trial and zero exceptions. Public
 submission tests cover malformed/missing evidence, hash changes, unsafe files,
