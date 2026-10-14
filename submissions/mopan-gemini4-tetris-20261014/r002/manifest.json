@@ -1,0 +1,617 @@
+{
+  "schema_version": "public-submission/0.1",
+  "id": "mopan-gemini4-tetris-20261014",
+  "revision": 2,
+  "kind": "result",
+  "policy_id": "tetris-browser-pilot-v1",
+  "policy_sha256": "afcc208f35233bb9df8b8e630e39f816a05ce028c91d0bd79cea17ffef4f2ede",
+  "author": "haot3x; execution and evidence assembly assisted by an AI browser operator",
+  "affiliation": "Mopan AI (platform-affiliated submitter; not an independent review)",
+  "creator": {
+    "platform": "mopan",
+    "harness_version": null,
+    "model": "Gemini 4 Argon",
+    "model_source": "visible_ui",
+    "effort": null
+  },
+  "environment": "2026-10-14 UTC; owner-selected Chrome 155 on macOS; Chrome DevTools MCP 1.9.0 attached to visible Chrome. Creation 1648×1233 CSS / DPR 2; evaluation desktop 1280×800 / DPR 2 and mobile emulation 390×844 / DPR 1. Clean anonymous context for scored play. No CPU/network throttling; network latency uncontrolled. Account tier unknown. Not a physical mobile-device test.",
+  "source_kind": "browser_observation",
+  "source_ref": "https://mopan.ai/workspace/9e77c349-d405-4916-9773-00f00535479d",
+  "attempts": [
+    {
+      "id": "attempt-1",
+      "outcome": "delivered",
+      "creation": "creation.jsonl",
+      "evaluation": "evaluation.jsonl",
+      "artifact": {
+        "id": "mopan-gemini4-tetris-build-5816ae22",
+        "kind": "public_url",
+        "url": "https://mopan.ai/play/9e77c349-d405-4916-9773-00f00535479d?build=5816ae22-b9f0-49cb-b736-dd111797133d",
+        "build_version": "5816ae22-b9f0-49cb-b736-dd111797133d",
+        "bundle_sha256": null,
+        "access": "Opened without login in a new isolated browser context at evaluation time. Hosted URL/build reference, not immutable artifact bytes."
+      },
+      "result": {
+        "evaluator": "Same AI browser operator as creation observer; visual game checks with visible DOM/coordinate input",
+        "model": null,
+        "mode": "agent_dom",
+        "creation_context_hidden": false,
+        "criteria": [
+          {
+            "criterion_id": "ready",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Clean anonymous start has empty readable board/state and a playable falling piece.",
+            "evidence_events": [
+              "observe-eval-009-clean-begin",
+              "observe-eval-011-rotate-open"
+            ]
+          },
+          {
+            "criterion_id": "movement",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Same L moves both ways and clamps at both walls.",
+            "evidence_events": [
+              "observe-eval-011-rotate-open",
+              "observe-eval-012-left-wall",
+              "observe-eval-013-left-clamp",
+              "observe-eval-015-right-wall",
+              "observe-eval-016-right-clamp"
+            ]
+          },
+          {
+            "criterion_id": "rotation",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Asymmetric L rotates in open space and at the left wall without crossing boundaries.",
+            "evidence_events": [
+              "observe-eval-009-clean-begin",
+              "observe-eval-011-rotate-open",
+              "observe-eval-012-left-wall",
+              "observe-eval-014-rotate-wall"
+            ]
+          },
+          {
+            "criterion_id": "gravity",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Idle descent then visibly faster ArrowDown descent; score 0→3 matches three soft-drop inputs.",
+            "evidence_events": [
+              "observe-eval-017-gravity-before",
+              "observe-eval-018-gravity-after",
+              "observe-eval-019-soft-drop"
+            ]
+          },
+          {
+            "criterion_id": "lock-spawn",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Three successive locks (floor and stack), retained locked pieces and new spawns.",
+            "evidence_events": [
+              "observe-eval-020-lock-one",
+              "observe-eval-021-lock-two",
+              "observe-eval-022-lock-three"
+            ]
+          },
+          {
+            "criterion_id": "line-clear",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Full bottom row removed by normal input and upper blocks collapse; a later two-row removal also captured.",
+            "evidence_events": [
+              "observe-eval-031-single-before",
+              "observe-eval-032-single-after",
+              "observe-eval-042-double-before",
+              "observe-eval-043-double-after"
+            ]
+          },
+          {
+            "criterion_id": "line-score",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "At level 1, single 102→234 with explicit +100 clear reward; double 568→898 with explicit +300 reward, lines 1→3. Drop contributions 32/30 cannot explain clear awards.",
+            "evidence_events": [
+              "observe-eval-031-single-before",
+              "observe-eval-032-single-after",
+              "observe-eval-042-double-before",
+              "observe-eval-043-double-after"
+            ]
+          },
+          {
+            "criterion_id": "game-over",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Normal hard-drops cause explicit loss at 263; subsequent direction/rotation/down inputs leave normal placement stopped.",
+            "evidence_events": [
+              "observe-eval-023-stack-6",
+              "observe-eval-024-top-5",
+              "observe-eval-025-loss-input-blocked"
+            ]
+          },
+          {
+            "criterion_id": "restart",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Post-loss visible restart empties board and current score; new ArrowLeft input works. Historical best correctly persists.",
+            "evidence_events": [
+              "observe-eval-026-restart-zero",
+              "observe-eval-027-restart-input"
+            ]
+          },
+          {
+            "criterion_id": "readability",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Active/locked pieces, score, level and lines remain legible in empty and populated states.",
+            "evidence_events": [
+              "observe-eval-009-clean-begin",
+              "observe-eval-022-lock-three",
+              "observe-eval-042-double-before"
+            ]
+          },
+          {
+            "criterion_id": "guidance",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Game-only start instructions mention direction controls and Space drop; visible directional/rotation/drop control labels correspond to observed ArrowLeft/Right/Up/Down and Space behavior.",
+            "evidence_events": [
+              "observe-eval-008-anonymous-start",
+              "observe-eval-011-rotate-open",
+              "observe-eval-015-right-wall",
+              "observe-eval-019-soft-drop",
+              "observe-eval-020-lock-one",
+              "observe-eval-045-mobile-ready"
+            ]
+          },
+          {
+            "criterion_id": "feedback",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Distinct on-screen line-clear message/particles and explicit game-over modal, beyond raw scores.",
+            "evidence_events": [
+              "observe-eval-032-single-after",
+              "observe-eval-043-double-after",
+              "observe-eval-024-top-5"
+            ]
+          },
+          {
+            "criterion_id": "layout",
+            "status": "passed",
+            "score": 10.0,
+            "reason": "Desktop 1280×800 and mobile emulation 390×844 show unobstructed board/state/controls. Mobile reload included; no physical-device claim.",
+            "evidence_events": [
+              "observe-eval-009-clean-begin",
+              "observe-eval-042-double-before",
+              "observe-eval-046-mobile-playing"
+            ]
+          },
+          {
+            "criterion_id": "delivery-time",
+            "status": "partial",
+            "score": 7.147785,
+            "reason": "1241.231 seconds observed acceptance-to-final-render; time formula frozen before Send, ready and lock-spawn gates passed.",
+            "evidence_events": [
+              "observe-delivery-timing"
+            ]
+          }
+        ],
+        "total": 91.443355
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "creation.jsonl",
+      "sha256": "640bbde3522b5d243478687cdf68cf22c3d1889253ff15223cc5a4e0691565e3",
+      "bytes": 33157
+    },
+    {
+      "path": "evaluation.jsonl",
+      "sha256": "f5040da5ff8de37654e14105d629e85ec392b8ef770fcc83ba1243d010a7f54e",
+      "bytes": 66095
+    },
+    {
+      "path": "README.md",
+      "sha256": "3cdd092f77b1522b2ee28c2c25fe3faa730016cf6e92b0beccfce196ee307362",
+      "bytes": 10619
+    },
+    {
+      "path": "recording-notes.md",
+      "sha256": "73ab07a2f08a5c0592ac75362c29f923e3dc2e989c5bfadfde62d57efea33279",
+      "bytes": 7255
+    },
+    {
+      "path": "evidence/accepted-full-local.jpeg",
+      "sha256": "92a15f99f8b9138c16f0c0ae48c1bbec8da3896b1d4e274dc8b5d343bea9bc41",
+      "bytes": 83768
+    },
+    {
+      "path": "evidence/accepted-snapshot.txt",
+      "sha256": "915c802956876afdc47fee0c9918fb0cb2fae5642ceb9c3f689d726e1a0657e9",
+      "bytes": 2036
+    },
+    {
+      "path": "evidence/browser-operations.jsonl",
+      "sha256": "19b929713b798ae296e7f6b5d6a13428e8c739244197b18eeb2009bc8773911e",
+      "bytes": 85914
+    },
+    {
+      "path": "evidence/capture-gaps.json",
+      "sha256": "2a19b76321b5b8808f5ec456a6dad5851aa8353bc73ef74bc2c3376347c15cad",
+      "bytes": 1724
+    },
+    {
+      "path": "evidence/clarification-selection.jpeg",
+      "sha256": "e4d0b689c1ea0d041ad4a70b8012ec88ecd1ee608f393e72d4a838762b509d93",
+      "bytes": 141268
+    },
+    {
+      "path": "evidence/clarification-submitted.txt",
+      "sha256": "c0ed532a4505dbeff0012b2ac4dc214e404da8e04034c0d692a362e72e202270",
+      "bytes": 3799
+    },
+    {
+      "path": "evidence/creation-001.jpeg",
+      "sha256": "a590d4877326643d7aa06ae2d3e7c0cbefd232f989f14eedd84b233306cd3c3d",
+      "bytes": 190641
+    },
+    {
+      "path": "evidence/creation-001.txt",
+      "sha256": "de469225c4e877a5f59656a2c34caa74d07168bc7fb9188caf5c839f1ab3b0c5",
+      "bytes": 3451
+    },
+    {
+      "path": "evidence/creation-002.txt",
+      "sha256": "adab2ea4ca22a3bf597ef9c3749df81e2c407f8a9798d885dd7e6ae50852137b",
+      "bytes": 4448
+    },
+    {
+      "path": "evidence/creation-003.txt",
+      "sha256": "809cc5e4a765a37fea02b0eea27c1691c88ccdbed992e9a2a80c7031e96ba8fc",
+      "bytes": 4452
+    },
+    {
+      "path": "evidence/creation-008.jpeg",
+      "sha256": "587dab65ae68490c9bf39ff8b7b9cf735f295ccecef0eb876b3d1c98fc87b02a",
+      "bytes": 446842
+    },
+    {
+      "path": "evidence/creation-008.txt",
+      "sha256": "fe93bdf5b283409cc273e65ffa0b07ad7e7f5af190bdc75f13a9cf27c2f3cdd4",
+      "bytes": 13390
+    },
+    {
+      "path": "evidence/creation-010.jpeg",
+      "sha256": "9a2c2cb764d364f30f8256bc56f4f39085ef6161c87a15b43ada99760805395d",
+      "bytes": 446890
+    },
+    {
+      "path": "evidence/creation-014.jpeg",
+      "sha256": "8d135398bdd53368f31c04148f5a02cae2a47e1abe3bb5adadeb1408443b24a7",
+      "bytes": 446398
+    },
+    {
+      "path": "evidence/creation-017.jpeg",
+      "sha256": "f0fbc27e356bd6161448b156cc70792ad00146e074a136db2efce7e7929a53c2",
+      "bytes": 458429
+    },
+    {
+      "path": "evidence/creation-020.jpeg",
+      "sha256": "344f241f0b395c4a26f159423f422582c73581be8276f33684a51aa150319490",
+      "bytes": 433358
+    },
+    {
+      "path": "evidence/creation-final-links.json",
+      "sha256": "ee6d415e8bec9afc2f4879df0f5af96153bb3c41d19a09a2c8f9abb5bb6d414a",
+      "bytes": 277
+    },
+    {
+      "path": "evidence/creation-final.txt",
+      "sha256": "4cc0624c73c1cd22d27171711cd962728acf1d1db8048d1089c1538a47fe496b",
+      "bytes": 16530
+    },
+    {
+      "path": "evidence/creation-observations.jsonl",
+      "sha256": "dbbdfdcdaefe1bfd5ecce30eda57f1e7cf1f0446e18d9eed984089d0521409fa",
+      "bytes": 377458
+    },
+    {
+      "path": "evidence/creator-ui-environment.json",
+      "sha256": "6cc686684224229f830a4155bd63c3af97e8f0f2cee76957a05a7eab5e4e7e8c",
+      "bytes": 1329
+    },
+    {
+      "path": "evidence/eval-001.jpeg",
+      "sha256": "1888c7278ee65093094f3b0316aad2b9098f31e05e6d2863955476b382f61e21",
+      "bytes": 99128
+    },
+    {
+      "path": "evidence/eval-001.txt",
+      "sha256": "41a210a2a4109ba7f44101b315ee005461bbef104203f821fde58869f1bc27f1",
+      "bytes": 792
+    },
+    {
+      "path": "evidence/eval-003-start.jpeg",
+      "sha256": "b4853bd8cf1617b488b120113a4e750b6bedcfa1cd8dc8a8834a9040c7ad1a29",
+      "bytes": 88215
+    },
+    {
+      "path": "evidence/eval-005-reset.jpeg",
+      "sha256": "7e2e64fcb83ae347e64808a156d5556994e32a7b3824f68310c0725b49046e24",
+      "bytes": 98059
+    },
+    {
+      "path": "evidence/eval-008-anonymous-start.jpeg",
+      "sha256": "234704548d5386cd8617b35078ed97299c5b3d0de236ecdd5035a9da682f226c",
+      "bytes": 99439
+    },
+    {
+      "path": "evidence/eval-008.txt",
+      "sha256": "f596cbce04ba6bb3d05d24741dd851c2ba3b360bf9405825137244c071204ac4",
+      "bytes": 752
+    },
+    {
+      "path": "evidence/eval-009-clean-begin.jpeg",
+      "sha256": "ca282034583307f11819a79639b9f636629bdeba7e595057a18baa829278e595",
+      "bytes": 82133
+    },
+    {
+      "path": "evidence/eval-011-rotate-open.jpeg",
+      "sha256": "52db0eae8da24c5b796c2d5f3eaabbb681aadf902dc1638695223e217067bd59",
+      "bytes": 82140
+    },
+    {
+      "path": "evidence/eval-012-left-wall.jpeg",
+      "sha256": "d1421d72669bfd2ce5c7a9c09969e71b3a899943428e79cfdb7c61beadbe49bc",
+      "bytes": 82023
+    },
+    {
+      "path": "evidence/eval-013-left-clamp.jpeg",
+      "sha256": "ee256bdea0fa7771607def00c38e15be8aa6b772328b146d580cc89f5fcb42a4",
+      "bytes": 82126
+    },
+    {
+      "path": "evidence/eval-014-rotate-wall.jpeg",
+      "sha256": "60f801f532cf8557469fcc95579d0d6774f6a74c09381eae59aef45584762c90",
+      "bytes": 81987
+    },
+    {
+      "path": "evidence/eval-015-right-wall.jpeg",
+      "sha256": "21c8c4443ce53fd4bca41e06504d0e9dfb5084e839e46b81978115b7207de46f",
+      "bytes": 82085
+    },
+    {
+      "path": "evidence/eval-016-right-clamp.jpeg",
+      "sha256": "61c23e83d17e126364ec7e8a4713e8bf1de97b3f604f0ae9657051ac679028b3",
+      "bytes": 82103
+    },
+    {
+      "path": "evidence/eval-017-gravity-before.jpeg",
+      "sha256": "61c23e83d17e126364ec7e8a4713e8bf1de97b3f604f0ae9657051ac679028b3",
+      "bytes": 82103
+    },
+    {
+      "path": "evidence/eval-018-gravity-after.jpeg",
+      "sha256": "6f45be4a649084e338150efa41841e584785c42c15ca79448f4e1426f99ba926",
+      "bytes": 82069
+    },
+    {
+      "path": "evidence/eval-019-soft-drop.jpeg",
+      "sha256": "69a5d945892edca2b690b4587665fa3375886a309f4ddebd146694c3171fdb5b",
+      "bytes": 82171
+    },
+    {
+      "path": "evidence/eval-020-lock-one.jpeg",
+      "sha256": "f9f70863bfe177b47721bdb89287b77744ee5cadb826a297710fc3a40b6d3be0",
+      "bytes": 84143
+    },
+    {
+      "path": "evidence/eval-021-lock-two.jpeg",
+      "sha256": "fa043620d2748b4847411a7edf8607ce60d6d920036b64329df837943a059aef",
+      "bytes": 85953
+    },
+    {
+      "path": "evidence/eval-022-lock-three.jpeg",
+      "sha256": "18c94f77dca99c7065efc729d6d7bf78726c4a163feb06f9cce9b0d406fe9714",
+      "bytes": 87856
+    },
+    {
+      "path": "evidence/eval-023-stack-6.jpeg",
+      "sha256": "1681bbed59404a797deca02be78fea22fc221f73508cb7ef3123f90b3493c142",
+      "bytes": 90702
+    },
+    {
+      "path": "evidence/eval-024-top-5.jpeg",
+      "sha256": "c01eba3a6af0e4c3b0c04f4224a79c2ae1b4ba5ae223ef6566eb420e60ac9ea6",
+      "bytes": 88872
+    },
+    {
+      "path": "evidence/eval-025-loss-input-blocked.jpeg",
+      "sha256": "f7fc5f7b2ddf9382d9e596d995096e7f9c020ba55e6907e1c3339d3824d52cb1",
+      "bytes": 96773
+    },
+    {
+      "path": "evidence/eval-026-restart-zero.jpeg",
+      "sha256": "227719e8adb69d662578c08c51569b8e393d52c1818c418a2d89d49054775e0e",
+      "bytes": 82190
+    },
+    {
+      "path": "evidence/eval-027-restart-input.jpeg",
+      "sha256": "0afbffe93ed62cb970b91b166c350033679272cba320428956923d70ed54fc82",
+      "bytes": 82167
+    },
+    {
+      "path": "evidence/eval-028-line-build.jpeg",
+      "sha256": "7e420f52df9594e9ae0906dc3dffb77a5340c64f855c813ef9246cba9b5ed371",
+      "bytes": 77673
+    },
+    {
+      "path": "evidence/eval-030-line-build.jpeg",
+      "sha256": "34dff4ecac80d7ee4969b9814050a04c725ca41e2de7ddc4ec5454f34e169e5d",
+      "bytes": 80948
+    },
+    {
+      "path": "evidence/eval-031-single-before.jpeg",
+      "sha256": "7cb7691df94c53b2dc3e89f1cb5e096ee93ec886605bc696bae05ddd4a954e2c",
+      "bytes": 98263
+    },
+    {
+      "path": "evidence/eval-032-single-after.jpeg",
+      "sha256": "cfc0c9735fc2ca08e75e67203d5eb238a087846c80e02700b0adac0fd4349d41",
+      "bytes": 98174
+    },
+    {
+      "path": "evidence/eval-034-line-build.jpeg",
+      "sha256": "936352c7056ab1cd815ff7b52a2f9bb2f6623f260d0cee44b645f750aef5a9a5",
+      "bytes": 82051
+    },
+    {
+      "path": "evidence/eval-036-line-build.jpeg",
+      "sha256": "0d87c435ed0d1a6d62cac2e33bc46aed390b3c2d0313d41c8ad7835eeaba937d",
+      "bytes": 85050
+    },
+    {
+      "path": "evidence/eval-037-line-build.jpeg",
+      "sha256": "b62299be176c31486544427e5600c738aec4e9f8c424e4efb55aa812630cf5a6",
+      "bytes": 86540
+    },
+    {
+      "path": "evidence/eval-038-line-build.jpeg",
+      "sha256": "d2ec92fc5200b6cfa8995d65d45d471827ceb6f8e92de3f09f7a30d859f3c218",
+      "bytes": 89657
+    },
+    {
+      "path": "evidence/eval-040-line-build.jpeg",
+      "sha256": "63f123a0debabf51135ed643875b87fbe0a2c266dafff2a4ce58c15bb9d81975",
+      "bytes": 92858
+    },
+    {
+      "path": "evidence/eval-041-line-build.jpeg",
+      "sha256": "af05d97ff6e93c0e93ef6a29a3a694ea37c8b6b9ee7c9ef70ef3bf58592a66b8",
+      "bytes": 96021
+    },
+    {
+      "path": "evidence/eval-042-double-before.jpeg",
+      "sha256": "48d2e228c0d2261711afa35c4d1f7e5527052e3af22ab3e06d6533aebafe7374",
+      "bytes": 120379
+    },
+    {
+      "path": "evidence/eval-043-double-after.jpeg",
+      "sha256": "d20669543db741b59bdc151ce7f57f544ace2257a87f09032ec5be7aa9403431",
+      "bytes": 116201
+    },
+    {
+      "path": "evidence/eval-044-mobile-layout.jpeg",
+      "sha256": "4623e9a097b2cccbcb6e44c016534cc9c5d14ec49027f6fa80409c1032530485",
+      "bytes": 7152
+    },
+    {
+      "path": "evidence/eval-045-mobile-ready.jpeg",
+      "sha256": "cee7e424a78a0bbcc40cb0d182671b136a21fed59c2ec66676f69717b6ad994d",
+      "bytes": 30936
+    },
+    {
+      "path": "evidence/eval-046-mobile-playing.jpeg",
+      "sha256": "75b3cd7f947cb87d04afdc51e97b78925e68deec9d35ce1c970edeb1a088673e",
+      "bytes": 25637
+    },
+    {
+      "path": "evidence/eval-047-mobile-paused.jpeg",
+      "sha256": "5fe097d98b6180adffd9b0815fd8f39f446534c30ca105a91c4e9b3966da19e2",
+      "bytes": 25728
+    },
+    {
+      "path": "evidence/eval-environment.json",
+      "sha256": "dabc9b6d22ab95774c3f38ac55f940b6753d4ecbdac5cf2822422241546f17f7",
+      "bytes": 273
+    },
+    {
+      "path": "evidence/eval-gravity-timer.json",
+      "sha256": "a42c72b0e8601060430bc620a5f8e9eec4cd8caf80b7daf29d39dfe9f5f9042c",
+      "bytes": 122
+    },
+    {
+      "path": "evidence/eval-mobile-geometry.json",
+      "sha256": "1a03139b864dba6f65bedb0baa869d6a06e2e201a2fc0d3030892454473f7bb7",
+      "bytes": 246
+    },
+    {
+      "path": "evidence/model-and-empty-prompt.jpeg",
+      "sha256": "e3311971b8837dfbb1254e5b15817471477fdc3cf752475291f65a62d0732495",
+      "bytes": 12506
+    },
+    {
+      "path": "evidence/prompt-before-send.jpeg",
+      "sha256": "d3d4f5eabe089274f1df2cc7e4cd29ef85deb19e9d84cc00cdc5447327f7cbea",
+      "bytes": 13327
+    },
+    {
+      "path": "evidence/owner-cost-summary.txt",
+      "sha256": "452750d89f352574677a0f1b004d61f9d2945475a91db57af820f3ca095a9507",
+      "bytes": 897
+    },
+    {
+      "path": "evidence/owner-cost-supplement.json",
+      "sha256": "b7c00f2838bcdaeadc8d08ae7a18fa974df6fc1ff6b63cd487fc7d823514386d",
+      "bytes": 3617
+    }
+  ],
+  "external_evidence": [],
+  "costs": [
+    {
+      "kind": "model_estimate",
+      "component": "creator",
+      "amount": 2.1561385,
+      "currency": "USD",
+      "basis": "Owner-provided backend summary received 2026-10-14 for this run: generation/provider estimate including Main+child model calls and new cover/music/effects. Model-only subtotal USD 1.807902 is in the evidence for like-for-like historical comparison; do not add it to this inclusive total. Displayed components sum to USD 2.156139, USD 0.0000005 above the reported precise total; underlying component precision was not supplied. No unit-rate/backend audit or invoice reconciliation. Not actual user payment or credit value; other unreported charges are not assumed included. No score change.",
+      "evidence": [
+        "evidence/owner-cost-summary.txt",
+        "evidence/owner-cost-supplement.json"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "component": "operator",
+      "amount": null,
+      "currency": null,
+      "basis": "No supported per-run usage/cash/subscription allocation receipt was collected; not zero/free. Operator and evaluator are the same assistant, not separate billed invocations.",
+      "evidence": []
+    },
+    {
+      "kind": "unknown",
+      "component": "evaluator",
+      "amount": null,
+      "currency": null,
+      "basis": "No supported per-run usage/cash/subscription allocation receipt was collected; not zero/free. Operator and evaluator are the same assistant, not separate billed invocations.",
+      "evidence": []
+    }
+  ],
+  "publication": {
+    "public_release_confirmed": true,
+    "rights_confirmed": true,
+    "sensitive_data_checked": true,
+    "all_attempts_disclosed": true,
+    "license": "Authored benchmark notes and JSON exports: Apache-2.0. Task-scoped screenshots and rendered dialogue are shared with the owner/submitter authorization for public benchmark review and display; third-party product/UI trademarks retain their respective rights. No game-source or additional training-data license is granted here.",
+    "redactions": [
+      "Unrelated tab metadata, account/profile paths, transport response bodies and local recording paths excluded by an explicit field/file allowlist. No credential/session export. Included images are original viewport or element screenshots, not retouched verdict evidence."
+    ],
+    "capture_gaps": [
+      "Public evidence is sampled, not a continuous video or complete internal model trajectory. Conversation-text sampling exceeded 30 seconds in 13 intervals; maximum 186.086 seconds. Exact intervals in evidence/capture-gaps.json.",
+      "Acceptance preceded its first observed receipt by up to about 13 seconds. Completion text first observed 04:28:34.559 UTC; final game first observed rendered 04:29:44.663 UTC. No guessed midpoint is used.",
+      "Local creation video starts after initial acceptance; local videos are deliberately not part of the public package or relied on for scored claims. Some redundant intermediate screenshots are omitted; their capture actions remain in the full sanitized operation trace."
+    ],
+    "limitations": [
+      "Manual pilot using method commit 362e3cc40eefb33e0987ffa6592076187c07cd63 / open method PR #3. Policy frozen before Send, not maintainer-approved; not an accepted benchmark ranking or calibrated automatic judge.",
+      "Single attempt on one prompt; no replication or model-wide quality claim. The 91.44 total measures this narrow functional/observable-UX/time rubric, not general fun, aesthetics or game-development ability. Not comparable with old report scales.",
+      "Creator-affiliated submitter and same-assistant evaluator; creation_context_hidden=false. No independent review or generation reproduction.",
+      "Two owner-game sessions showed state changes not attributable to recorded operator inputs. Retained as anomalies, not asserted as product defects or used as passing evidence; scored gameplay continued in a clean isolated context.",
+      "Five play sessions including mobile-emulation reload; deliberate pauses between actions for visual planning. Evaluation wall-clock includes these pauses and finished within 30 minutes.",
+      "Gemini 4 Argon is a selected UI label, not proof of internal routing/model identity. Tokens and estimated generation costs are supplemented by an owner-provided backend summary, not independently audited. Internal model reasoning, complete tool trajectory, effort, deployed harness version, account tier, actual user payment and credit value remain unavailable.",
+      "Hosted game URL with build ID is not a byte-frozen bundle; future availability or unchanged content is not guaranteed.",
+      "Audio quality, physical mobile input, sustained touch holds, 3/4-line clears, level-up progression, frame-time/performance and exhaustive rotation/collision edge cases were not evaluated; the frozen rubric does not award points for those claims.",
+      "Schema/hash/CI success validates structure and arithmetic only, not authenticity, completeness, rights, game truth or merge approval.",
+      "Revision r002 appends post-run owner-reported cost/usage and backend duration; r001 and original trajectories/screenshots remain unchanged. Backend time does not replace browser-observed scoring time. The requested old-report 40/20/20/20 reassessment has not been performed; this remains the original pilot score."
+    ]
+  }
+}

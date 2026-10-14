@@ -1,0 +1,17 @@
+Source: owner-provided backend summary in this conversation, 2026-10-14.
+Received after the run, in response to the request for this Gemini 4 Argon workspace's costs.
+This is a transcription of the owner's statement, not a backend export or a billing receipt.
+
+这个版本的「经典俄罗斯方块」，构建成本合计约 US$2.16，精确为 $2.1561385，包含新增素材。
+
+费用项目                          金额（USD）
+Gemini 4 Argon：Main＋子 Agent      $1.807902
+封面图片 × 1                      $0.068237
+背景音乐 × 1                      $0.040000
+音效 × 6                          $0.240000
+合计                              $2.156139
+
+本次共 59 次模型请求，耗时约 19 分 35 秒。模型用量：
+- 普通输入：386,689 Tokens
+- 缓存输入：3,267,135 Tokens，输入缓存命中占比 89.4%
+- 输出：70,781 Tokens，已包含 Thinking
