@@ -5,30 +5,57 @@ An open, evidence-first benchmark for AI game creation.
 Initiated by [Mopan](https://github.com/mopan-ai).
 Results are published at [aigamebench.com](https://www.aigamebench.com/).
 
-**Current scope:** one free Harbor/Docker/Chromium click-counter calibration,
-six platform connection guides, and offline public-submission tools. A separate
-[Tetris browser pilot](protocols/tetris-browser-pilot-v1/evaluation.md) provides
-manual observation rules, not an automatic creator or calibrated game judge.
-Historical reports are references, not reproduced results or comparable scores.
+**Public preview:** free local calibration, six tested platform workflows and
+offline submission tools. The six creator integrations are not yet runnable
+through `agb run`. [Current capabilities and limits](docs/project-state.md).
 
-**Accepted pilot:** [Mopan Gemini 4 Tetris](submissions/mopan-gemini4-tetris-20261014/)
-contains one real creation, public evidence/trajectories, an owner-reported cost
-supplement and a historical-policy score addendum. [Maintainer review](https://github.com/mopan-ai/ai-game-bench/pull/4#issuecomment-6162702189)
-accepted it with limitations after trusted checks and a limited artifact replay.
-This is non-blind pilot evidence, not independently reproduced generation or a
-calibrated leaderboard. Its three revisions are not three attempts.
+[Quick start](#quick-start) · [Platforms](#platform-support) ·
+[Contribute](#contributing) · [Documentation](docs/README.md)
 
-## Participate
+## Quick start
 
-| I want to… | Start here |
+Fork this repository, clone your fork, then install [uv](https://docs.astral.sh/uv/getting-started/installation/):
+
+```bash
+uv sync --locked
+uv run agb platforms
+uv run agb submission policies
+uv run agb submission validate examples/submissions/synthetic-counter
+```
+
+The example is invented format-test data, **not** a game score. These commands
+need no Docker or platform account, call no models and upload nothing.
+
+### Run the free calibration
+
+Start Docker, then:
+
+```bash
+uv run agb doctor
+./scripts/run-smoke.sh
+uv run agb view
+```
+
+Oracle should score 1, Nop 0, with no model calls. First use downloads dependencies
+and browser images. Harbor owns runs and local `jobs/`. [Runbook](docs/running.md).
+
+## Tasks and evaluation
+
+| Task | What is available |
 | --- | --- |
-| Submit a test result | [Record evidence and open one PR](docs/submissions.md) |
-| Propose a task, policy or platform | [Open an Ideas discussion](https://github.com/mopan-ai/ai-game-bench/discussions/new?category=ideas) |
-| Report a wrong verdict | [Open an issue](https://github.com/mopan-ai/ai-game-bench/issues/new?template=bug.yml) with the result and reproduction evidence |
-| Ask for help | [Q&A](https://github.com/mopan-ai/ai-game-bench/discussions/categories/q-a) |
+| [Click counter](datasets/smoke-create-v0.2/create-click-counter-zh-001/) | Free Harbor/Docker/Chromium calibration; automated interaction checks, not a game-quality score |
+| [Classic Tetris](protocols/tetris-browser-pilot-v1/evaluation.md) | Browser observation and evidence protocol; no automatic creator or calibrated game judge |
 
-No invitation is required. Discussions do not start models or spend credits.
-Results go directly to a PR; a separate Discussion is optional.
+Choose a task and freeze its policy before recording. Keep creation evidence
+separate from evaluation, and preserve failures, gaps and unknown values.
+[Evaluation boundaries](docs/architecture.md) · [Add a task or policy](docs/adding-tasks.md).
+
+**Example submission:** [Mopan Gemini 4 Tetris](submissions/mopan-gemini4-tetris-20261014/)
+was [accepted with limitations](https://github.com/mopan-ai/ai-game-bench/pull/4#issuecomment-6162702189).
+It contains public trajectories, evidence, cost and scoring addenda: three
+revisions of one creation, not three attempts. This affiliated, non-blind pilot
+is not independently reproduced generation or a calibrated leaderboard.
+[Historical reports](reports/README.md) are references, not reproduced results.
 
 ## Platform support
 
@@ -38,37 +65,39 @@ the platform is certified. Each guide links to the corresponding report.
 
 | Platform | Status | Execution |
 | --- | --- | --- |
-| [Mopan](platforms/mopan/README.md) | Tested | Browser tool use |
-| [TapTap Maker](platforms/taptap-maker/README.md) | Tested | Browser tool use |
-| [Astrocade](platforms/astrocade/README.md) | Tested | Browser tool use |
-| [Manus](platforms/manus/README.md) | Tested | Browser tool use |
-| [Codex](platforms/codex/README.md) | Tested | CLI |
-| [Claude Code](platforms/claude-code/README.md) | Tested | CLI |
+| <img src="platforms/mopan/logo.png" width="24" height="24" alt=""> &nbsp; [Mopan](platforms/mopan/README.md) | Tested | Browser tool use |
+| <img src="platforms/taptap-maker/logo.svg" width="24" height="24" alt=""> &nbsp; [TapTap Maker](platforms/taptap-maker/README.md) | Tested | Browser tool use |
+| <img src="platforms/astrocade/logo.svg" width="24" height="24" alt=""> &nbsp; [Astrocade](platforms/astrocade/README.md) | Tested | Browser tool use |
+| <img src="platforms/manus/logo.svg" width="24" height="24" alt=""> &nbsp; [Manus](platforms/manus/README.md) | Tested | Browser tool use |
+| <img src="platforms/codex/logo.png" width="24" height="24" alt=""> &nbsp; [Codex](platforms/codex/README.md) | Tested | CLI |
+| <img src="platforms/claude-code/logo.png" width="24" height="24" alt=""> &nbsp; [Claude Code](platforms/claude-code/README.md) | Tested | CLI |
 
 Reusable CLI integrations are planned. `agb run` currently executes only free
 Harbor Oracle/Nop counter calibration, not these six creators.
 [Support levels and setup](platforms/README.md) · [Add a platform](docs/platforms.md)
 
-## Submit a result
+## Contributing
 
-Fork this repository, clone your fork, then install [uv](https://docs.astral.sh/uv/getting-started/installation/):
+No invitation is required. Humans and agents follow the same guides.
 
-```bash
-uv sync --locked
-uv run agb submission policies
-uv run agb submission validate examples/submissions/synthetic-counter
-```
+| I want to… | Start here |
+| --- | --- |
+| Submit a test result | [Record evidence → prepare a public package → open one PR](docs/submissions.md) |
+| Add a task or evaluation policy | [Task contribution guide](docs/adding-tasks.md) |
+| Add a platform | [Integration contract](docs/platforms.md) |
+| Report a wrong verdict | [Open an issue](https://github.com/mopan-ai/ai-game-bench/issues/new?template=bug.yml) with reproduction evidence |
+| Discuss an idea or ask for help | [Ideas](https://github.com/mopan-ai/ai-game-bench/discussions/categories/ideas) · [Q&A](https://github.com/mopan-ai/ai-game-bench/discussions/categories/q-a) |
 
-The example is invented format-test data, **not** a game score. Submission tools
-do not require Docker, connect accounts, call models or upload anything.
+Read the public-data terms below **before uploading**. Existing-task results go
+directly to a PR; no prior Discussion or private workspace is required.
 
-[Start a submission](docs/submissions.md) — humans and agents follow the same
-guide: record locally → prepare an allowlisted public package → open one PR.
-Existing-task results do not require a prior Discussion or a private workspace.
+PR checks validate code, packages and free calibration. Maintainers separately
+run trusted evidence checks and review the claims before merging. Green checks
+are not evidence approval; website publication is a separate curated decision.
+Discussions and submissions do not trigger paid runs or automatic deployment.
 
-Missing a task or policy? [Contribute one](docs/adding-tasks.md).
-Platform connection methods: [platforms/](platforms/README.md).
-Maintainers: [review untrusted evidence](docs/reviewing-submissions.md).
+[Contribution guide](CONTRIBUTING.md) · [Actions and triggers](docs/contribution-workflow.md)
+· [Maintainer review](docs/reviewing-submissions.md) · [Governance](GOVERNANCE.md)
 
 ## Public-data and privacy terms
 
@@ -92,36 +121,6 @@ authored fixtures use [Apache-2.0](LICENSE); third-party evidence must state its
 actual license. No additional training-data agreement is inferred from submission;
 reuse follows the applicable license.
 
-## Run the free calibration
-
-Start Docker, then:
-
-```bash
-uv run agb doctor
-./scripts/run-smoke.sh
-uv run agb view
-```
-
-Oracle should score 1, Nop 0, with no model calls. First use downloads dependencies
-and browser images. Harbor owns runs and local `jobs/`; the binary score is not
-game quality. [Runbook](docs/running.md) · [Current state](docs/project-state.md)
-
-## Contribute and review
-
-| Stage | What happens |
-| --- | --- |
-| [Discussion](https://github.com/mopan-ai/ai-game-bench/discussions) | People discuss proposals and questions; no automatic execution |
-| [Public checks](https://github.com/mopan-ai/ai-game-bench/actions/workflows/checks.yml) | PR/main checks validate code, packages and free calibration; external runs require maintainer approval |
-| [Trusted evidence review](https://github.com/mopan-ai/ai-game-bench/actions/workflows/review-submission.yml) | Maintainer manually checks a result PR using trusted main code, not its submitted checker |
-| Evidence review → merge | Maintainer inspects claims and records the decision for the exact PR revision |
-
-Green checks prove neither authentic evidence nor a correct game. Only designated
-Mopan maintainers merge. Website publication is a separate curated update;
-there is no automatic paid run, private repository creation or deployment.
-
-[Contribution guide](CONTRIBUTING.md) · [Actions and triggers](docs/contribution-workflow.md)
-· [Governance](GOVERNANCE.md) · [Reports](reports/README.md)
-
 ## Roadmap
 
 - **Planned:** reusable platform integrations through the unified CLI.
@@ -130,6 +129,10 @@ there is no automatic paid run, private repository creation or deployment.
 
 ## Contributors
 
-- [Mopan](https://github.com/mopan-ai)
+| Contributor | Contribution |
+| --- | --- |
+| <img src="platforms/mopan/logo.png" width="24" height="24" alt=""> &nbsp; [Mopan](https://github.com/mopan-ai) | Project initiation and maintenance |
 
-New contributors are welcome through the [contribution guide](CONTRIBUTING.md).
+Task authors, platform integrators and reviewers are welcome through the
+[contribution guide](CONTRIBUTING.md). Tested platforms are not automatically
+contributors or endorsers. [Logo sources and attribution](platforms/LOGOS.md).

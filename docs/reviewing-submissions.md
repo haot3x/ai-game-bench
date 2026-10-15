@@ -26,6 +26,7 @@ uv run --locked agb --repo /path/to/trusted-checkout submission validate-all /pa
 
 Do not run `uv sync`, package installs, tests or scripts in an unreviewed incoming
 checkout on your workstation. Do not automatically fetch URLs or unpack archives.
+Structural checks only read data; they do not execute games or contributor scripts.
 New task/policy code must be reviewed/merged before a result can use it as trusted
 criteria. Run free calibrations for new methods; parsing alone is not acceptance.
 Trusted checks reject edits/deletions of already merged evidence; corrections
@@ -53,7 +54,8 @@ missing evidence; never ask an agent to reconstruct missing observations as fact
 ## 3. Replay and decision
 
 Replay important game checks using the frozen rubric in a disposable sandbox
-without personal credentials/profiles. Hosted games can change: record replay
+without personal credentials/profiles, host-home mounts or Docker sockets;
+restrict network and resource access. Hosted games can change: record replay
 time and build identity; disclose when exact replay is impossible. Do not claim
 generation reproduction merely because you replayed the finished game.
 

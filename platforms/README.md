@@ -21,12 +21,14 @@ adapters here. The public checkout executes only free Oracle/Nop calibration.
 
 | Platform | Status | Execution |
 | --- | --- | --- |
-| [Mopan](mopan/README.md) | Tested | Browser tool use |
-| [TapTap Maker](taptap-maker/README.md) | Tested | Browser tool use |
-| [Astrocade](astrocade/README.md) | Tested | Browser tool use |
-| [Manus](manus/README.md) | Tested | Browser tool use |
-| [Codex](codex/README.md) | Tested | CLI |
-| [Claude Code](claude-code/README.md) | Tested | CLI |
+| <img src="mopan/logo.png" width="24" height="24" alt=""> &nbsp; [Mopan](mopan/README.md) | Tested | Browser tool use |
+| <img src="taptap-maker/logo.svg" width="24" height="24" alt=""> &nbsp; [TapTap Maker](taptap-maker/README.md) | Tested | Browser tool use |
+| <img src="astrocade/logo.svg" width="24" height="24" alt=""> &nbsp; [Astrocade](astrocade/README.md) | Tested | Browser tool use |
+| <img src="manus/logo.svg" width="24" height="24" alt=""> &nbsp; [Manus](manus/README.md) | Tested | Browser tool use |
+| <img src="codex/logo.png" width="24" height="24" alt=""> &nbsp; [Codex](codex/README.md) | Tested | CLI |
+| <img src="claude-code/logo.png" width="24" height="24" alt=""> &nbsp; [Claude Code](claude-code/README.md) | Tested | CLI |
+
+[Logo sources and attribution](LOGOS.md). Platform listing does not imply endorsement.
 
 Inspect the [real Mopan package](../submissions/mopan-gemini4-tetris-20261014/r003/README.md)
 and [maintainer decision](https://github.com/mopan-ai/ai-game-bench/pull/4#issuecomment-6162702189).
