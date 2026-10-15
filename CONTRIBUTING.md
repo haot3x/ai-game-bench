@@ -24,3 +24,24 @@ revision, never by overwriting their records.
 Mopan maintainers review and merge; passing CI is not evidence approval or
 automatic website publication. Proposals do not trigger paid runs.
 [Review process](docs/contribution-workflow.md) · [Governance](GOVERNANCE.md)
+
+## Agent handoff
+
+Copy this into your agent and specify the task and platform you want to test:
+
+> Read AGENTS.md, then docs/submissions.md and the selected platform guide.
+> First identify the frozen task, policy, scoring version and what this checkout
+> can actually run. If a task or policy is missing, propose it using
+> docs/adding-tasks.md before a formal run; do not invent an official score.
+> Confirm the account/browser profile, model and spending limits with me before
+> any real-platform run. Record all attempts, prompt receipts, follow-ups,
+> timings and final artifact identity in creation.jsonl. Evaluate the final game
+> separately and record actions, observations and evidence in evaluation.jsonl.
+> Keep unknowns, failures, interventions and capture gaps explicit. Never upload
+> credentials, profiles or whole raw jobs. Prepare and validate only a reviewed,
+> task-scoped public package. Show me its exact file list, license/affiliation,
+> limitations and validation result; wait for my approval before pushing or
+> opening a PR. Structural validation is not evidence approval.
+
+This is a checklist for your agent, not an unattended runner or a grant of
+account, spending or publication permission.
