@@ -70,8 +70,12 @@ Audit on 2026-10-14: public visibility, Issues/Discussions, main PR + both check
 read-only Actions token, all-external-contributor approval and disabled auto-merge
 were read back. Secret scanning, push protection and private vulnerability
 reporting were enabled and read back. No collaborators or merge permissions were
-broadened. The new submission workflow still needs merge before it can be
-dispatched on GitHub; local checks do not establish that remote run.
+broadened. PR #3 has since merged the submission workflow, and
+[Trusted evidence review](https://github.com/mopan-ai/ai-game-bench/actions/runs/38524647241)
+successfully checked the exact result PR #4 head using trusted main code. PR #4
+is merged and [main checks passed](https://github.com/mopan-ai/ai-game-bench/actions/runs/38524926580).
+The workflow is available for manual dispatch; CI does not grant merge rights
+or replace evidence review. Local checks alone still do not establish remote state.
 
 Live evidence: [PRs](https://github.com/mopan-ai/ai-game-bench/pulls),
 [Actions](https://github.com/mopan-ai/ai-game-bench/actions),

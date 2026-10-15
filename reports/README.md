@@ -18,6 +18,14 @@ results were not regenerated using the public counter task.
 
 ## New result contribution
 
+The [accepted Gemini 4 pilot](../submissions/mopan-gemini4-tetris-20261014/)
+is a real example of the new contract, with original evidence (r001), an
+owner-reported cost supplement (r002) and a retrospective fixed-policy score
+addendum (r003). These are one creation's revisions, not repeated trials.
+[Maintainer review](https://github.com/mopan-ai/ai-game-bench/pull/4#issuecomment-6162702189)
+and [limited replay evidence](../reviews/mopan-gemini4-tetris-20261014/20261014/)
+record acceptance with limitations, not independent generation reproduction.
+
 Use [the public submission guide](../docs/submissions.md) and submit one result PR with:
 
 - Task/prompt version and hash; evaluation policy/rubric version.
@@ -32,7 +40,8 @@ Use [the public submission guide](../docs/submissions.md) and submit one result 
 
 `agb submission init/prepare/validate` supports public evidence packaging and
 offline structural checks. The report links above are historical references,
-not examples of this new contract. Use the authored synthetic format example.
+not examples of this new contract. Start with the authored synthetic format
+example, then inspect the real accepted pilot and its declared limitations.
 Do not submit a raw Harbor job to this public repo. HTML generation is not part
 of the submission CLI.
 
