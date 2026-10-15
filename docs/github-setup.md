@@ -27,6 +27,13 @@ other repositories, organization membership or a cross-repository GitHub App.
 
 ## Administrator application
 
+Policy files: [main-protection.json](../.github/main-protection.json) controls
+the intended write allowlist and branch rules; [CODEOWNERS](../.github/CODEOWNERS)
+routes reviews. Require `checks-and-package` and `browser-calibration` on an
+up-to-date branch, with no PR bypass. Keep both jobs reporting on docs-only PRs.
+Before adding a maintainer, update these files and explicitly decide whether
+independent approval, code-owner approval and last-pusher approval become required.
+
 The committed policy is a desired configuration, not a self-applying workflow.
 Apply only after reviewing the exact repository and confirming the expected
 check names and GitHub Actions app ID (`15368`) from a real PR run:

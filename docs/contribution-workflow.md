@@ -49,6 +49,8 @@ All Actions run on GitHub-hosted runners with read-only permissions. Outside
 contributors' workflow runs require maintainer approval. PR CI itself is not a
 tamper-proof judge: inspect changes to checks/workflows before approving.
 No auto-merge, paid runs, raw-job upload or landing deployment.
+Maintainer-funded reruns require separate approval of the task, revision,
+platform, attempts, time and spending.
 
 ## Result PR: who does what?
 

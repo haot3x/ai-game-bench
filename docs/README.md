@@ -15,5 +15,5 @@
 | See the upstream research | [Research notes](research/contribution-automation.md) |
 | Understand the public-evidence decision | [Evidence design](research/submission-evidence.md) |
 | Publish a result safely | [Reports](../reports/README.md) |
-| Configure repository permissions | [Governance](../GOVERNANCE.md) |
-| Audit live GitHub settings and CI | [GitHub setup](github-setup.md) |
+| Understand maintainers and decisions | [Governance](../GOVERNANCE.md) |
+| Configure/audit GitHub permissions and CI | [GitHub setup](github-setup.md) |

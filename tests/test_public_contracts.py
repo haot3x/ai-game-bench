@@ -77,12 +77,16 @@ def test_local_documentation_links():
         ROOT / "AGENTS.md",
         ROOT / "CONTRIBUTING.md",
         ROOT / "GOVERNANCE.md",
+        ROOT / "SECURITY.md",
         *ROOT.glob("docs/**/*.md"),
         *ROOT.glob("reports/**/*.md"),
         *ROOT.glob("platforms/**/*.md"),
     ]
     for document in docs:
-        for target in re.findall(r"\]\(([^)]+)\)", document.read_text()):
+        content = document.read_text()
+        targets = re.findall(r"\]\(([^)]+)\)", content)
+        targets += re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', content)
+        for target in targets:
             if "://" in target or target.startswith("#"):
                 continue
             assert (document.parent / target.split("#")[0]).exists(), (document, target)
@@ -180,15 +184,22 @@ def test_platform_support_tables_link_every_reference_guide():
         (ROOT / "platforms/README.md", ""),
     ]:
         rows = re.findall(
-            rf"^\| \[[^\]]+\]\({re.escape(prefix)}([a-z-]+)/README\.md\)"
+            rf'^\| <img src="{re.escape(prefix)}([a-z-]+)/logo\.(png|svg)"'
+            r' width="24" height="24" alt=""> &nbsp; '
+            rf"\[[^\]]+\]\({re.escape(prefix)}\1/README\.md\)"
             r" \| ([^|]+) \| ([^|]+) \|$",
             document.read_text(),
             flags=re.MULTILINE,
         )
-        guide_ids = [identifier for identifier, _, _ in rows]
+        guide_ids = [identifier for identifier, _, _, _ in rows]
         assert len(guide_ids) == len(REFERENCE_PLATFORMS)
         assert set(guide_ids) == set(REFERENCE_PLATFORMS)
-        for identifier, status, execution in rows:
+        for identifier, extension, status, execution in rows:
+            asset = ROOT / "platforms" / identifier / f"logo.{extension}"
+            assert asset.is_file()
+            assert f"({identifier}/logo.{extension})" in (
+                ROOT / "platforms/LOGOS.md"
+            ).read_text()
             entry = json.loads((ROOT / "platforms" / identifier / "integration.json").read_text())
             assert status.strip() == "Tested"
             expected = "CLI" if entry["historical_route"] == "local_cli" else "Browser tool use"
