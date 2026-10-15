@@ -10,7 +10,13 @@ PR CI checks packages, but a PR can edit its own checker. For a result PR, dispa
 **Trusted evidence review** from a reviewed main revision, entering its PR number.
 The workflow pins the head SHA, checks out incoming files as data, and runs only
 trusted code/dependencies/policies. It has no write/model/deployment credentials.
-This workflow becomes available only after it is merged into main.
+The workflow is live on main; select a reviewed main revision when dispatching.
+
+In GitHub: [Actions → Trusted evidence review](https://github.com/mopan-ai/ai-game-bench/actions/workflows/review-submission.yml)
+→ **Run workflow** → select **main** → enter the result PR number. Check the
+resolved PR head in the run log against the PR's current head, and include the
+run URL in your decision. If the head changed, rerun and review the new revision.
+This is a manual structural gate, not an automatic PR approval or gameplay test.
 
 The equivalent local command, from a trusted installation/checkout, is:
 

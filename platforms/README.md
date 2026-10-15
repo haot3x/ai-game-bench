@@ -1,19 +1,45 @@
-# Platform integration references
+# Platform support and connection guides
 
 These six directories document the routes used in the historical Tetris pilots.
-They are **reference integrations, not six working `agb run` plugins**. Browser
-creation was operated through a consented Chrome connection; historical local CLI
-runs also need account/runtime setup that is not distributed here. The public
-checkout currently executes only free Oracle/Nop calibration.
+Agents used browser tools through a consented Chrome connection or invoked local
+CLIs. These are **tested workflows, not six working `agb run` plugins**. Account
+setup and the orchestration used for those runs are not distributed as reusable
+adapters here. The public checkout executes only free Oracle/Nop calibration.
 
-| Platform | Historical creation route | Start here |
+## What “support” means
+
+- **Runnable calibration:** Oracle/Nop execute the free local counter through
+  Harbor. They are fixtures, not game-creation platforms.
+- **Tested:** a recorded test was performed through agent-operated tool use.
+  This does not mean every game passed, a platform is certified, or generation
+  was independently reproduced. Human login, authorization and review remain
+  separate from the agent's browser/CLI actions.
+- **Public execution integration — planned:** none of the six creators is
+  enabled in `agb run` yet. The guides do not supply authentication, browser
+  control or an automatic recorder. This packaging gap does not make the
+  recorded agent tool-use workflow a human-operated test.
+
+| Platform | Status | Execution |
 | --- | --- | --- |
-| Codex | Local CLI → local game files | [Codex](codex/README.md) |
-| Claude Code | Local CLI, separately configured model provider → local files | [Claude Code](claude-code/README.md) |
-| Mopan | Website chat → delivered game/preview URL | [Mopan](mopan/README.md) |
-| TapTap Maker | Website chat → preview game | [TapTap Maker](taptap-maker/README.md) |
-| Manus | Website task → managed Preview | [Manus](manus/README.md) |
-| Astrocade | Website create → editor Game Preview | [Astrocade](astrocade/README.md) |
+| [Mopan](mopan/README.md) | Tested | Browser tool use |
+| [TapTap Maker](taptap-maker/README.md) | Tested | Browser tool use |
+| [Astrocade](astrocade/README.md) | Tested | Browser tool use |
+| [Manus](manus/README.md) | Tested | Browser tool use |
+| [Codex](codex/README.md) | Tested | CLI |
+| [Claude Code](claude-code/README.md) | Tested | CLI |
+
+Inspect the [real Mopan package](../submissions/mopan-gemini4-tetris-20261014/r003/README.md)
+and [maintainer decision](https://github.com/mopan-ai/ai-game-bench/pull/4#issuecomment-6162702189).
+It is one affiliated, non-blind creation, not independent reproduction. Other
+platforms' [historical reports](../reports/README.md) are not accepted submissions
+under this new contract. Neither kind establishes current account availability.
+
+**Requirements:** CLI routes need your local CLI/provider account. Browser
+references use an owner-selected, logged-in Chrome profile with explicit control
+permission; this repo does not connect it for you. Submission packaging itself
+needs neither a browser nor Docker. The free calibration uses Docker/Chromium.
+For another browser/control tool, disclose the actual environment and check policy
+compatibility; a historical Chrome procedure does not validate that alternative.
 
 One common entry point, with no login, browser control or model spending:
 
@@ -29,6 +55,13 @@ delivery checks and platform-specific pitfalls). These files are documentation
 inputs, never executable imports. Do not embed credentials, private project IDs,
 current prices or personal Chrome paths. A cost belongs to a **run**, not to a
 platform plugin: the same platform can use different models/plans over time.
+
+To submit now, choose an applicable [task/policy](../docs/submissions.md) before
+recording. Use your authorized account and tools, record evidence and open a PR.
+New platforms may use the same evidence contract when compatible; new tasks/policies
+need method review first. A public `agb run` adapter is not required to submit
+a separately operated run. Disclose the actual automation and human interventions;
+unknown model/effort/cost stays unknown.
 
 Shared material:
 

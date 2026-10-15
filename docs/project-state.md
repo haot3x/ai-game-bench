@@ -25,8 +25,8 @@ The landing site and historical records remain in a separate private repository.
 
 ## Not included / not claimed
 
-- No six-platform unattended creation adapter. The separately authorized Gemini 4
-  pilot has a public result PR; it is not an unattended or reproduced run.
+- No six-platform unattended creation adapter. The Gemini 4 pilot is accepted
+  with limitations; it is not an unattended or independently reproduced run.
 - No migration of private browser profiles, production Mopan API integration,
   private prompts, raw jobs, screenshots containing accounts or Git history.
 - No independently calibrated subjective judge, representative game leaderboard,
@@ -36,24 +36,47 @@ The landing site and historical records remain in a separate private repository.
 - No automatic browser recorder, uploader or evidence authenticity certification.
   Agents/operators record events locally; upload uses an ordinary fork/PR.
 
+## Accepted public pilot — 2026-10-14
+
+Method [PR #3](https://github.com/mopan-ai/ai-game-bench/pull/3) and result
+[PR #4](https://github.com/mopan-ai/ai-game-bench/pull/4) are merged. Public
+submission checks and the trusted-review workflow are live on main. The package
+is [`submissions/mopan-gemini4-tetris-20261014/`](../submissions/mopan-gemini4-tetris-20261014/):
+
+- r001: original one-attempt Tetris pilot, screenshots, creation/evaluation
+  events and sanitized browser receipts; original pilot score retained.
+- r002: owner-reported cost/usage supplement; USD 1.807902 model-only and
+  USD 2.1561385 including new media, not a reconciled user bill.
+- r003: retrospective `tetris-absolute/1.0.0` addendum, fixed 40/20/20/20 weights.
+  Total 85.380340 is provisional (80/100 scored weight), nine core checks
+  demonstrated; missing user payments remain unknown.
+
+These are three immutable revisions of one creation, not three independent runs.
+Observed delivery time is 1241.231 seconds; UI/backend timers have different
+bounds and remain separate. Affiliated same-person/non-blind review, capture
+gaps, unresolved owner-tab anomalies and retrospective scoring are disclosed.
+Acceptance does not certify capture authenticity or calibrated judge accuracy.
+
+[Maintainer acceptance](https://github.com/mopan-ai/ai-game-bench/pull/4#issuecomment-6162702189)
+records exact head, omissions and a limited credential-free final-build replay.
+[Replay evidence](../reviews/mopan-gemini4-tetris-20261014/20261014/) does not
+independently rerun creation or reproduce every gameplay/experience claim.
+[Trusted review passed](https://github.com/mopan-ai/ai-game-bench/actions/runs/38524647241)
+and [merged-main checks passed](https://github.com/mopan-ai/ai-game-bench/actions/runs/38524926580).
+These are actual remote runs, not claims inferred from local workflow files.
+
+Final pre-merge local checks: 214 fast tests, 13 separate real Chromium calibration
+tests, wheel/source builds and free Harbor Oracle/Nop passed. Oracle scored 1,
+Nop 0, with zero exceptions. No new paid run is authorized by this state update.
+Earlier dated validation snapshots below remain historical records.
+
 ## Next acceptance gate
 
-The current user priority is public contribution acceptance: task/policy additions,
-public evidence packages and untrusted-data review. The owner has authorized one
-fresh Mopan Gemini 4 Argon Tetris pilot and a public evidence PR. Freeze its
-method before generation; do not call it an accepted or independently reproduced
-benchmark result. The new trusted-review dispatch becomes live
-only after its workflow is merged. See [submitting](submissions.md) and
-[reviewing](reviewing-submissions.md).
-
-Current review slice (2026-10-14): the fixed historical Tetris scoring standard
-is available under `scoring/`, with explicitly retrospective, automatically
-recomputed addenda. Original pilot policy and evidence are preserved. Method
-[PR #3](https://github.com/mopan-ai/ai-game-bench/pull/3) and evidence
-[PR #4](https://github.com/mopan-ai/ai-game-bench/pull/4) track acceptance separately;
-consult their exact heads, checks and review comments for live status. The
-Gemini 4 cost supplement is owner-reported, not independently billed or audited.
-No new game generation is needed for this review or reassessment.
+Have an outside contributor follow task/policy → public package → PR → trusted
+checks → evidence review without private maintainer context. Treat incoming
+claims as unverified and record the reviewed head SHA. Website publication is a
+separately authorized curated operation in the landing repository.
+See [submitting](submissions.md) and [reviewing](reviewing-submissions.md).
 
 Initial pre-run local validation on 2026-10-14: 164 fast tests passed; all 13 real Chromium
 calibration tests passed separately. Native Harbor Oracle returned `overall=1`

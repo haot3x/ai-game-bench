@@ -172,6 +172,30 @@ def test_shared_observation_template_is_not_a_run_or_score():
     assert record["training_eligible"] is False
 
 
+def test_platform_support_tables_link_every_reference_guide():
+    from ai_game_bench.cli import REFERENCE_PLATFORMS
+
+    for document, prefix in [
+        (ROOT / "README.md", "platforms/"),
+        (ROOT / "platforms/README.md", ""),
+    ]:
+        rows = re.findall(
+            rf"^\| \[[^\]]+\]\({re.escape(prefix)}([a-z-]+)/README\.md\)"
+            r" \| ([^|]+) \| ([^|]+) \|$",
+            document.read_text(),
+            flags=re.MULTILINE,
+        )
+        guide_ids = [identifier for identifier, _, _ in rows]
+        assert len(guide_ids) == len(REFERENCE_PLATFORMS)
+        assert set(guide_ids) == set(REFERENCE_PLATFORMS)
+        for identifier, status, execution in rows:
+            entry = json.loads((ROOT / "platforms" / identifier / "integration.json").read_text())
+            assert status.strip() == "Tested"
+            expected = "CLI" if entry["historical_route"] == "local_cli" else "Browser tool use"
+            assert execution.strip() == expected
+            assert entry["public_execution_supported"] is False
+
+
 def test_single_maintainer_policy_keeps_pr_and_ci_gates():
     policy = json.loads((ROOT / ".github/main-protection.json").read_text())
     checks = policy["required_status_checks"]
