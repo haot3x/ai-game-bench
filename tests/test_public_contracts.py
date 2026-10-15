@@ -78,6 +78,7 @@ def test_local_documentation_links():
         ROOT / "CONTRIBUTING.md",
         ROOT / "GOVERNANCE.md",
         ROOT / "SECURITY.md",
+        *ROOT.glob("assets/**/*.md"),
         *ROOT.glob("docs/**/*.md"),
         *ROOT.glob("reports/**/*.md"),
         *ROOT.glob("platforms/**/*.md"),
@@ -90,6 +91,32 @@ def test_local_documentation_links():
             if "://" in target or target.startswith("#"):
                 continue
             assert (document.parent / target.split("#")[0]).exists(), (document, target)
+
+
+def test_readme_and_contributor_navigation_anchors():
+    # These entry-point headings are plain English, with no duplicate slugs.
+    for document in [ROOT / "README.md", ROOT / "CONTRIBUTING.md"]:
+        for target in re.findall(r"\]\(([^)]+)\)", document.read_text()):
+            if "://" in target or "#" not in target:
+                continue
+            filename, fragment = target.split("#", 1)
+            destination = document.parent / filename if filename else document
+            headings = re.findall(r"^#{1,6} (.+)$", destination.read_text(), re.MULTILINE)
+            anchors = {
+                re.sub(r"[^\w\- ]", "", heading.lower()).replace(" ", "-")
+                for heading in headings
+            }
+            assert fragment in anchors, (document, target)
+
+
+def test_readme_brand_and_ci_badge_point_to_real_assets():
+    readme = (ROOT / "README.md").read_text()
+    workflow = "https://github.com/mopan-ai/ai-game-bench/actions/workflows/checks.yml"
+    assert f"({workflow}/badge.svg?branch=main)" in readme
+    assert f"]({workflow})" in readme
+    assert 'src="assets/brand/readme-logo.png"' in readme
+    for name in ["readme-logo.png", "logo-transparent.png"]:
+        assert (ROOT / "assets/brand" / name).read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
 
 
 def test_no_private_payload_paths_in_public_tree():

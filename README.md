@@ -1,30 +1,58 @@
-# AI Game Bench
+<p align="center">
+  <img src="assets/brand/readme-logo.png" width="560" alt="AI Game Bench">
+</p>
 
-An open, evidence-first benchmark for AI game creation.
+**An open, evidence-first benchmark for AI game creation.**
+
+[![Public checks](https://github.com/mopan-ai/ai-game-bench/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/mopan-ai/ai-game-bench/actions/workflows/checks.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
+
+[Results](https://www.aigamebench.com/) · [Quick start](#quick-start) ·
+[Tasks](#tasks-and-evaluation) · [Platforms](#platform-support) ·
+[Contribute](#contributing) · [Docs](docs/README.md)
 
 Initiated by [Mopan](https://github.com/mopan-ai).
 Results are published at [aigamebench.com](https://www.aigamebench.com/).
 
 **Public preview:** free local calibration, six tested platform workflows and
-offline submission tools. The six creator integrations are not yet runnable
-through `agb run`. [Current capabilities and limits](docs/project-state.md).
+public evidence submissions. Start with the free example below; real-platform
+creation uses the [platform guides](#platform-support), not `agb run`.
+[Current capabilities and limits](docs/project-state.md).
 
-[Quick start](#quick-start) · [Platforms](#platform-support) ·
-[Contribute](#contributing) · [Documentation](docs/README.md)
+## Results and evidence
+
+Browse the [results website](https://www.aigamebench.com/), or inspect a complete
+public submission before making your own:
+
+| Mopan Gemini 4 · Classic Tetris | Inspect |
+| --- | --- |
+| Original attempt | [Creation trajectory](submissions/mopan-gemini4-tetris-20261014/r001/creation.jsonl) · [Playtest trajectory](submissions/mopan-gemini4-tetris-20261014/r001/evaluation.jsonl) · [Evidence](submissions/mopan-gemini4-tetris-20261014/r001/evidence/) |
+| Addenda | [Cost and usage](submissions/mopan-gemini4-tetris-20261014/r002/README.md) · [Fixed-policy scoring](submissions/mopan-gemini4-tetris-20261014/r003/README.md) |
+| Maintainer decision | [Accepted with limitations](https://github.com/mopan-ai/ai-game-bench/pull/4#issuecomment-6162702189) · [Limited replay](reviews/mopan-gemini4-tetris-20261014/20261014/) |
+
+Three revisions of **one creation**, not three attempts. This affiliated,
+non-blind pilot is not independently reproduced generation or a calibrated
+leaderboard. [Historical reports](reports/README.md) are references, not results
+reproduced by this checkout.
 
 ## Quick start
 
-Fork this repository, clone your fork, then install [uv](https://docs.astral.sh/uv/getting-started/installation/):
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run
+on macOS/Linux (Windows: WSL):
 
 ```bash
+git clone https://github.com/mopan-ai/ai-game-bench.git
+cd ai-game-bench
 uv sync --locked
 uv run agb platforms
 uv run agb submission policies
 uv run agb submission validate examples/submissions/synthetic-counter
 ```
 
-The example is invented format-test data, **not** a game score. These commands
-need no Docker or platform account, call no models and upload nothing.
+You should see the six platform references, available policies and a valid
+synthetic package. The example is invented format-test data, **not** a game
+score. These commands need no Docker or platform account, call no models and
+upload nothing. To contribute, [work from your own fork](CONTRIBUTING.md).
 
 ### Run the free calibration
 
@@ -50,13 +78,6 @@ Choose a task and freeze its policy before recording. Keep creation evidence
 separate from evaluation, and preserve failures, gaps and unknown values.
 [Evaluation boundaries](docs/architecture.md) · [Add a task or policy](docs/adding-tasks.md).
 
-**Example submission:** [Mopan Gemini 4 Tetris](submissions/mopan-gemini4-tetris-20261014/)
-was [accepted with limitations](https://github.com/mopan-ai/ai-game-bench/pull/4#issuecomment-6162702189).
-It contains public trajectories, evidence, cost and scoring addenda: three
-revisions of one creation, not three attempts. This affiliated, non-blind pilot
-is not independently reproduced generation or a calibrated leaderboard.
-[Historical reports](reports/README.md) are references, not reproduced results.
-
 ## Platform support
 
 These platforms have been tested through **agent-operated workflows**.
@@ -78,7 +99,8 @@ Harbor Oracle/Nop counter calibration, not these six creators.
 
 ## Contributing
 
-No invitation is required. Humans and agents follow the same guides.
+No invitation is required. Start with a **result, task or platform**; humans and
+agents follow the same guides.
 
 | I want to… | Start here |
 | --- | --- |
@@ -98,6 +120,9 @@ Discussions and submissions do not trigger paid runs or automatic deployment.
 
 [Contribution guide](CONTRIBUTING.md) · [Actions and triggers](docs/contribution-workflow.md)
 · [Maintainer review](docs/reviewing-submissions.md) · [Governance](GOVERNANCE.md)
+
+Working with an agent? Give it the [contributor handoff](CONTRIBUTING.md#agent-handoff)
+so it knows what to record, validate and ask permission to publish.
 
 ## Public-data and privacy terms
 
@@ -123,16 +148,24 @@ reuse follows the applicable license.
 
 ## Roadmap
 
-- **Planned:** reusable platform integrations through the unified CLI.
-- **Planned:** simpler evidence recording and packaging.
-- **Contributions welcome:** new game tasks, platform guides and independent reviews.
+- **Next:** an outside contributor completes the submission → review workflow.
+- **Next:** 2D platformer and 3D racing protocols with passing/failing calibration
+  examples, before real-platform runs. Not available as accepted tasks yet.
+- **Planned:** a reusable browser adapter and evidence recorder, then more
+  integrations through the unified CLI.
+
+Propose a task, platform or review in
+[Discussions](https://github.com/mopan-ai/ai-game-bench/discussions/categories/ideas).
 
 ## Contributors
 
-| Contributor | Contribution |
-| --- | --- |
-| <img src="platforms/mopan/logo.png" width="24" height="24" alt=""> &nbsp; [Mopan](https://github.com/mopan-ai) | Project initiation and maintenance |
+<p>
+  <a href="https://github.com/mopan-ai"><img src="platforms/mopan/logo.png" width="64" height="64" alt="Mopan"></a>
+  <br>
+  <a href="https://github.com/mopan-ai">Mopan</a> — project initiation and maintenance.
+</p>
 
 Task authors, platform integrators and reviewers are welcome through the
 [contribution guide](CONTRIBUTING.md). Tested platforms are not automatically
-contributors or endorsers. [Logo sources and attribution](platforms/LOGOS.md).
+contributors or endorsers. [Platform logo attribution](platforms/LOGOS.md) ·
+[AI Game Bench brand assets](assets/brand/README.md).
