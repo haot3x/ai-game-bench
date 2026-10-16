@@ -50,6 +50,10 @@ jobs:
       - run: uv run --locked agb doctor
       - name: Build browser image and test known-good and broken games
         run: ./scripts/test-browser.sh
+      - name: Repeat authored platformer and racing checks (no models)
+        run: |
+          ./scripts/test-gameplay-calibration.sh
+          ./scripts/test-gameplay-calibration.sh
       - name: Run native Harbor Oracle and Nop; assert rewards and no errors
         run: ./scripts/run-smoke.sh
       # Deliberately no model keys, account profiles, deployment or raw-job upload.

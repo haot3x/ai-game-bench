@@ -1,0 +1,76 @@
+{
+  "kind": "hypothetical_review_cases_not_run_evidence",
+  "description": "Authored examples for reviewer discussion; no games were generated, played or judged automatically.",
+  "cases": [
+    {
+      "id": "valid-jump",
+      "criterion_id": "jump",
+      "observation": "From ground the player rises, descends, lands on a raised platform, then repeats a controlled jump.",
+      "expected": {
+        "status": "passed",
+        "score": 10,
+        "reason": "A full observed motion/landing sequence, not one still."
+      }
+    },
+    {
+      "id": "cosmetic-jump",
+      "criterion_id": "jump",
+      "observation": "Jump key changes the sprite pose, but the player never leaves the ground.",
+      "expected": {
+        "status": "failed",
+        "score": 0,
+        "reason": "Pose change alone is not a jump."
+      }
+    },
+    {
+      "id": "duplicate-coin",
+      "criterion_id": "collectibles",
+      "observation": "The same coin position increments the count on every revisit without restarting.",
+      "expected": {
+        "status": "failed",
+        "score": 0,
+        "reason": "Pickup must occur once per coin per round."
+      }
+    },
+    {
+      "id": "coin-not-reached",
+      "criterion_id": "collectibles",
+      "observation": "No coin was reached within the six-session budget.",
+      "expected": {
+        "status": "not_tested",
+        "score": 0,
+        "reason": "Unobserved is not an invented defect or a pass."
+      }
+    },
+    {
+      "id": "false-win",
+      "criterion_id": "goal-win",
+      "observation": "A victory banner appears on starting, before traversing the level.",
+      "expected": {
+        "status": "failed",
+        "score": 0,
+        "reason": "Winning requires observable goal arrival."
+      }
+    },
+    {
+      "id": "overlay-only-reset",
+      "criterion_id": "loss-restart",
+      "observation": "Restart hides the failure overlay but leaves a nonzero coin count and missing pickups.",
+      "expected": {
+        "status": "failed",
+        "score": 0,
+        "reason": "Overlay removal alone is not a reset."
+      }
+    },
+    {
+      "id": "transport-outage",
+      "criterion_id": "movement",
+      "observation": "Browser input transport disconnected before movement could be tested.",
+      "expected": {
+        "status": "infra_error",
+        "score": null,
+        "reason": "Do not score tool failure as a gameplay defect."
+      }
+    }
+  ]
+}

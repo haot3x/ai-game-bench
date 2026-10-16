@@ -72,6 +72,47 @@ Earlier dated validation snapshots below remain historical records.
 
 ## Next acceptance gate
 
+Contributor method review, 2026-10-16: the platformer/racing proposals are prepared
+on `feat/platformer-racing-methods`, based on current public main. They add no live
+platform results and do not alter released Tetris/counter bytes. Each includes a
+prompt, pinned policy/rubric, acceptance card and authored pass/fault examples;
+the proposed CI runs the new fixture checks twice. Approval and actual independent
+evaluator calibration remain required before a formal live pilot.
+
+Current local validation: 282 fast tests passed (45 browser tests skipped there);
+13 existing Chromium checks passed separately. Two new gameplay repetitions each
+passed 32 tests: 30 focused probes and two mobile-layout checks, with identical
+fixture/probe hashes, zero false passes/failures and zero harness errors in those
+30 probes. Each retained 30 local videos. This is fixture regression, not judge
+accuracy. Wheel/source builds and CLI dry-run passed; native Harbor Oracle/Nop
+returned 1/0 with zero exceptions. No models, real platforms or website changes
+were used for these method checks. A PR's remote CI and review are separate gates.
+
+Local acceptance-pack validation on 2026-10-15: the proposed platformer/racing
+methods now have [step-by-step acceptance cards and playable pass/fault examples](../fixtures/calibration/gameplay-v1/README.md).
+Two final repetitions of the same fixture/probe bytes each passed 32 real
+Chromium checks: 15 working/fault pairs plus two mobile-layout checks. Each
+repetition had zero false passes/failures across those 30 focused probes and no
+harness errors. This is authored, non-blind, fixture-specific regression, **not
+independent AI judge accuracy or full protocol/visual-quality acceptance**.
+
+The initial replay exposed a checker route that hit the outer wall without ever
+testing the inner boundary. That route was corrected, not the acceptance rule;
+the failed run remains local. Fast checks passed 280 tests; 45 browser tests were
+skipped there and exercised separately (13 existing + 32 new). Free Harbor
+Oracle/Nop returned 1/0 with zero exceptions; wheel/source builds passed.
+Evidence stays in ignored `artifacts/gameplay-calibration/` and native `jobs/`.
+The CI step is defined locally, not deployed. No model/Mopan call, upload,
+commit, push or historical-score change was made for this validation.
+The intended evaluator still needs blind calibration before the live pilot.
+
+Contributor proposals add two data-only browser methods:
+[2D platformer and 3D racing](proposals/platformer-racing-pilot.md). Their pinned
+policies, hypothetical review cases and offline export tests are method-review
+inputs, not accepted tasks, real game runs or calibrated judges. Mopan / Gemini 4
+Argon is the planned first pilot through normal user-facing pages only. No method
+approval or new model call is implied by submitting the method for review.
+
 Have an outside contributor follow task/policy → public package → PR → trusted
 checks → evidence review without private maintainer context. Treat incoming
 claims as unverified and record the reviewed head SHA. Website publication is a

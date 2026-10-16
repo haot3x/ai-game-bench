@@ -1,0 +1,76 @@
+{
+  "kind": "hypothetical_review_cases_not_run_evidence",
+  "description": "Authored examples for reviewer discussion; no games were generated, played or judged automatically.",
+  "cases": [
+    {
+      "id": "valid-lap",
+      "criterion_id": "lap-finish",
+      "observation": "From zero progress the car traverses all visible checkpoints in order, crosses the finish correctly, and the positive final time remains fixed for 3 seconds.",
+      "expected": {
+        "status": "passed",
+        "score": 10,
+        "reason": "Requires an unbroken sequence, not a result screen alone."
+      }
+    },
+    {
+      "id": "hud-only-speed",
+      "criterion_id": "acceleration",
+      "observation": "The speedometer increases, but the car and world landmarks never move.",
+      "expected": {
+        "status": "failed",
+        "score": 0,
+        "reason": "HUD numbers alone do not establish acceleration."
+      }
+    },
+    {
+      "id": "brake-wall",
+      "criterion_id": "braking",
+      "observation": "The car slows only when it hits a wall while the brake is held.",
+      "expected": {
+        "status": "not_tested",
+        "score": 0,
+        "reason": "This observation does not isolate braking; test a straight or leave untested."
+      }
+    },
+    {
+      "id": "checkpoint-skip",
+      "criterion_id": "ordered-checkpoints",
+      "observation": "Reverse across the finish before checkpoint one and the game declares a completed lap.",
+      "expected": {
+        "status": "failed",
+        "score": 0,
+        "reason": "Invalid crossing must not finish the race."
+      }
+    },
+    {
+      "id": "infield-shortcut",
+      "criterion_id": "track-bounds",
+      "observation": "Car crosses the inner wall and retains skipped checkpoint/lap gains.",
+      "expected": {
+        "status": "failed",
+        "score": 0,
+        "reason": "A rendered wall is not functional route protection."
+      }
+    },
+    {
+      "id": "stale-reset",
+      "criterion_id": "restart",
+      "observation": "Restart moves the car to the start but retains the prior checkpoint progress.",
+      "expected": {
+        "status": "failed",
+        "score": 0,
+        "reason": "All round state must reset."
+      }
+    },
+    {
+      "id": "auth-expired",
+      "criterion_id": "ready",
+      "observation": "The platform login expired before the game could be opened.",
+      "expected": {
+        "status": "infra_error",
+        "score": null,
+        "reason": "Access failure is not evidence of a defective game."
+      }
+    }
+  ]
+}

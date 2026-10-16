@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game behavior calibration · local reference</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #f3f5fa; color: #16263b; font: 16px system-ui; }
+  main { max-width: 1080px; margin: auto; padding: 16px; }
+  h1 { margin: 0 0 8px; font-size: 24px; }
+  p { margin: 6px 0 12px; }
+  nav, .hud { display: flex; flex-wrap: wrap; gap: 16px; margin: 12px 0; }
+  a { color: #1644a8; }
+  button { padding: 10px 18px; font: inherit; cursor: pointer; }
+  #stage { position: relative; width: min(100%, max(280px, calc((100dvh - 300px) * 1.78))); margin-inline: auto; }
+  #world { width: 100%; height: auto; display: block; border: 2px solid #16263b; }
+  #map { position: absolute; top: 10px; right: 10px; width: 150px; height: 150px; background: #fff; border: 2px solid #16263b; }
+  #message { min-height: 26px; font-weight: 700; }
+  .note { font-size: 14px; color: #526278; }
+  @media (max-width: 500px) { #map { width: 88px; height: 88px; } h1 { font-size: 20px; } }
+</style>
+<main>
+  <h1 id="title">Local reference</h1>
+  <p class="note">Hand-authored test fixture, not a creator-platform result or a quality benchmark.</p>
+  <nav><a href="?game=platformer">Platformer</a><a href="?game=racing">3D racing</a></nav>
+  <p id="instructions"></p>
+  <button id="start">Start</button> <button id="restart" disabled>Restart</button>
+  <div class="hud"><span id="state">Ready</span><span id="counter"></span><span id="timer"></span><span id="speed"></span></div>
+  <div id="stage"></div>
+  <p id="message" role="status"></p>
+</main>
+<script src="game.js"></script>
+</html>
