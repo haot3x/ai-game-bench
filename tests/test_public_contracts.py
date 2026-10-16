@@ -212,7 +212,7 @@ def test_platform_support_tables_link_every_reference_guide():
     ]:
         rows = re.findall(
             rf'^\| <img src="{re.escape(prefix)}([a-z-]+)/logo\.(png|svg)"'
-            r' width="24" height="24" alt=""> &nbsp; '
+            r' width="32" height="32" alt=""> &nbsp; '
             rf"\[[^\]]+\]\({re.escape(prefix)}\1/README\.md\)"
             r" \| ([^|]+) \| ([^|]+) \|$",
             document.read_text(),
