@@ -48,6 +48,14 @@ call. This preview does not configure or test your paid accounts.
   rewrite the result to zero; fix the environment and run a new job.
 - Port busy: choose `agb view --port 8081`. Viewer remains localhost-only.
 
+## Proposed gameplay examples
+
+For the proposed platformer/racing methods, see the
+[acceptance cards and local behavior fixtures](../fixtures/calibration/gameplay-v1/README.md).
+`./scripts/test-gameplay-calibration.sh` replays focused pass/fault checks in an
+isolated browser and retains local video/actions/JSON. It calls no model and is
+not an independent game judge or a creator-platform benchmark run.
+
 ## Publishing boundary
 
 Never attach raw `jobs/` to a public issue. Share a scrubbed summary and the

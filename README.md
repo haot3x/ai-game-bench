@@ -73,10 +73,13 @@ and browser images. Harbor owns runs and local `jobs/`. [Runbook](docs/running.m
 | --- | --- |
 | [Click counter](datasets/smoke-create-v0.2/create-click-counter-zh-001/) | Free Harbor/Docker/Chromium calibration; automated interaction checks, not a game-quality score |
 | [Classic Tetris](protocols/tetris-browser-pilot-v1/evaluation.md) | Browser observation and evidence protocol; no automatic creator or calibrated game judge |
+| [2D platformer](protocols/platformer-browser-pilot-v1/evaluation.md) | **Proposed** browser protocol; not approved or run |
+| [3D racing](protocols/racing-3d-browser-pilot-v1/evaluation.md) | **Proposed** browser protocol; not approved or run |
 
 Choose a task and freeze its policy before recording. Keep creation evidence
 separate from evaluation, and preserve failures, gaps and unknown values.
 [Evaluation boundaries](docs/architecture.md) · [Add a task or policy](docs/adding-tasks.md).
+[Platformer/racing proposal and validation plan](docs/proposals/platformer-racing-pilot.md).
 
 ## Platform support
 

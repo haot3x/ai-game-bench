@@ -82,6 +82,7 @@ def test_local_documentation_links():
         *ROOT.glob("docs/**/*.md"),
         *ROOT.glob("reports/**/*.md"),
         *ROOT.glob("platforms/**/*.md"),
+        *ROOT.glob("protocols/**/*.md"),
     ]
     for document in docs:
         content = document.read_text()

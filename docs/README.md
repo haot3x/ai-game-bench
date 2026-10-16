@@ -6,6 +6,8 @@
 | Run, verify and inspect | [Running locally](running.md) |
 | Understand boundaries and scores | [Architecture](architecture.md) |
 | Add a game task | [Adding tasks](adding-tasks.md) |
+| Review proposed platformer/racing tasks | [Contributor method proposal](proposals/platformer-racing-pilot.md) |
+| Calibrate gameplay checks before a live pilot | [Acceptance cards and local pass/fault examples](../fixtures/calibration/gameplay-v1/README.md) |
 | Submit a result (human or agent) | [Public submission guide](submissions.md) |
 | Review untrusted evidence | [Maintainer checklist](reviewing-submissions.md) |
 | Compare historical Tetris scores | [Fixed scoring and retrospective addenda](../scoring/README.md) |

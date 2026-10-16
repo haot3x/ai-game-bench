@@ -1,0 +1,34 @@
+{
+  "schema_version": "authored-gameplay-fixtures/1",
+  "kind": "fixture_regression_not_agent_calibration",
+  "original_assets": true,
+  "gameplay_score": null,
+  "pairs": [
+    {"game": "platformer", "criterion": "movement", "mutation": "frozen-player"},
+    {"game": "platformer", "criterion": "jump", "mutation": "cosmetic-jump"},
+    {"game": "platformer", "criterion": "solid-platforms", "mutation": "decorative-platform"},
+    {"game": "platformer", "criterion": "collectibles", "mutation": "duplicate-coin"},
+    {"game": "platformer", "criterion": "fall-loss", "mutation": "no-loss"},
+    {"game": "platformer", "criterion": "goal-win", "mutation": "premature-win"},
+    {"game": "platformer", "criterion": "loss-restart", "mutation": "stale-reset"},
+    {"game": "platformer", "criterion": "win-restart", "mutation": "stale-reset"},
+    {"game": "racing", "criterion": "acceleration", "mutation": "hud-only-speed"},
+    {"game": "racing", "criterion": "braking", "mutation": "no-brakes"},
+    {"game": "racing", "criterion": "steering", "mutation": "no-steering"},
+    {"game": "racing", "criterion": "track-bounds", "mutation": "no-boundaries"},
+    {"game": "racing", "criterion": "ordered-checkpoints", "mutation": "unordered-checkpoints"},
+    {"game": "racing", "criterion": "lap-finish", "mutation": "running-finish-clock"},
+    {"game": "racing", "criterion": "restart", "mutation": "stale-reset"}
+  ],
+  "manual_only": {
+    "platformer": ["ready", "readability", "guidance", "feedback", "presentation"],
+    "racing": ["ready", "follow-camera", "readability", "guidance", "feedback", "presentation"]
+  },
+  "not_applicable": ["delivery-time", "platform_cost", "model_accuracy"],
+  "notes": [
+    "Each pair tests the unmodified reference and one deliberate mutation against one focused probe.",
+    "A probe is narrower than the full protocol criterion. Other criteria can also be affected by a mutation.",
+    "These labels are author expectations for fixture behavior, not independent human consensus.",
+    "Automated success does not certify the reference's art style, camera or a full task score."
+  ]
+}
