@@ -86,12 +86,12 @@ the platform is certified. Each guide links to the corresponding report.
 
 | Platform | Status | Execution |
 | --- | --- | --- |
-| <img src="platforms/mopan/logo.png" width="24" height="24" alt=""> &nbsp; [Mopan](platforms/mopan/README.md) | Tested | Browser tool use |
-| <img src="platforms/taptap-maker/logo.svg" width="24" height="24" alt=""> &nbsp; [TapTap Maker](platforms/taptap-maker/README.md) | Tested | Browser tool use |
-| <img src="platforms/astrocade/logo.svg" width="24" height="24" alt=""> &nbsp; [Astrocade](platforms/astrocade/README.md) | Tested | Browser tool use |
-| <img src="platforms/manus/logo.svg" width="24" height="24" alt=""> &nbsp; [Manus](platforms/manus/README.md) | Tested | Browser tool use |
-| <img src="platforms/codex/logo.png" width="24" height="24" alt=""> &nbsp; [Codex](platforms/codex/README.md) | Tested | CLI |
-| <img src="platforms/claude-code/logo.png" width="24" height="24" alt=""> &nbsp; [Claude Code](platforms/claude-code/README.md) | Tested | CLI |
+| <img src="platforms/mopan/logo.png" width="32" height="32" alt=""> &nbsp; [Mopan](platforms/mopan/README.md) | Tested | Browser tool use |
+| <img src="platforms/taptap-maker/logo.svg" width="32" height="32" alt=""> &nbsp; [TapTap Maker](platforms/taptap-maker/README.md) | Tested | Browser tool use |
+| <img src="platforms/astrocade/logo.svg" width="32" height="32" alt=""> &nbsp; [Astrocade](platforms/astrocade/README.md) | Tested | Browser tool use |
+| <img src="platforms/manus/logo.svg" width="32" height="32" alt=""> &nbsp; [Manus](platforms/manus/README.md) | Tested | Browser tool use |
+| <img src="platforms/codex/logo.png" width="32" height="32" alt=""> &nbsp; [Codex](platforms/codex/README.md) | Tested | CLI |
+| <img src="platforms/claude-code/logo.png" width="32" height="32" alt=""> &nbsp; [Claude Code](platforms/claude-code/README.md) | Tested | CLI |
 
 Reusable CLI integrations are planned. `agb run` currently executes only free
 Harbor Oracle/Nop counter calibration, not these six creators.

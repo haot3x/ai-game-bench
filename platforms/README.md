@@ -21,12 +21,12 @@ adapters here. The public checkout executes only free Oracle/Nop calibration.
 
 | Platform | Status | Execution |
 | --- | --- | --- |
-| <img src="mopan/logo.png" width="24" height="24" alt=""> &nbsp; [Mopan](mopan/README.md) | Tested | Browser tool use |
-| <img src="taptap-maker/logo.svg" width="24" height="24" alt=""> &nbsp; [TapTap Maker](taptap-maker/README.md) | Tested | Browser tool use |
-| <img src="astrocade/logo.svg" width="24" height="24" alt=""> &nbsp; [Astrocade](astrocade/README.md) | Tested | Browser tool use |
-| <img src="manus/logo.svg" width="24" height="24" alt=""> &nbsp; [Manus](manus/README.md) | Tested | Browser tool use |
-| <img src="codex/logo.png" width="24" height="24" alt=""> &nbsp; [Codex](codex/README.md) | Tested | CLI |
-| <img src="claude-code/logo.png" width="24" height="24" alt=""> &nbsp; [Claude Code](claude-code/README.md) | Tested | CLI |
+| <img src="mopan/logo.png" width="32" height="32" alt=""> &nbsp; [Mopan](mopan/README.md) | Tested | Browser tool use |
+| <img src="taptap-maker/logo.svg" width="32" height="32" alt=""> &nbsp; [TapTap Maker](taptap-maker/README.md) | Tested | Browser tool use |
+| <img src="astrocade/logo.svg" width="32" height="32" alt=""> &nbsp; [Astrocade](astrocade/README.md) | Tested | Browser tool use |
+| <img src="manus/logo.svg" width="32" height="32" alt=""> &nbsp; [Manus](manus/README.md) | Tested | Browser tool use |
+| <img src="codex/logo.png" width="32" height="32" alt=""> &nbsp; [Codex](codex/README.md) | Tested | CLI |
+| <img src="claude-code/logo.png" width="32" height="32" alt=""> &nbsp; [Claude Code](claude-code/README.md) | Tested | CLI |
 
 [Logo sources and attribution](LOGOS.md). Platform listing does not imply endorsement.
 
