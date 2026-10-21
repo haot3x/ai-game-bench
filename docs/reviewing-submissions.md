@@ -36,6 +36,11 @@ and run link. It states **structural validation only**, including on success;
 content review, artifact replay and generation rerun are **not performed by
 this action**. Existing human decisions are not changed or overwritten.
 
+The incoming checkout explicitly opts into the action's fork guard for **passive
+data only**: exact SHA, sparse `submissions/`, no persisted credentials, secrets,
+caches, LFS or submodules. Never add PR code execution or write permissions to
+that job. See [GitHub's security guidance](https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/).
+
 In GitHub: [Actions → Trusted evidence review](https://github.com/mopan-ai/ai-game-bench/actions/workflows/review-submission.yml)
 shows the run logs and summary. Manual fallback: **Run workflow** → **main** →
 enter the result PR number. Use it for an existing PR after rollout or when

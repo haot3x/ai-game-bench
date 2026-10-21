@@ -301,6 +301,16 @@ def test_trusted_evidence_review_does_not_execute_incoming_code():
     assert checkouts[0]["with"]["ref"] == "${{ github.sha }}"
     assert checkouts[1]["with"]["ref"] == "${{ steps.pr.outputs.sha }}"
     assert checkouts[1]["with"]["sparse-checkout"] == "/submissions/"
+    assert checkouts[1]["with"]["sparse-checkout-cone-mode"] == "false"
+    # checkout's workflow_run fork guard needs explicit, narrowly scoped consent.
+    assert checkouts[1]["with"]["allow-unsafe-pr-checkout"] == "true"
+    opted_in = [
+        step
+        for candidate in workflow["jobs"].values()
+        for step in candidate["steps"]
+        if step.get("with", {}).get("allow-unsafe-pr-checkout") == "true"
+    ]
+    assert opted_in == [checkouts[1]]
     assert checkouts[1]["with"]["persist-credentials"] == "false"
     assert checkouts[1]["with"]["submodules"] == "false"
     assert checkouts[1]["with"]["lfs"] == "false"
