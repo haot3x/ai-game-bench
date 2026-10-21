@@ -23,6 +23,9 @@ revision, never by overwriting their records.
 
 Mopan maintainers review and merge; passing CI is not evidence approval or
 automatic website publication. Proposals do not trigger paid runs.
+Result PRs receive an automatic **structural validation only** receipt after
+Public checks. Maintainers separately state whether they reviewed evidence,
+replayed the artifact or reran creation; unperformed checks are explicit.
 [Review process](docs/contribution-workflow.md) · [Governance](GOVERNANCE.md)
 
 ## Agent handoff

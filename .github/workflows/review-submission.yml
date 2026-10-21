@@ -1,7 +1,10 @@
 name: Trusted evidence review
 
-# Maintainer chooses a trusted default-branch revision. No PR-triggered privileged execution.
+# Only main's checker runs. Incoming submissions are data, never executable code.
 on:
+  workflow_run:
+    workflows: [Public checks]
+    types: [completed]
   workflow_dispatch:
     inputs:
       pull_request:
@@ -15,42 +18,77 @@ permissions:
 
 jobs:
   evidence-review:
-    if: github.ref == 'refs/heads/main'
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'workflow_dispatch' || github.event.workflow_run.event == 'pull_request')
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    outputs:
+      eligible: ${{ steps.pr.outputs.eligible }}
+      pr: ${{ steps.pr.outputs.pr }}
+      sha: ${{ steps.pr.outputs.sha }}
+      outcome: ${{ steps.validate.outcome }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: ${{ github.sha }}
           path: trusted
           persist-credentials: false
-      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
-        with:
-          version: "0.8.22"
-          enable-cache: false
-      - name: Resolve exact public-repository PR head
+      - name: Resolve current result PR and exact head (skip stale/non-result runs)
         id: pr
         env:
           GH_TOKEN: ${{ github.token }}
           REVIEW_PR: ${{ inputs.pull_request }}
           REVIEW_REPO: ${{ github.repository }}
-        run: |
-          [[ "$REVIEW_PR" =~ ^[0-9]+$ ]] || exit 1
-          REVIEW_SHA=$(gh api "repos/$REVIEW_REPO/pulls/$REVIEW_PR" --jq '.head.sha')
-          [[ "$REVIEW_SHA" =~ ^[0-9a-f]{40}$ ]] || exit 1
-          printf 'sha=%s\n' "$REVIEW_SHA" >> "$GITHUB_OUTPUT"
-          printf 'Reviewing PR %s at %s\n' "$REVIEW_PR" "$REVIEW_SHA"
+        run: python3 -I trusted/.github/scripts/evidence_review.py resolve
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        if: steps.pr.outputs.eligible == 'true'
+        with:
+          version: "0.8.22"
+          enable-cache: false
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        if: steps.pr.outputs.eligible == 'true'
         with:
           ref: ${{ steps.pr.outputs.sha }}
           path: incoming
           persist-credentials: false
           submodules: false
           lfs: false
-      - name: Validate data using trusted code, dependencies and policies only
+          sparse-checkout: /submissions/
+          sparse-checkout-cone-mode: false
+      - name: Install trusted main dependencies only
+        if: steps.pr.outputs.eligible == 'true'
         working-directory: trusted
-        run: |
-          uv sync --locked --python 3.12
-          uv run --locked agb --repo "$GITHUB_WORKSPACE/trusted" submission validate-all "$GITHUB_WORKSPACE/incoming/submissions"
-      # No incoming scripts, URL downloads, model calls, artifact upload, PR writes or auto-merge.
-      # Green = structural check only. Record the head SHA and human review in the PR.
+        run: uv sync --locked --python 3.12
+      - name: Validate data using trusted code, dependencies and policies only
+        if: steps.pr.outputs.eligible == 'true'
+        id: validate
+        working-directory: trusted
+        run: uv run --locked agb --repo "$GITHUB_WORKSPACE/trusted" submission validate-all "$GITHUB_WORKSPACE/incoming/submissions"
+      # This job has read-only permissions. No PR code, URL fetches, models or caches.
+
+  report-scope:
+    name: Report structural check scope
+    needs: evidence-review
+    if: always() && !cancelled() && needs.evidence-review.outputs.eligible == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+          path: trusted
+          persist-credentials: false
+      - name: Post fixed-scope receipt for the still-current head
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVIEW_REPO: ${{ github.repository }}
+          REVIEW_PR: ${{ needs.evidence-review.outputs.pr }}
+          REVIEW_SHA: ${{ needs.evidence-review.outputs.sha }}
+          REVIEW_OUTCOME: ${{ needs.evidence-review.outputs.outcome }}
+        run: python3 -I trusted/.github/scripts/evidence_review.py report
+      # Separate runner: no incoming checkout, installs, artifacts or raw evidence text.
+      # Comments only; never approve, merge, change scores or publish reports.
