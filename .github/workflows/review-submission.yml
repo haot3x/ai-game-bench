@@ -51,6 +51,10 @@ jobs:
         with:
           ref: ${{ steps.pr.outputs.sha }}
           path: incoming
+          # Required for workflow_run forks. This read-only job treats the exact
+          # SHA's submissions as passive data: no PR code/dependencies, secrets,
+          # caches, LFS or submodules. The write-enabled reporter is a separate job.
+          allow-unsafe-pr-checkout: true
           persist-credentials: false
           submodules: false
           lfs: false
