@@ -1,31 +1,17 @@
 # AI Game Bench brand assets
 
-- `readme-logo.png`: white-backed wordmark for readable display in both GitHub themes.
-- `logo-transparent.png`: original transparent wordmark; use on a light background.
+Owner-supplied teal/navy identity, adopted 2026-10-25.
 
-The cobalt stepped G combines a game-block silhouette with the project initial.
-These project assets were made with AI assistance, not taken from another
-benchmark's identity. Third-party platform marks are documented separately in
-[platform logo attribution](../../platforms/LOGOS.md).
+- `readme-logo.png`: horizontal logo on white, readable in both GitHub themes.
+- `logo-transparent.png`: horizontal logo for a light website background.
+- `logo-square.png`: square symbol export for avatars, favicons and saved shortcuts.
 
-## Production notes
+The artwork comes from the owner's horizontal and symbol PNGs, not the earlier
+AI-generated placeholder. Only transparent outer spacing, proportional sizing,
+background/padding and metadata-free export are adjusted; the design is not
+redrawn. The symbol source is 442×526 and is fitted without stretching onto a
+512×512 white canvas. The landing repository uses the same exports.
 
-Created with the built-in image generation tool. The README version is an edit
-of the original transparent concept. No trademark clearance is claimed.
-
-Final README edit prompt:
-
-```text
-Use case: precise-object-edit.
-Asset type: AI Game Bench GitHub README logo lockup.
-Input image: the existing AI Game Bench transparent logo is the edit target.
-Primary request: put this exact logo onto a solid pure white opaque background,
-preserving the cobalt-blue stepped G icon and dark navy wordmark, the exact text
-"AI Game Bench", their proportions, and their horizontal layout.
-Composition: compact wide horizontal logo, centered with generous but not
-excessive equal margins, about 3:1 aspect ratio.
-Constraints: change only the transparent background to white; retain the original
-identity. Flat, crisp, solid-color edges. No gradient, shadow, texture, added text,
-slogan, border, or other symbol. The result must be legible as a small README
-header on light and dark GitHub themes.
-```
+These marks identify AI Game Bench; no third-party endorsement or trademark
+clearance is claimed. Other platform marks have separate
+[attribution](../../platforms/LOGOS.md).

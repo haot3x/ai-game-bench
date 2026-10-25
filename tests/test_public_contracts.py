@@ -116,8 +116,15 @@ def test_readme_brand_and_ci_badge_point_to_real_assets():
     assert f"({workflow}/badge.svg?branch=main)" in readme
     assert f"]({workflow})" in readme
     assert 'src="assets/brand/readme-logo.png"' in readme
-    for name in ["readme-logo.png", "logo-transparent.png"]:
-        assert (ROOT / "assets/brand" / name).read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
+    for name in ["readme-logo.png", "logo-transparent.png", "logo-square.png"]:
+        data = (ROOT / "assets/brand" / name).read_bytes()
+        assert data.startswith(b"\x89PNG\r\n\x1a\n")
+        width = int.from_bytes(data[16:20], "big")
+        height = int.from_bytes(data[20:24], "big")
+        if name == "logo-square.png":
+            assert (width, height) == (512, 512)
+        else:
+            assert width > 3 * height
 
 
 def test_no_private_payload_paths_in_public_tree():
