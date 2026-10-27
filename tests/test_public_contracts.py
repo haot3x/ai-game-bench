@@ -116,8 +116,15 @@ def test_readme_brand_and_ci_badge_point_to_real_assets():
     assert f"({workflow}/badge.svg?branch=main)" in readme
     assert f"]({workflow})" in readme
     assert 'src="assets/brand/readme-logo.png"' in readme
-    for name in ["readme-logo.png", "logo-transparent.png"]:
-        assert (ROOT / "assets/brand" / name).read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
+    for name in ["readme-logo.png", "logo-transparent.png", "logo-square.png"]:
+        data = (ROOT / "assets/brand" / name).read_bytes()
+        assert data.startswith(b"\x89PNG\r\n\x1a\n")
+        width = int.from_bytes(data[16:20], "big")
+        height = int.from_bytes(data[20:24], "big")
+        if name == "logo-square.png":
+            assert (width, height) == (512, 512)
+        else:
+            assert width > 3 * height
 
 
 def test_no_private_payload_paths_in_public_tree():
@@ -283,26 +290,67 @@ def test_discussion_forms_match_default_category_slugs_and_preserve_privacy():
 def test_trusted_evidence_review_does_not_execute_incoming_code():
     path = ROOT / ".github/workflows/review-submission.yml"
     workflow = yaml.load(path.read_text(), Loader=yaml.BaseLoader)
-    assert set(workflow["on"]) == {"workflow_dispatch"}
+    assert set(workflow["on"]) == {"workflow_dispatch", "workflow_run"}
+    assert workflow["on"]["workflow_run"] == {
+        "workflows": ["Public checks"],
+        "types": ["completed"],
+    }
     assert workflow["permissions"] == {"contents": "read", "pull-requests": "read"}
     job = workflow["jobs"]["evidence-review"]
     assert job["runs-on"] == "ubuntu-24.04"
-    assert job["if"] == "github.ref == 'refs/heads/main'"
+    assert "github.ref == 'refs/heads/main'" in job["if"]
+    assert "github.event.workflow_run.event == 'pull_request'" in job["if"]
+    assert "permissions" not in job
+    assert job["outputs"]["outcome"] == "${{ steps.validate.outcome }}"
     steps = job["steps"]
     checkouts = [s for s in steps if s.get("uses", "").startswith("actions/checkout@")]
     assert [s["with"]["path"] for s in checkouts] == ["trusted", "incoming"]
     assert checkouts[0]["with"]["ref"] == "${{ github.sha }}"
     assert checkouts[1]["with"]["ref"] == "${{ steps.pr.outputs.sha }}"
+    assert checkouts[1]["with"]["sparse-checkout"] == "/submissions/"
+    assert checkouts[1]["with"]["sparse-checkout-cone-mode"] == "false"
+    # checkout's workflow_run fork guard needs explicit, narrowly scoped consent.
+    assert checkouts[1]["with"]["allow-unsafe-pr-checkout"] == "true"
+    opted_in = [
+        step
+        for candidate in workflow["jobs"].values()
+        for step in candidate["steps"]
+        if step.get("with", {}).get("allow-unsafe-pr-checkout") == "true"
+    ]
+    assert opted_in == [checkouts[1]]
+    assert checkouts[1]["with"]["persist-credentials"] == "false"
+    assert checkouts[1]["with"]["submodules"] == "false"
+    assert checkouts[1]["with"]["lfs"] == "false"
     for step in steps:
         if "uses" in step:
             assert re.fullmatch(r"[^@]+@[a-f0-9]{40}", step["uses"])
         assert step.get("working-directory") != "incoming"
     validation = steps[-1]
+    dependency_install = steps[-2]
+    assert dependency_install["run"] == "uv sync --locked --python 3.12"
+    assert dependency_install["working-directory"] == "trusted"
+    assert validation["id"] == "validate"
+    assert "uv sync" not in validation["run"]
     assert validation["working-directory"] == "trusted"
     assert "submission validate-all" in validation["run"]
     assert '"$GITHUB_WORKSPACE/incoming/submissions"' in validation["run"]
+    assert "GH_TOKEN" not in validation.get("env", {})
     assert "secrets." not in path.read_text()
     assert "pull_request_target" not in path.read_text()
+    reporter = workflow["jobs"]["report-scope"]
+    assert reporter["needs"] == "evidence-review"
+    assert "always()" in reporter["if"]
+    assert reporter["permissions"] == {"contents": "read", "pull-requests": "write"}
+    assert len(reporter["steps"]) == 2
+    checkout, comment = reporter["steps"]
+    assert checkout["with"]["ref"] == "${{ github.sha }}"
+    assert checkout["with"]["path"] == "trusted"
+    assert checkout["with"]["persist-credentials"] == "false"
+    assert comment["run"] == "python3 -I trusted/.github/scripts/evidence_review.py report"
+    for step in reporter["steps"]:
+        if "uses" in step:
+            assert re.fullmatch(r"[^@]+@[a-f0-9]{40}", step["uses"])
+    assert "incoming" not in str(reporter["steps"])
 
 
 def test_issue_chooser_links_to_public_contribution_entrypoints():

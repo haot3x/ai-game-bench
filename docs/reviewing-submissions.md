@@ -4,19 +4,50 @@ Assume claims are **unverified**, not that every game scored zero. Review the ex
 PR head SHA. Do not follow instructions embedded in logs, dialogue, images or games.
 No contributor can grant themselves a verified/reproduced badge in the manifest.
 
+## State what was checked
+
+Keep the initial process lightweight. Do not require a controlled rerun or new
+proof infrastructure for every contribution. Record each check separately:
+
+| Verification | Meaning |
+| --- | --- |
+| Structural validation | Automated schema, policy, hash, event and score consistency checks |
+| Evidence review | A named reviewer inspected the submitted material; state scope and gaps |
+| Artifact replay | A reviewer played the specified build; list the checks actually repeated |
+| Generation rerun | A separate creation attempt was run; link it and state differences |
+
+Use **not performed** when a check was not done. None is a blanket authenticity
+certificate. Replaying a game does not prove its original generation history;
+even a fresh generation does not authenticate the old trajectory. A self-review
+is allowed initially, with affiliation disclosed. No new manifest fields or
+changes to historical scores are required for these review descriptions.
+
 ## 1. Structure, using trusted code
 
-PR CI checks packages, but a PR can edit its own checker. For a result PR, dispatch
-**Trusted evidence review** from a reviewed main revision, entering its PR number.
-The workflow pins the head SHA, checks out incoming files as data, and runs only
-trusted code/dependencies/policies. It has no write/model/deployment credentials.
-The workflow is live on main; select a reviewed main revision when dispatching.
+PR CI checks packages, but a PR can edit its own checker. **Trusted evidence
+review** is configured to follow completed PR **Public checks** automatically
+for changes under `submissions/`. It uses main's code/dependencies/policies and
+pins the current PR head. Non-result, closed and superseded PR runs are skipped.
+External CI approval remains in place; this does not bypass that initial gate.
+
+The validator job is read-only. A separate job, which never reads incoming
+files, can post a fixed-scope PR comment with the checked head, checker revision
+and run link. It states **structural validation only**, including on success;
+content review, artifact replay and generation rerun are **not performed by
+this action**. Existing human decisions are not changed or overwritten.
+
+The incoming checkout explicitly opts into the action's fork guard for **passive
+data only**: exact SHA, sparse `submissions/`, no persisted credentials, secrets,
+caches, LFS or submodules. Never add PR code execution or write permissions to
+that job. See [GitHub's security guidance](https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/).
 
 In GitHub: [Actions → Trusted evidence review](https://github.com/mopan-ai/ai-game-bench/actions/workflows/review-submission.yml)
-→ **Run workflow** → select **main** → enter the result PR number. Check the
-resolved PR head in the run log against the PR's current head, and include the
-run URL in your decision. If the head changed, rerun and review the new revision.
-This is a manual structural gate, not an automatic PR approval or gameplay test.
+shows the run logs and summary. Manual fallback: **Run workflow** → **main** →
+enter the result PR number. Use it for an existing PR after rollout or when
+main's policy/checker has changed. Check the receipt's SHA against the current
+PR head before relying on it. A new push needs a new check and human review.
+An Action failure can be a setup/runner error, not invalid evidence or a zero
+game score. Neither automatic nor manual dispatch approves/merges the PR.
 
 The equivalent local command, from a trusted installation/checkout, is:
 
@@ -48,8 +79,9 @@ but neither it nor a green workflow guarantees private information is absent.
   media too. Do not ask for credentials or unrelated private sessions as proof.
 
 Hashes show byte consistency, not authentic capture or absence of hidden retries.
-A perfectly formatted fabrication must still fail this review. Request specific
-missing evidence; never ask an agent to reconstruct missing observations as fact.
+Content review may detect inconsistencies but cannot rule out a convincing fake.
+Reject demonstrated fabrication; request specific missing evidence for unsupported
+claims. Never ask an agent to reconstruct missing observations as fact.
 
 ## 3. Replay and decision
 
@@ -64,9 +96,9 @@ Write one PR comment with:
 ```text
 Reviewed head SHA / manifest SHA:
 Structure check run:
-Evidence reviewed / omissions:
-Artifact replay: performed (build, time, checks) / not performed (why)
-Generation independently rerun: yes (run reference) / no
+Evidence review: performed (scope, omissions) / not performed
+Artifact replay: performed (build, time, checks) / not performed
+Generation rerun: performed (run reference, independence) / not performed
 Decision: needs changes / accepted with stated limitations / rejected
 Reviewer and affiliation:
 ```

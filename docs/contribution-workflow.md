@@ -29,7 +29,8 @@ workflows from public CLI integrations. None of these entry points starts a paid
 | --- | --- | --- |
 | PR opened/updated, push main | Public checks | Ruff/pytest, submission/policy validation, package build, free browser and Oracle/Nop calibration |
 | Maintainer manual dispatch | Public checks | Repeat the same free checks |
-| Maintainer manual dispatch with a PR number | Trusted evidence review | Pin PR head; validate its data using the dispatch revision's trusted code, dependencies and policies |
+| PR Public checks completes; submission files changed | Trusted evidence review | Validate current PR-head data with main's code/policies; post a structural-only receipt |
+| Maintainer manual dispatch with a PR number | Trusted evidence review | Repeat for the current head, including existing PRs after rollout |
 | Issue / Discussion | None | Conversation only; no model, upload, merge or deployment |
 
 Open [Public checks](https://github.com/mopan-ai/ai-game-bench/actions/workflows/checks.yml)
@@ -38,15 +39,19 @@ to inspect actual runs. If an external PR is waiting for workflow approval, a
 maintainer must inspect its workflow/code changes and approve the run first.
 The contributor does not need to supply repository secrets or model keys.
 
-The trusted review workflow is live on main and must be dispatched from a reviewed
-main revision. It reads incoming submissions as data, never installs their
-dependencies or executes their scripts. External media is not downloaded.
+The trusted review workflow uses a reviewed main revision, not PR code. It reads
+incoming submissions as data, never installs their dependencies or executes their
+scripts. External media is not downloaded. Old-head, closed and non-result PRs
+are skipped. A policy/checker change on main does not automatically revisit all
+open results; dispatch those explicitly when needed.
 A new policy must be merged before formal submissions can pass this independent
 structural check. The initial bootstrap PR cannot be checked by a main-branch
 validator that does not exist yet; use the reviewed local revision first.
 
-All Actions run on GitHub-hosted runners with read-only permissions. Outside
-contributors' workflow runs require maintainer approval. PR CI itself is not a
+Checks run on GitHub-hosted runners with read-only permissions. Only the isolated
+receipt job has `pull-requests: write`, to post a comment; it checks out main only,
+reads no evidence/artifacts, and cannot write repository contents. Outside
+contributors' Public checks require maintainer approval. PR CI itself is not a
 tamper-proof judge: inspect changes to checks/workflows before approving.
 No auto-merge, paid runs, raw-job upload or landing deployment.
 Maintainer-funded reruns require separate approval of the task, revision,
@@ -56,15 +61,17 @@ platform, attempts, time and spending.
 
 1. **Contributor:** prepare/validate the public package, check privacy/rights and
    submit the PR. Fix structural errors without hiding failed game attempts.
-2. **Maintainer:** approve external CI when safe, then manually dispatch trusted
-   evidence review with the PR number. Both required Public checks must pass.
+2. **Maintainer:** approve external CI when safe. Trusted evidence review then
+   follows automatically for result PRs; inspect its exact-head receipt (manual
+   dispatch remains available). Both required Public checks must also pass.
 3. **Maintainer:** inspect screenshots/trajectories, perform any stated replay,
    and record the decision, limitations and exact reviewed head/manifest hashes.
    Passing Actions alone is not approval; changed evidence needs a new review.
 4. **Maintainer:** merge an accepted revision manually. Website publication, if
    selected, is a separate curated change in the landing repository.
 
-Checks passed → evidence reviewed → artifact replayed (if performed) →
-generation independently reproduced (only if actually rerun) are separate claims.
+Record **structural validation**, **evidence review**, **artifact replay** and
+**generation rerun** separately; use **not performed** where applicable. There
+is no requirement to rerun every creation and no generic "authentic" badge.
 Record the exact reviewed head SHA in the PR. A changed head needs a new review.
 [Maintainer checklist](reviewing-submissions.md) · [Live settings](github-setup.md)

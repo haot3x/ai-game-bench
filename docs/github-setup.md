@@ -19,9 +19,11 @@ other repositories, organization membership or a cross-repository GitHub App.
   Q&A. Forms live in `.github/DISCUSSION_TEMPLATE/` and take effect on `main`.
 - Discussions and issues do not trigger an automated reviewer, paid run, private
   repository creation, merge or website publication.
-- Result PRs go directly to public `submissions/`; Discussion is optional. The
-  `Trusted evidence review` manual workflow checks pinned PR data with trusted
-  code/policies; it is not another required PR approval or automatic score judge.
+- Result PRs go directly to public `submissions/`; Discussion is optional.
+  `Trusted evidence review` follows completed PR `Public checks` for submission
+  changes; manual dispatch remains available. It checks pinned data with main's
+  code/policies, not gameplay or authenticity. Only its separate receipt job has
+  PR-comment write permission; it cannot approve/merge or change repository files.
 - Secret scanning and push protection should be enabled. Private vulnerability
   reporting is for security incidents, not a private result-submission workflow.
 
@@ -81,8 +83,13 @@ broadened. PR #3 has since merged the submission workflow, and
 [Trusted evidence review](https://github.com/mopan-ai/ai-game-bench/actions/runs/38524647241)
 successfully checked the exact result PR #4 head using trusted main code. PR #4
 is merged and [main checks passed](https://github.com/mopan-ai/ai-game-bench/actions/runs/38524926580).
-The workflow is available for manual dispatch; CI does not grant merge rights
-or replace evidence review. Local checks alone still do not establish remote state.
+That dated audit verified manual dispatch, not the later automatic trigger.
+For the automation rollout, inspect an actual `workflow_run` execution and its
+exact-head PR receipt after merging the configuration. An existing PR can be
+bootstrapped by rerunning its Public checks or using manual dispatch. The workflow
+must exist on main to receive these events. No protection/approval settings need
+to be weakened. CI does not grant merge rights or replace evidence review.
+Local checks alone still do not establish remote state.
 
 Live evidence: [PRs](https://github.com/mopan-ai/ai-game-bench/pulls),
 [Actions](https://github.com/mopan-ai/ai-game-bench/actions),
